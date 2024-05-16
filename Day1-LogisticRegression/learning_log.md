@@ -15,8 +15,7 @@ The parameters used in Logistic regression are:
 - The output: 𝑦̂ = 𝜎(𝑤𝑇𝑥 + 𝑏)
 - Sigmoid function: s = 𝜎(𝑤𝑇𝑥 + 𝑏) = 𝜎(𝑧)= 1/(1+ 𝑒−𝑧)
 
-**Cost Function*: J(w, b) = -\frac{1}{m} \sum_{i=1}^{m} [y^{(i)} \log(\hat{y}^{(i)}) + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)})]
-
+*Cost Function*: J(w, b) = -1/m * Σ[i=1 to m] [y(i) * log(y_hat(i)) + (1 - y(i)) * log(1 - y_hat(i))]
 
 ### Notes: 
 
