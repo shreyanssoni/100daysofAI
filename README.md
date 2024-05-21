@@ -90,7 +90,7 @@ Feel free to follow along or join me in this challenge!
 
 ## Contact
 
-If you have any questions, suggestions, or want to collaborate, please feel free to reach out to me via [email@example.com](mailto:sonishreyans01@example.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/shreyans-soni/).
+If you have any questions, suggestions, or want to collaborate, please feel free to reach out to me via [sonishreyans01@gmail.com](mailto:sonishreyans01@gmail.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/shreyans-soni/).
 
 ---
 
