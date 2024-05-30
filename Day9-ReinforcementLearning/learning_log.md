@@ -71,3 +71,8 @@ KL-Divergence, or Kullback-Leibler Divergence, is a concept often encountered in
 Ideas: 
 - consitutional AI
 ![alt text](image-12.png)
+
+
+# Resources 
+
+[Link 1 - RLHF](https://huggingface.co/blog/trl-peft)
