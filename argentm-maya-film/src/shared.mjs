@@ -1,3 +1,6 @@
+import { mayaSide, mayaBack, dev, mayaFaceSVG, P } from "./characters.mjs";
+export { mayaSide, mayaBack };
+export const colleague = dev;
 // Shared building blocks for every scene: palette, type, the office, Maya and the app UI.
 // Scenes are generated from these so the room, the character and the product stay identical.
 
@@ -32,7 +35,7 @@ export const C = {
 
 // ---------- CSS shared by all scenes ----------
 export const CSS = `
-#root{position:absolute;inset:0;overflow:hidden;background:${C.ivory};font-family:Inter,sans-serif;color:${C.ink};-webkit-font-smoothing:antialiased}
+#root{--ground:radial-gradient(1400px 900px at 68% 22%, #FFFDF9 0%, #FAF5EC 55%, #F3EBDE 100%);position:absolute;inset:0;overflow:hidden;background:var(--ground);font-family:Inter,sans-serif;color:${C.ink};-webkit-font-smoothing:antialiased}
 .abs{position:absolute}
 .full{position:absolute;left:0;top:0;width:1920px;height:1080px}
 .world{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
@@ -42,7 +45,7 @@ export const CSS = `
 .t-hero .serif{font-size:1.12em;color:${C.bronze}}
 .t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:${C.ink2}}
 .w{display:inline-block;white-space:pre}
-.card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:18px;box-shadow:0 1px 2px rgba(70,50,30,.06),0 14px 36px rgba(70,50,30,.09)}
+.card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:20px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 6px 14px rgba(70,50,30,.05),0 28px 60px rgba(70,50,30,.10)}
 .chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;letter-spacing:-.005em;white-space:nowrap}
 .chip-blue{background:${C.blueL};color:${C.blueD}}
 .chip-amber{background:${C.amberL};color:${C.amberD}}
@@ -75,12 +78,8 @@ export const CSS = `
 `;
 
 // ---------- small pieces ----------
-export const brandMark = (size = 22, stroke = C.bronze, sw = 2.4, id = "") => `
-<svg ${id ? `id="${id}"` : ""} width="${size}" height="${size}" viewBox="0 0 40 40" fill="none">
-  <circle class="bm-ring" cx="18" cy="21" r="12" stroke="${stroke}" stroke-width="${sw * 40 / size}" pathLength="100"/>
-  <path class="bm-stem" d="M30 9 V33" stroke="${stroke}" stroke-width="${sw * 40 / size}" stroke-linecap="round" pathLength="100"/>
-  <path class="bm-bar" d="M8 27 H30" stroke="${stroke}" stroke-width="${sw * 40 / size}" stroke-linecap="round" pathLength="100"/>
-</svg>`;
+// No logo marks anywhere in the film (client request).
+export const brandMark = () => "";
 
 export const cursorSVG = (id) => `
 <svg id="${id}" class="cursor" viewBox="0 0 64 64">
@@ -99,7 +98,7 @@ const NAV = ["Dashboard", "Remittances", "Customers", "Matching", "Exceptions", 
 export const appShell = (active, content, extra = "") => `
 <div class="app" ${extra}>
   <div class="app-nav">
-    <div class="brand">${brandMark(24)}<span>argentm<span style="color:${C.bronze}">.ai</span></span></div>
+    <div class="brand" style="font-size:16px;color:#4A463F">AR Workspace</div>
     ${NAV.map((n) => `<div class="nav-i ${n === active ? "on" : ""}"><i></i>${n}</div>`).join("")}
   </div>
   <div class="app-main">
@@ -164,6 +163,17 @@ export const office = (p, opts = {}) => `
   <g id="${p}-sun" opacity="${opts.sun ?? 0.55}">
     ${[330, 700, 1070].map((x) => `<polygon points="${x + 30},642 ${x + 330},642 ${x + 560},1000 ${x + 180},1000" fill="url(#${p}-sun)"/>`).join("")}
   </g>
+  <!-- rug under Maya's desk -->
+  <polygon points="850,716 1610,716 1720,900 760,900" fill="#E8DCCB"/>
+  <polygon points="872,726 1592,726 1690,890 790,890" fill="none" stroke="#DCCBB4" stroke-width="3"/>
+  <!-- wall clock: shows the time of day -->
+  <g id="${p}-clock">
+    <circle cx="1444" cy="182" r="31" fill="#FFFDF8" stroke="#3A3631" stroke-width="3.5"/>
+    ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => `<line x1="1444" y1="${182 - 26}" x2="1444" y2="${182 - (i % 3 ? 23 : 21)}" stroke="#3A3631" stroke-width="${i % 3 ? 1.4 : 2.4}" transform="rotate(${i * 30} 1444 182)"/>`).join("")}
+    <line id="${p}-clkH" x1="1444" y1="182" x2="1444" y2="166" stroke="#2B2A28" stroke-width="3.4" stroke-linecap="round" transform="rotate(${((opts.clock ?? [8, 58])[0] % 12 + (opts.clock ?? [8, 58])[1] / 60) * 30} 1444 182)"/>
+    <line id="${p}-clkM" x1="1444" y1="182" x2="1444" y2="159" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round" transform="rotate(${(opts.clock ?? [8, 58])[1] * 6} 1444 182)"/>
+    <circle cx="1444" cy="182" r="2.6" fill="${C.bronze}"/>
+  </g>
   <!-- pendant lamps -->
   ${[760, 1290].map((x) => `<line x1="${x}" y1="30" x2="${x}" y2="150" stroke="#8C8378" stroke-width="2"/><path d="M${x - 34} 176 Q${x} 132 ${x + 34} 176 Z" fill="${C.bronze}"/><ellipse cx="${x}" cy="176" rx="34" ry="5" fill="#E9D3B4"/>`).join("")}
   <!-- tall plant -->
@@ -190,6 +200,9 @@ export const office = (p, opts = {}) => `
     <rect x="432" y="621" width="6" height="103" fill="#4A4744"/><rect x="682" y="621" width="6" height="103" fill="#4A4744"/>
     <polygon points="560,598 640,598 652,574 572,574" fill="#C9C4BC"/><polygon points="560,598 640,598 636,602 556,602" fill="#B2ACA2"/>
     <rect x="600" y="586" width="44" height="12" rx="2" fill="#E9E1D3"/>
+    <path d="M444 576 L462 576 L460 598 L446 598 Z" fill="#7F96B1"/><path d="M462 582 q8 0 7 8 q-1 6 -8 5" stroke="#7F96B1" stroke-width="2.5" fill="none"/>
+    <path d="M488 598 L506 598 L503 584 L491 584 Z" fill="#D9CDBB"/>
+    <path d="M497 584 Q486 568 480 570 Q490 576 494 584 M497 584 Q508 564 516 566 Q504 574 500 584 M497 584 Q498 566 494 556 Q502 568 500 584" fill="#7D9276" stroke="#7D9276" stroke-width="3" stroke-linejoin="round"/>
   </g>
   ${opts.colleague ?? ""}
   <!-- Maya's desk -->
@@ -216,6 +229,12 @@ export const office = (p, opts = {}) => `
     <polygon points="985,584 1015,584 1018,594 980,594" fill="#FDFBF7" stroke="#E2DACD" stroke-width="1"/>
     <rect x="1150" y="560" width="16" height="16" fill="#F0DFA9" transform="rotate(-4 1158 568)"/>
     <rect x="1153" y="540" width="15" height="15" fill="${C.amber}" opacity=".7" transform="rotate(6 1160 548)"/>
+    <!-- desk lamp and a small plant -->
+    <ellipse cx="1478" cy="579" rx="11" ry="3" fill="#3A3631"/>
+    <path d="M1478 578 L1470 536 L1446 526" stroke="#3A3631" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1432 534 L1447 520 L1457 530 Z" fill="${C.bronze}"/>
+    <path d="M1186 594 L1204 594 L1202 580 L1188 580 Z" fill="#EDE5D8" stroke="#D8CDBD" stroke-width="1"/>
+    <path d="M1195 580 Q1184 566 1178 568 Q1188 572 1192 580 M1195 580 Q1206 562 1212 565 Q1202 572 1198 580 M1195 580 Q1196 562 1192 554 Q1200 566 1198 580" fill="#7D9276" stroke="#7D9276" stroke-width="2.5" stroke-linejoin="round"/>
     <!-- coffee placed on the desk -->
     <g id="${p}-deskcup" opacity="${opts.cupOnDesk ? 1 : 0}">
       <ellipse cx="1040" cy="596" rx="16" ry="3.5" fill="#4A3A2A" opacity=".2"/>
@@ -225,112 +244,6 @@ export const office = (p, opts = {}) => `
     </g>
   </g>
 </svg>`;
-
-// colleague seated at the background desk, side view facing right, rig parts animated by id
-export const colleague = (p) => `
-<g id="${p}-col" transform="translate(520 724) scale(.82)">
-  <ellipse cx="0" cy="2" rx="55" ry="6" fill="#4A3A2A" opacity=".12"/>
-  <rect x="-34" y="-122" width="12" height="70" rx="5" fill="#4A4744"/>
-  <rect x="-36" y="-56" width="60" height="10" rx="4" fill="#4A4744"/>
-  <rect x="-4" y="-46" width="6" height="40" fill="#5A5653"/>
-  <path d="M-26 -4 L30 -4" stroke="#5A5653" stroke-width="5" stroke-linecap="round"/>
-  <rect x="0" y="-60" width="56" height="16" rx="7" fill="#4C5566"/>
-  <rect x="44" y="-60" width="15" height="60" rx="6" fill="#4C5566"/>
-  <path d="M44 -2 L70 -2 L70 2 L42 2 Z" fill="${C.shoe}"/>
-  <path d="M-20 -150 C-26 -120 -24 -80 -18 -56 L18 -56 C22 -90 20 -125 12 -150 Z" fill="#8DA4BF"/>
-  <rect x="-4" y="-166" width="10" height="18" fill="${C.skinS}"/>
-  <g id="${p}-col-head">
-    <ellipse cx="2" cy="-186" rx="19" ry="22" fill="#C98F6B"/>
-    <path d="M-18 -190 C-20 -214 8 -216 18 -202 C14 -206 2 -204 -6 -196 C-10 -186 -12 -178 -16 -174 Z" fill="#5B4A3E"/>
-    <ellipse cx="12" cy="-188" rx="2" ry="2.4" fill="#2B211C"/>
-    <path d="M20 -186 q5 5 0 8" stroke="#A9775A" stroke-width="2" fill="none"/>
-  </g>
-  <g id="${p}-col-arm">
-    <rect x="-4" y="-146" width="13" height="50" rx="6" fill="#7F96B1"/>
-    <g id="${p}-col-fore"><rect x="-2" y="-100" width="11" height="44" rx="5" fill="#7F96B1" transform="rotate(-70 3 -98)"/><circle cx="44" cy="-112" r="6" fill="#C98F6B"/></g>
-  </g>
-</g>`;
-
-// ---------- Maya: side view (walking, facing right). Origin at her feet. ----------
-export const mayaSide = (p) => `
-<g id="${p}-ms" transform="translate(-200 800)">
-  <ellipse id="${p}-ms-shadow" cx="0" cy="2" rx="46" ry="7" fill="#4A3A2A" opacity=".16"/>
-  <g id="${p}-ms-body">
-    <g id="${p}-ms-armB">
-      <rect x="-6" y="-258" width="13" height="60" rx="6.5" fill="${C.sweaterS}" stroke="#3A332D" stroke-width="1.2" stroke-opacity=".35"/>
-      <g id="${p}-ms-foreB"><rect x="-5" y="-204" width="11" height="54" rx="5.5" fill="${C.sweaterS}"/><circle cx="0.5" cy="-150" r="6" fill="${C.skinS}"/></g>
-      <g transform="rotate(-8 0 -205)"><rect x="-44" y="-214" width="78" height="9" rx="2.5" fill="#BFB9B0"/><rect x="-44" y="-214" width="78" height="2.5" rx="1" fill="#D8D3CB"/></g>
-    </g>
-    <g id="${p}-ms-legB">
-      <rect x="-10" y="-172" width="20" height="88" rx="9.5" fill="${C.trousersB}"/>
-      <g id="${p}-ms-shinB"><rect x="-8.5" y="-90" width="17" height="82" rx="8" fill="${C.trousersB}"/><path d="M-8 -12 L16 -12 Q24 -10 24 -2 L24 0 L-9 0 Z" fill="${C.shoe}"/></g>
-    </g>
-    <path d="M-20 -170 L22 -170 L22 -150 L-20 -150 Z" fill="${C.trousers}"/>
-    <g id="${p}-ms-legF">
-      <rect x="-10" y="-172" width="20" height="88" rx="9.5" fill="${C.trousers}"/>
-      <g id="${p}-ms-shinF"><rect x="-8.5" y="-90" width="17" height="82" rx="8" fill="${C.trousers}"/><path d="M-8 -12 L16 -12 Q24 -10 24 -2 L24 0 L-9 0 Z" fill="${C.shoe}"/></g>
-    </g>
-    <path d="M-17 -264 C-26 -232 -25 -196 -22 -158 L24 -158 C26 -198 25 -236 18 -264 Q0 -270 -17 -264 Z" fill="${C.sweater}" stroke="#3A332D" stroke-width="1.2" stroke-opacity=".35"/>
-    <path d="M-22 -166 L24 -166" stroke="${C.sweaterS}" stroke-width="5"/>
-    <rect x="-5" y="-282" width="11" height="22" fill="${C.skinS}"/>
-    <g id="${p}-ms-head">
-      <ellipse cx="3" cy="-298" rx="19.5" ry="23.5" fill="${C.skin}"/>
-      <path d="M20 -306 Q27 -298 21 -292" fill="${C.skin}" stroke="${C.skinS}" stroke-width="1.5"/>
-      <path d="M-20 -292 C-24 -320 -2 -332 14 -324 C22 -318 24 -310 22 -305 C12 -312 2 -312 -6 -302 C-8 -292 -12 -284 -16 -278 Z" fill="${C.hair}"/>
-      <circle cx="-21" cy="-283" r="10.5" fill="${C.hair}"/>
-      <ellipse cx="-3" cy="-295" rx="4" ry="6" fill="${C.skinS}"/>
-      <circle cx="-3" cy="-287" r="1.8" fill="${C.bronze}"/>
-      <ellipse id="${p}-ms-eye" cx="12" cy="-301" rx="2.2" ry="2.8" fill="#2B211C"/>
-      <path d="M7 -309 q5 -2.5 10 -.5" stroke="${C.hair}" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <path d="M12 -286 q4 1.5 7 -1" stroke="#9C5B4E" stroke-width="2" fill="none" stroke-linecap="round"/>
-    </g>
-    <g id="${p}-ms-armF">
-      <rect x="-6.5" y="-260" width="14" height="62" rx="7" fill="${C.sweater}" stroke="#3A332D" stroke-width="1.2" stroke-opacity=".35"/>
-      <g id="${p}-ms-foreF"><rect x="-5.5" y="-205" width="12" height="54" rx="6" fill="${C.sweater}" stroke="#3A332D" stroke-width="1.2" stroke-opacity=".35"/><circle cx="0.5" cy="-150" r="6.2" fill="${C.skin}"/></g>
-    </g>
-    <g id="${p}-ms-cup">
-      <path d="M-11 -14 L11 -14 L8.5 10 L-8.5 10 Z" fill="#FFFFFF" stroke="#CFC6B9" stroke-width="1.2"/>
-      <rect x="-11.5" y="-7" width="23" height="8" fill="${C.bronze}"/>
-      <rect x="-12" y="-17" width="24" height="4" rx="1.5" fill="#E8E1D6"/>
-    </g>
-  </g>
-</g>`;
-
-// ---------- Maya: back view (standing / sitting at the desk). Origin at her feet. ----------
-export const mayaBack = (p) => `
-<g id="${p}-mb" transform="translate(${CHAIR_X} 798)" opacity="0">
-  <ellipse id="${p}-mb-shadow" cx="0" cy="0" rx="44" ry="7" fill="#4A3A2A" opacity=".16"/>
-  <g id="${p}-mb-legs">
-    <rect x="-17" y="-170" width="16" height="160" rx="7.5" fill="${C.trousers}"/>
-    <rect x="1" y="-170" width="16" height="160" rx="7.5" fill="${C.trousersB}"/>
-    <path d="M-18 -12 L-1 -12 L-1 0 L-19 0 Z" fill="${C.shoe}"/><path d="M1 -12 L18 -12 L19 0 L1 0 Z" fill="${C.shoe}"/>
-  </g>
-  <g id="${p}-mb-up">
-    <g id="${p}-mb-armL">
-      <rect x="-31" y="-256" width="13" height="58" rx="6.5" fill="${C.sweaterS}"/>
-      <g id="${p}-mb-foreL"><rect x="-30" y="-202" width="11" height="52" rx="5.5" fill="${C.sweaterS}"/><circle cx="-24.5" cy="-150" r="6" fill="${C.skinS}"/>
-        <g id="${p}-mb-cupL" opacity="0" transform="translate(-24.5 -152)"><path d="M-10 -13 L10 -13 L8 9 L-8 9 Z" fill="#FFFFFF" stroke="#CFC6B9" stroke-width="1.2"/><rect x="-10.5" y="-7" width="21" height="7" fill="${C.bronze}"/></g></g>
-    </g>
-    <g id="${p}-mb-armR">
-      <rect x="18" y="-256" width="13" height="58" rx="6.5" fill="${C.sweater}"/>
-      <g id="${p}-mb-foreR"><rect x="19" y="-202" width="11" height="52" rx="5.5" fill="${C.sweater}"/><circle cx="24.5" cy="-150" r="6" fill="${C.skin}"/>
-        <g id="${p}-mb-cup" transform="translate(24.5 -152)"><path d="M-10 -13 L10 -13 L8 9 L-8 9 Z" fill="#FFFFFF" stroke="#CFC6B9" stroke-width="1.2"/><rect x="-10.5" y="-7" width="21" height="7" fill="${C.bronze}"/></g>
-      </g>
-    </g>
-    <path d="M-26 -262 C-30 -230 -28 -196 -24 -160 L24 -160 C28 -196 30 -230 26 -262 Q0 -270 -26 -262 Z" fill="${C.sweater}" stroke="#3A332D" stroke-width="1.2" stroke-opacity=".3"/>
-    <path d="M-18 -258 Q0 -246 18 -258" stroke="${C.sweaterS}" stroke-width="2" fill="none"/>
-    <path d="M0 -252 L0 -168" stroke="${C.sweaterS}" stroke-width="1.5" opacity=".6"/>
-    <rect x="-6" y="-282" width="12" height="22" fill="${C.skinS}"/>
-    <g id="${p}-mb-head">
-      <ellipse cx="-21" cy="-297" rx="4" ry="6.5" fill="${C.skinS}"/><ellipse cx="21" cy="-297" rx="4" ry="6.5" fill="${C.skinS}"/>
-      <circle cx="-21" cy="-289" r="1.8" fill="${C.bronze}"/><circle cx="21" cy="-289" r="1.8" fill="${C.bronze}"/>
-      <ellipse cx="0" cy="-299" rx="21" ry="24.5" fill="${C.hair}"/>
-      <path d="M-14 -316 Q0 -322 14 -314" stroke="#463830" stroke-width="2" fill="none" opacity=".7"/>
-      <circle cx="0" cy="-280" r="12" fill="${C.hair}"/>
-      <path d="M-8 -283 Q0 -276 8 -283" stroke="#463830" stroke-width="1.6" fill="none" opacity=".8"/>
-    </g>
-  </g>
-</g>`;
 
 // office chair seen from behind
 export const chair = (p) => `
@@ -371,43 +284,7 @@ export const mayaFace = (p) => `
   <g id="${p}-screenUI" opacity=".9">
     <rect x="1540" y="240" width="300" height="26" rx="6" fill="#ECE5D9" transform="skewY(-6.8)"/>
   </g>
-  <g id="${p}-fig" transform="translate(0 0)">
-    <g id="${p}-torso">
-      <path d="M440 1080 C450 900 520 800 640 760 C680 746 710 712 730 700 L826 700 C846 712 880 746 920 760 C1040 800 1110 900 1130 1080 Z" fill="${C.sweater}"/>
-      <path d="M440 1080 C450 900 520 800 640 760 C680 746 710 712 730 700 L750 706 C700 760 640 820 600 1080 Z" fill="${C.sweaterS}" opacity=".6"/>
-      <path d="M722 704 Q778 744 834 704" stroke="${C.sweaterS}" stroke-width="10" fill="none" stroke-linecap="round"/>
-    </g>
-    <g id="${p}-headg">
-      <path d="M740 585 L734 708 Q778 736 830 708 L826 595 Z" fill="${C.skinS}"/>
-      <!-- bun and back hair -->
-      <circle cx="668" cy="548" r="58" fill="${C.hair}"/>
-      <path d="M640 520 Q660 500 700 512" stroke="#463830" stroke-width="4" fill="none" opacity=".6"/>
-      <!-- face -->
-      <path id="${p}-face" d="M735 330 C790 298 852 316 866 368 C872 394 874 420 880 440 L900 478 C904 486 896 492 882 492 C886 500 886 507 880 513 C884 521 880 531 872 535 C870 553 860 571 840 581 C814 595 780 593 752 573 C728 557 712 521 708 481 Z" fill="${C.skin}"/>
-      <path d="M735 330 C790 298 852 316 866 368 C872 394 874 420 880 440 L900 478 C904 486 896 492 882 492 C886 500 886 507 880 513 C884 521 880 531 872 535 C870 553 860 571 840 581 C814 595 780 593 752 573 C728 557 712 521 708 481 Z" fill="url(#${p}-glow)"/>
-      <ellipse cx="826" cy="486" rx="26" ry="14" fill="#E39A82" opacity=".28"/>
-      <!-- hair front -->
-      <path d="M700 478 C676 380 722 296 806 290 C868 288 896 338 872 376 C852 352 818 344 792 356 C770 382 760 424 750 462 C742 502 740 536 728 562 C712 534 704 506 700 478 Z" fill="${C.hair}"/>
-      <path d="M806 296 C780 300 760 316 748 340" stroke="#463830" stroke-width="3" fill="none" opacity=".6"/>
-      <ellipse cx="754" cy="488" rx="15" ry="24" fill="${C.skinS}"/>
-      <circle cx="754" cy="518" r="5" fill="${C.bronze}"/>
-      <!-- brows -->
-      <path id="${p}-browN" d="M806 412 Q830 400 854 409" stroke="${C.hair}" stroke-width="6" fill="none" stroke-linecap="round"/>
-      <path id="${p}-browF" d="M874 404 Q884 400 893 404" stroke="${C.hair}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-      <!-- eyes -->
-      <g id="${p}-eyeN" transform="translate(0 0)">
-        <path d="M812 436 Q830 424 848 434 Q830 444 812 436 Z" fill="#FBF7F2"/>
-        <circle id="${p}-irisN" cx="836" cy="435" r="7" fill="#3A2A22"/>
-        <circle cx="838" cy="432.5" r="2" fill="#fff"/>
-        <path d="M810 435 Q830 422 850 433" stroke="#2B211C" stroke-width="3" fill="none" stroke-linecap="round"/>
-      </g>
-      <g id="${p}-eyeF"><path d="M878 430 Q886 426 892 430 Q886 434 878 430 Z" fill="#FBF7F2"/><circle cx="887" cy="430" r="3.5" fill="#3A2A22"/><path d="M877 429 Q886 424 893 429" stroke="#2B211C" stroke-width="2.4" fill="none"/></g>
-      <path id="${p}-lidN" d="M810 435 Q830 422 850 433 Q830 422 810 435 Z" fill="${C.skin}" opacity="0"/>
-      <!-- nose and mouth -->
-      <path d="M880 444 Q898 474 892 483 Q884 489 873 486" stroke="${C.skinS}" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path id="${p}-mouth" d="M852 513 Q866 517 879 512" stroke="#A35E50" stroke-width="4" fill="none" stroke-linecap="round"/>
-    </g>
-  </g>
+  ${mayaFaceSVG(p)}
 </svg>`;
 
 // ---------- runtime helpers injected into each scene script ----------
@@ -453,23 +330,24 @@ const poseSide = (o) => {
   const s = Math.sin(ph), c = Math.cos(ph);
   const bob = 5*a*Math.abs(s);
   setT('${p}-ms', 'translate(' + o.x.toFixed(2) + ' ' + (o.y ?? 800) + ') scale(' + (o.sc ?? 1) + ')');
-  setT('${p}-ms-body', 'translate(0 ' + bob.toFixed(2) + ') rotate(' + (2.5*a) + ' 0 -165)');
-  rot('${p}-ms-legF', -22*a*s, 0, -165);
-  rot('${p}-ms-legB', 22*a*s, 0, -165);
-  rot('${p}-ms-shinF', a*(4 + 30*Math.pow(Math.max(0, c), 2)), 0, -87);
-  rot('${p}-ms-shinB', a*(4 + 30*Math.pow(Math.max(0, -c), 2)), 0, -87);
-  rot('${p}-ms-armB', -6*a*s + (o.armB ?? 0), 0, -252);
-  rot('${p}-ms-foreB', -14, 0, -202);
-  const ua = (o.armF ?? -14) + 6*a*s, fa = (o.foreF ?? -72);
-  rot('${p}-ms-armF', ua, 0, -253);
-  rot('${p}-ms-foreF', fa, 0.5, -202);
+  setT('${p}-ms-body', 'translate(0 ' + bob.toFixed(2) + ') rotate(' + (2*a) + ' 0 -190)');
+  rot('${p}-ms-legF', -21*a*s, 0, -196);
+  rot('${p}-ms-legB', 21*a*s, 0, -196);
+  rot('${p}-ms-legF-shin', a*(3 + 26*Math.pow(Math.max(0, c), 2)), 0, -104);
+  rot('${p}-ms-legB-shin', a*(3 + 26*Math.pow(Math.max(0, -c), 2)), 0, -104);
+  rot('${p}-ms-armB', -7*a*s + (o.armB ?? 4), 1, -295);
+  rot('${p}-ms-foreB', -10, 0.5, -229);
+  rot('${p}-ms-bag', 2.5*a*Math.sin(ph*2 + 0.6), -6, -296);
+  const ua = (o.armF ?? -14) + 5*a*s, fa = (o.foreF ?? -72);
+  rot('${p}-ms-armF', ua, 1, -295);
+  rot('${p}-ms-foreF', fa, 0.5, -229);
   // cup follows the front hand and stays upright
   const r1 = ua*Math.PI/180, r2 = (ua+fa)*Math.PI/180;
-  const ex = -51*Math.sin(r1), ey = -253 + 51*Math.cos(r1);
-  const hx = ex - 52*Math.sin(r2), hy = ey + 52*Math.cos(r2);
-  setT('${p}-ms-cup', 'translate(' + (hx+3).toFixed(2) + ' ' + (hy-4).toFixed(2) + ')');
+  const ex = 1 - 66*Math.sin(r1), ey = -295 + 66*Math.cos(r1);
+  const hx = ex - 66*Math.sin(r2), hy = ey + 66*Math.cos(r2);
+  setT('${p}-ms-cup', 'translate(' + (hx+5+3).toFixed(2) + ' ' + (hy-5).toFixed(2) + ')');
   setO('${p}-ms-cup', o.cup ?? 1);
-  rot('${p}-ms-head', (o.head ?? 0) + 1.5*a*Math.sin(ph*2), 0, -278);
+  rot('${p}-ms-head', (o.head ?? 0) + 1.2*a*Math.sin(ph*2), 5, -318);
   setO('${p}-ms', o.op ?? 1);
 };`;
 
@@ -479,25 +357,36 @@ const poseBack = (o) => {
   const sit = o.sit ?? 0;
   setT('${p}-mb', 'translate(' + o.x.toFixed(2) + ' 798)');
   setO('${p}-mb', o.op ?? 1);
-  setT('${p}-mb-up', 'translate(0 ' + (44*sit + (o.bob ?? 0)).toFixed(2) + ') rotate(' + (o.lean ?? 0) + ' 0 -165)');
+  setT('${p}-mb-up', 'translate(0 ' + (88*sit + (o.bob ?? 0)).toFixed(2) + ') rotate(' + (o.lean ?? 0) + ' 0 -165)');
   setT('${p}-mb-legs', 'translate(0 ' + (40*sit).toFixed(2) + ') scale(1 ' + (1 - 0.55*sit).toFixed(3) + ')');
   setO('${p}-mb-legs', 1 - sit*0.98);
-  rot('${p}-mb-armL', o.armL ?? 4, -24, -252);
-  rot('${p}-mb-foreL', o.foreL ?? 0, -24.5, -200);
-  rot('${p}-mb-armR', o.armR ?? -4, 24, -252);
-  rot('${p}-mb-foreR', o.foreR ?? 0, 24.5, -200);
-  setO('${p}-mb-cup', o.cup ?? 0);
+  rot('${p}-mb-armL', o.armL ?? 4, -34, -294);
+  rot('${p}-mb-foreL', o.foreL ?? 0, -34, -229);
+  rot('${p}-mb-armR', o.armR ?? -4, 34, -294);
+  rot('${p}-mb-foreR', o.foreR ?? 0, 34, -229);
+  setO('${p}-mb-cupR', o.cup ?? 0);
+  setO('${p}-mb-foreL', o.foreLVis ?? (1 - sit));
+  setO('${p}-mb-foreR', o.foreRVis ?? (1 - sit));
   setO('${p}-mb-cupL', o.cupL ?? 0);
-  setT('${p}-mb-head', 'rotate(' + (o.head ?? 0).toFixed(2) + ' 0 -280) translate(' + (o.headX ?? 0) + ' 0)');
+  setT('${p}-mb-head', 'rotate(' + (o.head ?? 0).toFixed(2) + ' 0 -318) translate(' + (o.headX ?? 0) + ' 0)');
 };`;
 
+// Out-of-focus foreground leaves: depth for the wide shots (off-frame in close shots).
+export const foreground = (p) => `
+<svg class="full" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0;pointer-events:none">
+  <defs><filter id="${p}-fgblur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+  <g filter="url(#${p}-fgblur)" opacity=".92">
+    ${[[-30, 1110, -10, 830, 60], [40, 1120, 120, 860, 40], [100, 1130, 230, 900, 20], [-60, 1100, 60, 760, 75], [150, 1140, 300, 960, 10]].map(([x1, y1, x2, y2, w], i) => `<path d="M${x1} ${y1} Q${(x1 + x2) / 2 - w} ${(y1 + y2) / 2} ${x2} ${y2} Q${(x1 + x2) / 2 + w} ${(y1 + y2) / 2 + 20} ${x1 + 40} ${y1} Z" fill="${i % 2 ? "#6E8467" : "#5F7559"}"/>`).join("")}
+    ${[[1960, 1120, 1840, 880, -50], [1900, 1130, 1760, 930, -30], [1990, 1100, 1900, 820, -60]].map(([x1, y1, x2, y2, w], i) => `<path d="M${x1} ${y1} Q${(x1 + x2) / 2 - w} ${(y1 + y2) / 2} ${x2} ${y2} Q${(x1 + x2) / 2 + w} ${(y1 + y2) / 2 + 20} ${x1 - 40} ${y1} Z" fill="${i % 2 ? "#6E8467" : "#5F7559"}"/>`).join("")}
+  </g>
+</svg>`;
 // The office "world" with Maya seated at her desk and the monitor showing screenHTML (1280x720 app).
 export const screenCSS = (p) => `
 #${p}-screen{left:${SCREEN.x}px;top:${SCREEN.y}px;width:${SCREEN.w}px;height:${SCREEN.h}px;overflow:hidden;background:#FBF9F5}
 #${p}-screen .app{transform:scale(${SCREEN.w / 1280})}`;
 export const worldLayer = (p, screenHTML, opts = {}) => `
 <div id="${p}-world" class="world">
-  ${office(p, { colleague: colleague(p), cupOnDesk: opts.cupOnDesk ?? true, sun: opts.sun })}
+  ${office(p, { colleague: colleague(p), cupOnDesk: opts.cupOnDesk ?? true, sun: opts.sun, clock: opts.clock })}
   ${opts.overSVG ?? ""}
   <svg class="full" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0">
     ${mayaBack(p)}
@@ -506,6 +395,7 @@ export const worldLayer = (p, screenHTML, opts = {}) => `
   </svg>
   <div id="${p}-screen" class="abs">${screenHTML}</div>
   ${opts.extra ?? ""}
+  ${opts.fg === false ? "" : foreground(p)}
 </div>`;
 // camera helper (runtime): sets the world transform so world point (cx,cy) sits at frame centre
 export const CAM = (p) => `

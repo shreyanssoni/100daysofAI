@@ -2,6 +2,11 @@
 import { C, appShell, dashContent, worldLayer, screenCSS, CAM, BACK_POSE, remitPDF, words, cursorSVG } from "../shared.mjs";
 
 const p = "s2";
+const devMsg = `
+<div id="${p}-dev" class="a-card" style="position:absolute;left:640px;top:530px;width:412px;padding:16px 18px;display:flex;gap:14px;box-shadow:0 2px 4px rgba(70,50,30,.08),0 18px 40px rgba(70,50,30,.16)">
+  <div style="width:42px;height:42px;border-radius:50%;background:#DCE6F0;color:#3F6489;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;flex:none">DP</div>
+  <div><div style="font-size:13px;color:${C.ink2}"><b style="color:${C.ink}">Dev Patel</b> · Sales · now</div><div style="font-size:19px;line-height:1.35;margin-top:4px;color:${C.ink}">Helix says they <b>paid in full</b>. Can you confirm before my 10:00 call?</div></div>
+</div>`;
 const toast = `
 <div id="${p}-toast" class="a-card" style="position:absolute;left:680px;top:58px;width:372px;padding:14px 18px;display:flex;gap:14px;align-items:center;box-shadow:0 2px 4px rgba(70,50,30,.08),0 18px 40px rgba(70,50,30,.16)">
   <div style="width:44px;height:44px;border-radius:12px;background:${C.bronzeL};display:flex;align-items:center;justify-content:center;font-weight:700;color:${C.bronzeD};font-size:22px">$</div>
@@ -31,7 +36,7 @@ export default {
   css: `
 ${screenCSS(p)}
 #${p}-row{opacity:0}
-#${p}-pw{background:${C.ivory};opacity:0}
+#${p}-pw{background:var(--ground);opacity:0}
 #${p}-pdf{left:700px;top:150px;width:480px;height:800px;transform-origin:0 0}
 #${p}-t1{left:110px;top:150px}
 #${p}-t2{left:110px;top:240px}
@@ -39,12 +44,11 @@ ${screenCSS(p)}
 #${p}-ws{left:300px;top:250px;width:1320px;height:640px;opacity:0;background:#FFFFFF;border-radius:28px;border:1px solid ${C.line};box-shadow:0 30px 80px rgba(70,50,30,.10)}
 `,
   html: `
-${worldLayer(p, appShell("Dashboard", dashContent(p).replace(`id="${p}-newrow"`, `id="${p}-row"`) + toast + remitCard))}
+${worldLayer(p, appShell("Dashboard", dashContent(p).replace(`id="${p}-newrow"`, `id="${p}-row"`) + toast + remitCard + devMsg))}
 <div id="${p}-pw" class="full">
   <div id="${p}-ws" class="abs">
     <div style="position:absolute;left:36px;top:28px;display:flex;align-items:center;gap:14px;font-size:24px;font-weight:700">
-      <svg width="30" height="30" viewBox="0 0 40 40" fill="none"><circle cx="18" cy="21" r="12" stroke="${C.bronze}" stroke-width="3.4"/><path d="M30 9 V33 M8 27 H30" stroke="${C.bronze}" stroke-width="3.4" stroke-linecap="round"/></svg>
-      Cash application workspace <span style="font-weight:400;color:${C.ink2}">· Helix Health Distribution</span></div>
+            Cash application workspace <span style="font-weight:400;color:${C.ink2}">· Helix Health Distribution</span></div>
   </div>
   ${bank}
   ${erp}
@@ -65,6 +69,8 @@ drive(tl, 8, (t) => {
   const cy = key(t, [[0, 538], [1.05, 520], [3.15, 520], [3.7, 500]]);
   cam(s, cx, cy);
 });
+// Dev's question arrives first
+tl.fromTo('#${p}-dev', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 0.35);
 // payment lands on the dashboard
 tl.fromTo('#${p}-toast', { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 1.0);
 tl.fromTo('#${p}-row', { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 1.25);

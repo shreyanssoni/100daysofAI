@@ -4,7 +4,9 @@ Writes assets/audio/score.wav (music bed) and assets/audio/fx.wav (footsteps, da
 glass match notes, low exception tones). Deterministic: seeded RNG.
 Run: python3 src/score.py
 """
-import numpy as np, wave, os
+import numpy as np, wave, os, json
+_here = os.path.dirname(os.path.abspath(__file__))
+S = json.load(open(os.path.join(_here, "timing.json")))["starts"]
 
 SR = 48000
 DUR = 60.0
@@ -147,40 +149,40 @@ BAR = BEAT * 4
 # pad through the film, quieter in the montage peak (rhythm carries it), resolve at the logo
 t = 0.0
 ci = 0
-while t < 56.0:
+while t < S["s8"] + 3.0:
     ch = CHORDS[ci % 4]
     amp = 0.05
-    if 44 <= t < 51:
+    if S["s6"] <= t < S["s7"]:
         amp = 0.065
     for m in ch:
         add(mus, t, pad_note(midi(m), BAR, amp, bright=0.42))
     t += BAR
     ci += 1
-# resolution chord at the logo (57.35) – warm, long
+# resolution chord on the end card – warm, long
 for m in [38, 50, 57, 62, 66, 69, 73, 76]:
-    add(mus, 57.3, pad_note(midi(m), 2.0, 0.07, bright=0.5))
+    add(mus, S["s8"] + 3.2, pad_note(midi(m), 2.0, 0.07, bright=0.5))
 
 # pulse: muted plucks on eighths from the payment's arrival; arpeggios build through the montage
 def chord_at(tm):
     return CHORDS[int(tm // BAR) % 4]
 
 def section_level(tm):
-    if tm < 7.6: return 0.0
-    if tm < 15: return 0.35
-    if tm < 30: return 0.55
-    if tm < 44: return 0.55 + 0.45 * (tm - 30) / 14
-    if tm < 51: return 0.0
-    if tm < 56.2: return 0.4
+    if tm < S["s2"] + 0.6: return 0.0
+    if tm < S["s3"]: return 0.35
+    if tm < S["s5"]: return 0.55
+    if tm < S["s6"]: return 0.55 + 0.45 * (tm - S["s5"]) / (S["s6"] - S["s5"])
+    if tm < S["s7"]: return 0.0
+    if tm < S["s8"] + 2.9: return 0.4
     return 0.0
 
 step = BEAT / 2
 k = 0
-while k * step < 57:
+while k * step < S["s8"] + 3.0:
     tm = k * step
     lvl = section_level(tm)
     if lvl > 0:
         ch = chord_at(tm)
-        if tm >= 30 and tm < 44:
+        if S["s5"] <= tm < S["s6"]:
             # 16th arpeggio in the montage
             for s16 in range(2):
                 tt16 = tm + s16 * step / 2
@@ -193,15 +195,15 @@ while k * step < 57:
         if k % 8 == 0:
             add(mus, tm, pluck(midi(ch[0] - 12), 0.16 * max(lvl, 0.4), decay=1.4, bright=0.25))
         # soft kick on beats from 15 s, every beat in the montage
-        if tm >= 15 and k % 2 == 0 and (tm >= 30 or k % 4 == 0):
+        if tm >= S["s3"] and k % 2 == 0 and (tm >= S["s5"] or k % 4 == 0):
             add(mus, tm, kick(0.22 * lvl))
         # off-beat ticks
-        if tm >= 15 and k % 2 == 1:
+        if tm >= S["s3"] and k % 2 == 1:
             add(mus, tm, tick(0.018 * lvl))
     k += 1
 
 # gentle descending notes during Maya's decisions
-for i, (tm, m) in enumerate([(44.4, 74), (45.6, 71), (46.9, 69), (48.2, 66), (49.5, 69)]):
+for i, (tm, m) in enumerate([(S["s6"] + d, n) for d, n in [(0.4, 74), (1.6, 71), (2.9, 69), (4.2, 66), (5.5, 69)]]):
     add(mus, tm, pluck(midi(m), 0.05, decay=1.6, bright=0.3))
 
 mus = lp_fast(mus, 9000)
@@ -259,33 +261,37 @@ add(fx, 3.87, felt(0.06))            # cup set down
 add(fx, 4.62, felt(0.05))            # sits
 add(fx, 4.98, glass(midi(81), 0.025))  # monitor wakes
 # scene 2 paper: the remittance document unfolds
-add(fx, 10.4, paper(0.05, 0.5))
+add(fx, S["s2"] + 3.4, paper(0.05, 0.5))
 # scene 3: extraction ticks as the scan reads each row
 TX_ROWS = 9
 for i in range(8):
-    ti = 15 + 2.3 + ((i * 56 + 56 * 0.6) / (8 * 56 + 8 + 68)) * 2.0
+    ti = S["s3"] + 2.3 + ((i * 56 + 56 * 0.6) / (8 * 56 + 8 + 68)) * 2.0
     add(fx, ti, tick(0.05, fc=5000, dec=90))
-add(fx, 16.0, paper(0.035, 0.6))
+add(fx, S["s3"] + 1.0, paper(0.035, 0.6))
 # scene 4: lines draw (glass), match (glass chord)
-add(fx, 23.95, glass(midi(86), 0.03)); add(fx, 24.1, glass(midi(90), 0.025))
-add(fx, 29.07, glass(midi(81), 0.04)); add(fx, 29.07, glass(midi(85), 0.03)); add(fx, 29.1, glass(midi(88), 0.03))
+add(fx, S["s4"] + 0.95, glass(midi(86), 0.03)); add(fx, S["s4"] + 1.1, glass(midi(90), 0.025))
+add(fx, S["s4"] + 6.07, glass(midi(81), 0.04)); add(fx, S["s4"] + 6.07, glass(midi(85), 0.03)); add(fx, S["s4"] + 6.1, glass(midi(88), 0.03))
 # scene 5 montage: matches, rules, exceptions
 for i in range(4):
-    add(fx, 30 + 1.75 + i * 0.07, glass(midi(88 + [0, 2, 4, 7][i]), 0.03))
-add(fx, 30 + 3.65, glass(midi(86), 0.03))                 # discount verified
-add(fx, 30 + 5.2, low_tone(midi(45), 0.05))               # chargeback exception
-add(fx, 30 + 6.1, low_tone(midi(50), 0.035, 0.4))         # proposed action
-add(fx, 30 + 8.0, glass(midi(90), 0.035))                 # recovery identified
-add(fx, 30 + 9.95, low_tone(midi(52), 0.035, 0.4))        # short pay kept open
-add(fx, 30 + 11.35, low_tone(midi(41), 0.06, 0.5))        # duplicate barrier
+    add(fx, S["s5"] + 1.75 + i * 0.07, glass(midi(88 + [0, 2, 4, 7][i]), 0.03))
+add(fx, S["s5"] + 3.65, glass(midi(86), 0.03))                 # discount verified
+add(fx, S["s5"] + 5.2, low_tone(midi(45), 0.05))               # chargeback exception
+add(fx, S["s5"] + 6.1, low_tone(midi(50), 0.035, 0.4))         # proposed action
+add(fx, S["s5"] + 8.0, glass(midi(90), 0.035))                 # recovery identified
+add(fx, S["s5"] + 9.95, low_tone(midi(52), 0.035, 0.4))        # short pay kept open
+add(fx, S["s5"] + 11.35, low_tone(midi(41), 0.06, 0.5))        # duplicate barrier
 # scene 6: felt-damped confirmations
-add(fx, 44 + 2.32, felt(0.07)); add(fx, 44 + 3.77, felt(0.07))
-add(fx, 44 + 4.0, glass(midi(81), 0.03))
+add(fx, S["s6"] + 2.32, felt(0.07)); add(fx, S["s6"] + 3.77, felt(0.07))
+add(fx, S["s6"] + 4.0, glass(midi(81), 0.03))
 # scene 7: posting resolves
-add(fx, 51 + 1.2, glass(midi(74), 0.04)); add(fx, 51 + 1.2, glass(midi(78), 0.03)); add(fx, 51 + 1.22, glass(midi(81), 0.03))
+add(fx, S["s7"] + 1.2, glass(midi(74), 0.04)); add(fx, S["s7"] + 1.2, glass(midi(78), 0.03)); add(fx, S["s7"] + 1.22, glass(midi(81), 0.03))
 for i in range(6):
-    add(fx, 51 + 2.38 + i * 0.09, felt(0.03))
-add(fx, 51 + 2.55, paper(0.04, 0.5))
+    add(fx, S["s7"] + 2.38 + i * 0.09, felt(0.03))
+add(fx, S["s7"] + 2.55, paper(0.04, 0.5))
+
+# scene 8: reply sent, Dev reacts
+add(fx, S["s8"] + 0.52, glass(midi(81), 0.03)); add(fx, S["s8"] + 0.55, glass(midi(85), 0.025))
+add(fx, S["s8"] + 2.15, felt(0.04))
 
 fx_st = reverb(fx, mix=0.22, decay=1.4)
 

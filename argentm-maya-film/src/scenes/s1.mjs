@@ -1,5 +1,5 @@
 // 0:00–0:07 — The morning. Maya walks in, sets down her coffee, sits, wakes the monitor.
-import { office, colleague, mayaSide, mayaBack, chair, appShell, dashContent, SCREEN, words, SIDE_POSE, BACK_POSE } from "../shared.mjs";
+import { foreground, office, colleague, mayaSide, mayaBack, chair, appShell, dashContent, SCREEN, words, SIDE_POSE, BACK_POSE } from "../shared.mjs";
 
 const p = "s1";
 export default {
@@ -15,13 +15,14 @@ export default {
 `,
   html: `
 <div id="${p}-world" class="world">
-  ${office(p, { colleague: colleague(p), cupOnDesk: false })}
+  ${office(p, { colleague: colleague(p), cupOnDesk: false, clock: [8, 58] })}
   <svg class="full" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0">
     ${mayaBack(p)}
     ${chair(p)}
     ${mayaSide(p)}
   </svg>
   <div id="${p}-screen" class="abs">${appShell("Dashboard", dashContent(p))}<div id="${p}-off"></div></div>
+  ${foreground(p)}
 </div>
 <div id="${p}-t1" class="t-hero">${words("Every morning,", p + "-w1")}<br>${words("payments arrive.", p + "-w1")}</div>
 <div id="${p}-t2" class="t-hero">${words("But the", p + "-w2")} <span class="w ${p}-w2 serif">answers</span> ${words("don't.", p + "-w2")}</div>
@@ -48,7 +49,7 @@ drive(tl, 7, (t) => {
   const bob = (t < 3.45 ? Math.sin(clamp((t - 3.3) / 0.15, 0, 1) * Math.PI) * 3 : 0) + settle;
   poseBack({
     x: bx, op: turn, sit, bob,
-    armR: lerp(lerp(-4, -20, reach), -12, type), foreR: lerp(lerp(0, -100, reach), -18, type),
+    armR: lerp(lerp(-4, -8, reach), -12, type), foreR: lerp(lerp(0, -62, reach), -18, type),
     armL: lerp(4, 10, type), foreL: lerp(0, 14, type),
     cup: t < 3.86 ? 1 : 0, head: lerp(0, 4, type) + key(t, [[5.4, 0], [5.8, -2], [6.4, 0]]),
   });
@@ -60,8 +61,9 @@ drive(tl, 7, (t) => {
   // ---- colleague looks up and waves as she passes ----
   const look = key(t, [[1.2, 0], [1.5, 1], [2.6, 1], [3.0, 0]]);
   const wave = key(t, [[1.45, 0], [1.75, 1], [2.35, 1], [2.7, 0]]);
-  rot('${p}-col-head', -9 * look, 2, -166);
-  rot('${p}-col-arm', -95 * wave + 6 * Math.sin(t * 14) * wave, 2, -146);
+  rot('${p}-col-head', -10 * look, 4, -226);
+  rot('${p}-col-arm', -105 * wave + 7 * Math.sin(t * 13) * wave, 0, -204);
+  rot('${p}-col-fore', (1 - wave) * 3 * Math.sin(t * 22), 0, -146);
   // ---- camera ----
   const s = key(t, [[0, 1.06], [1.2, 1.1], [3.1, 1.3], [4.7, 1.36], [6.5, 3.2], [7, 3.25]]);
   let ccx = key(t, [[0, 760], [1.2, 780], [3.1, 1060], [4.7, 1140], [6.5, 1232], [7, 1234]]);

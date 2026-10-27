@@ -30,7 +30,7 @@ const LOG = [
 
 export default {
   id: p,
-  dur: 14,
+  dur: 13.5,
   css: `
 #${p}-t1{left:110px;top:64px;font-size:60px}
 #${p}-t2{left:110px;top:134px;font-size:60px}
@@ -39,6 +39,10 @@ export default {
 .${p}-col{position:absolute;top:322px;font-size:17px}
 `,
   html: `
+<div id="${p}-ask" class="card" style="left:1400px;top:56px;width:410px;padding:16px 20px;display:flex;gap:14px;align-items:center;opacity:0">
+  <div style="width:46px;height:46px;border-radius:50%;background:${C.blueL};color:${C.blueD};font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;flex:none">DP</div>
+  <div><div style="font-size:16px;color:${C.ink2}"><b style="color:${C.ink}">Dev</b> asked</div><div style="font-size:23px;font-weight:700;letter-spacing:-.01em">“Did Helix pay in full?”</div></div>
+</div>
 <div id="${p}-t1" class="t-hero">${words("Every line understood.", p + "-w1")}</div>
 <div id="${p}-t2" class="t-hero">${words("Every decision", p + "-w2")} <span class="w ${p}-w2 serif">explained.</span></div>
 
@@ -123,6 +127,7 @@ ${label(`${p}-fL`, "Duplicate payment prevented", "chip-red")}
 const pop = (sel, t) => tl.fromTo(sel, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(1.6)' }, t);
 const inOut = (sel, a, b) => { tl.fromTo(sel, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out' }, a); tl.to(sel, { opacity: 0, duration: 0.2, ease: 'power2.in' }, b); };
 revealWords(tl, '.${p}-w1', 0.15);
+tl.fromTo('#${p}-ask', { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 0.25);
 revealWords(tl, '.${p}-w2', 6.6, 0.1);
 
 // ---- A: invoice matching (0.3 – 2.7)
@@ -202,8 +207,9 @@ tl.to('#${p}-F', { opacity: 0, y: -30, duration: 0.25, ease: 'power3.in' }, 12.7
 
 // ---- outro: two decisions need Maya
 hideWords(tl, '.${p}-w1, .${p}-w2', 12.75, 0.02);
-tl.to('#${p}-log', { y: 540 - 968 - 20, x: -20, scale: 1.0, transformOrigin: '0 50%', duration: 0.6, ease: 'power3.inOut' }, 12.95);
-tl.to('#${p}-lg0, #${p}-lg1, #${p}-lg3, #${p}-lg5', { opacity: 0.35, duration: 0.3 }, 13.3);
-pop('#${p}-need', 13.4);
+tl.to('#${p}-log', { y: 540 - 968 - 20, x: -20, scale: 1.0, transformOrigin: '0 50%', duration: 0.55, ease: 'power3.inOut' }, 12.75);
+tl.to('#${p}-lg0, #${p}-lg1, #${p}-lg3, #${p}-lg5', { opacity: 0.35, duration: 0.3 }, 12.95);
+pop('#${p}-need', 13.1);
+tl.to('#${p}-ask', { x: -560, y: 300, duration: 0.55, ease: 'power3.inOut' }, 12.75);
 `,
 };

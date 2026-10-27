@@ -1,7 +1,7 @@
 <template>
 <style>
 
-#root{position:absolute;inset:0;overflow:hidden;background:#FBF8F2;font-family:Inter,sans-serif;color:#2B2A28;-webkit-font-smoothing:antialiased}
+#root{--ground:radial-gradient(1400px 900px at 68% 22%, #FFFDF9 0%, #FAF5EC 55%, #F3EBDE 100%);position:absolute;inset:0;overflow:hidden;background:var(--ground);font-family:Inter,sans-serif;color:#2B2A28;-webkit-font-smoothing:antialiased}
 .abs{position:absolute}
 .full{position:absolute;left:0;top:0;width:1920px;height:1080px}
 .world{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
@@ -11,7 +11,7 @@
 .t-hero .serif{font-size:1.12em;color:#A9773F}
 .t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:#6B665E}
 .w{display:inline-block;white-space:pre}
-.card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:18px;box-shadow:0 1px 2px rgba(70,50,30,.06),0 14px 36px rgba(70,50,30,.09)}
+.card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:20px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 6px 14px rgba(70,50,30,.05),0 28px 60px rgba(70,50,30,.10)}
 .chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;letter-spacing:-.005em;white-space:nowrap}
 .chip-blue{background:#E3EBF3;color:#3F6489}
 .chip-amber{background:#F6EAD0;color:#8E6A22}
@@ -46,7 +46,7 @@
 
 #s7-screen{left:1180px;top:452px;width:222px;height:125px;overflow:hidden;background:#FBF9F5}
 #s7-screen .app{transform:scale(0.1734375)}
-#s7-ui{transform-origin:0 0;background:#FBF8F2}
+#s7-ui{transform-origin:0 0;background:var(--ground)}
 #s7-zoom{transform-origin:0 0}
 #s7-world{opacity:0}
 #s7-audit{left:260px;top:620px;width:1400px;padding:26px 34px;opacity:0;transform-origin:50% 100%}
@@ -112,6 +112,17 @@
   <g id="s7-sun" opacity="0.55">
     <polygon points="360,642 660,642 890,1000 510,1000" fill="url(#s7-sun)"/><polygon points="730,642 1030,642 1260,1000 880,1000" fill="url(#s7-sun)"/><polygon points="1100,642 1400,642 1630,1000 1250,1000" fill="url(#s7-sun)"/>
   </g>
+  <!-- rug under Maya's desk -->
+  <polygon points="850,716 1610,716 1720,900 760,900" fill="#E8DCCB"/>
+  <polygon points="872,726 1592,726 1690,890 790,890" fill="none" stroke="#DCCBB4" stroke-width="3"/>
+  <!-- wall clock: shows the time of day -->
+  <g id="s7-clock">
+    <circle cx="1444" cy="182" r="31" fill="#FFFDF8" stroke="#3A3631" stroke-width="3.5"/>
+    <line x1="1444" y1="156" x2="1444" y2="161" stroke="#3A3631" stroke-width="2.4" transform="rotate(0 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="159" stroke="#3A3631" stroke-width="1.4" transform="rotate(30 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="159" stroke="#3A3631" stroke-width="1.4" transform="rotate(60 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="161" stroke="#3A3631" stroke-width="2.4" transform="rotate(90 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="159" stroke="#3A3631" stroke-width="1.4" transform="rotate(120 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="159" stroke="#3A3631" stroke-width="1.4" transform="rotate(150 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="161" stroke="#3A3631" stroke-width="2.4" transform="rotate(180 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="159" stroke="#3A3631" stroke-width="1.4" transform="rotate(210 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="159" stroke="#3A3631" stroke-width="1.4" transform="rotate(240 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="161" stroke="#3A3631" stroke-width="2.4" transform="rotate(270 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="159" stroke="#3A3631" stroke-width="1.4" transform="rotate(300 1444 182)"/><line x1="1444" y1="156" x2="1444" y2="159" stroke="#3A3631" stroke-width="1.4" transform="rotate(330 1444 182)"/>
+    <line id="s7-clkH" x1="1444" y1="182" x2="1444" y2="166" stroke="#2B2A28" stroke-width="3.4" stroke-linecap="round" transform="rotate(269 1444 182)"/>
+    <line id="s7-clkM" x1="1444" y1="182" x2="1444" y2="159" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round" transform="rotate(348 1444 182)"/>
+    <circle cx="1444" cy="182" r="2.6" fill="#A9773F"/>
+  </g>
   <!-- pendant lamps -->
   <line x1="760" y1="30" x2="760" y2="150" stroke="#8C8378" stroke-width="2"/><path d="M726 176 Q760 132 794 176 Z" fill="#A9773F"/><ellipse cx="760" cy="176" rx="34" ry="5" fill="#E9D3B4"/><line x1="1290" y1="30" x2="1290" y2="150" stroke="#8C8378" stroke-width="2"/><path d="M1256 176 Q1290 132 1324 176 Z" fill="#A9773F"/><ellipse cx="1290" cy="176" rx="34" ry="5" fill="#E9D3B4"/>
   <!-- tall plant -->
@@ -138,28 +149,48 @@
     <rect x="432" y="621" width="6" height="103" fill="#4A4744"/><rect x="682" y="621" width="6" height="103" fill="#4A4744"/>
     <polygon points="560,598 640,598 652,574 572,574" fill="#C9C4BC"/><polygon points="560,598 640,598 636,602 556,602" fill="#B2ACA2"/>
     <rect x="600" y="586" width="44" height="12" rx="2" fill="#E9E1D3"/>
+    <path d="M444 576 L462 576 L460 598 L446 598 Z" fill="#7F96B1"/><path d="M462 582 q8 0 7 8 q-1 6 -8 5" stroke="#7F96B1" stroke-width="2.5" fill="none"/>
+    <path d="M488 598 L506 598 L503 584 L491 584 Z" fill="#D9CDBB"/>
+    <path d="M497 584 Q486 568 480 570 Q490 576 494 584 M497 584 Q508 564 516 566 Q504 574 500 584 M497 584 Q498 566 494 556 Q502 568 500 584" fill="#7D9276" stroke="#7D9276" stroke-width="3" stroke-linejoin="round"/>
   </g>
   
-<g id="s7-col" transform="translate(520 724) scale(.82)">
-  <ellipse cx="0" cy="2" rx="55" ry="6" fill="#4A3A2A" opacity=".12"/>
-  <rect x="-34" y="-122" width="12" height="70" rx="5" fill="#4A4744"/>
-  <rect x="-36" y="-56" width="60" height="10" rx="4" fill="#4A4744"/>
-  <rect x="-4" y="-46" width="6" height="40" fill="#5A5653"/>
-  <path d="M-26 -4 L30 -4" stroke="#5A5653" stroke-width="5" stroke-linecap="round"/>
-  <rect x="0" y="-60" width="56" height="16" rx="7" fill="#4C5566"/>
-  <rect x="44" y="-60" width="15" height="60" rx="6" fill="#4C5566"/>
-  <path d="M44 -2 L70 -2 L70 2 L42 2 Z" fill="#26231F"/>
-  <path d="M-20 -150 C-26 -120 -24 -80 -18 -56 L18 -56 C22 -90 20 -125 12 -150 Z" fill="#8DA4BF"/>
-  <rect x="-4" y="-166" width="10" height="18" fill="#D49C78"/>
-  <g id="s7-col-head">
-    <ellipse cx="2" cy="-186" rx="19" ry="22" fill="#C98F6B"/>
-    <path d="M-18 -190 C-20 -214 8 -216 18 -202 C14 -206 2 -204 -6 -196 C-10 -186 -12 -178 -16 -174 Z" fill="#5B4A3E"/>
-    <ellipse cx="12" cy="-188" rx="2" ry="2.4" fill="#2B211C"/>
-    <path d="M20 -186 q5 5 0 8" stroke="#A9775A" stroke-width="2" fill="none"/>
-  </g>
+<g id="s7-col" transform="translate(500 724) scale(.9)">
+  <ellipse cx="10" cy="2" rx="62" ry="6" fill="#4A3A2A" opacity=".14"/>
+  <!-- chair -->
+  <path d="M-30 -4 L40 -4 M5 -4 L5 -64" stroke="#55514D" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="-30" cy="-1" r="4.5" fill="#33302D"/><circle cx="40" cy="-1" r="4.5" fill="#33302D"/>
+  <rect x="-30" y="-150" width="16" height="90" rx="7" fill="#5C5853"/>
+  <rect x="-28" y="-72" width="74" height="12" rx="6" fill="#55514D"/>
+  <!-- legs -->
+  <path d="M-8 -98 C10 -102 40 -102 60 -96 C66 -92 66 -80 60 -76 C40 -76 10 -76 -8 -72 Z" fill="#3D4A5C"/>
+  <path d="M46 -86 C48 -60 49 -30 49 -8 L63 -8 C64 -32 64 -62 64 -88 Z" fill="#323D4D"/>
+  <path d="M46 -9 C54 -11 66 -10 74 -4 C76 -1 74 2 70 2 L46 2 Z" fill="#2A2622"/>
+  <!-- torso -->
+  <path d="M-18 -210 C-2 -216 18 -214 26 -206 C30 -170 30 -120 26 -92 L-14 -92 C-22 -130 -24 -175 -18 -210 Z" fill="#9DB4CC"/>
+  <path d="M-18 -210 C-24 -175 -22 -130 -14 -92 L-4 -92 C-8 -130 -8 -176 -4 -213 Z" fill="#839CB6"/>
+  <path d="M10 -208 L12 -100" stroke="#839CB6" stroke-width="1.3"/>
+  <circle cx="12" cy="-180" r="1.4" fill="#fff"/><circle cx="12" cy="-158" r="1.4" fill="#fff"/><circle cx="12" cy="-136" r="1.4" fill="#fff"/>
+  <path d="M-3 -226 L9 -226 L11 -208 L-5 -208 Z" fill="#9E6C4B"/>
+  <path d="M-8 -214 L3 -205 L15 -214 L13 -208 L3 -200 L-6 -208 Z" fill="#839CB6"/>
+  <g id="s7-col-head"><g transform="translate(4 -228) scale(.84) translate(-4 228)">
+    <path d="M-14 -258 C-15 -276 0 -284 14 -279 C23 -275 26 -264 25 -256 L28 -249 C28.6 -247 27.4 -246 25.6 -246 C25.6 -240 24 -234 19 -231 C12 -226 2 -226 -4 -231 C-11 -237 -14 -246 -14 -258 Z" fill="#B9845F"/>
+    <path d="M-4 -231 C2 -226 12 -226 19 -231 C24 -234 25.6 -240 25.6 -246 L22 -246 C20 -240 14 -236 6 -236 C2 -238 -2 -240 -4 -242 Z" fill="#1E1915" opacity=".85"/>
+    <path d="M-16 -256 C-20 -278 -2 -290 14 -284 C24 -281 29 -272 27 -262 C20 -270 10 -272 2 -268 C-4 -262 -8 -254 -12 -246 Z" fill="#1E1915"/>
+    <path d="M-5 -255 C-7 -251 -7 -246 -4 -243 C-1 -245 -1 -252 -5 -255 Z" fill="#9E6C4B"/>
+    <path d="M9 -262 C12 -264 17 -264 20 -262" stroke="#1E1915" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="15" cy="-256" rx="2.2" ry="2.4" fill="#1E1915"/>
+    <path d="M25 -254 C27 -251 28 -248 26 -247" stroke="#9E6C4B" stroke-width="1.4" fill="none"/>
+    <path id="s7-col-mouth" d="M16 -239 C19 -238 22 -238 24 -239.5" stroke="#5A3A2E" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  </g></g>
+  <!-- near arm -->
   <g id="s7-col-arm">
-    <rect x="-4" y="-146" width="13" height="50" rx="6" fill="#7F96B1"/>
-    <g id="s7-col-fore"><rect x="-2" y="-100" width="11" height="44" rx="5" fill="#7F96B1" transform="rotate(-70 3 -98)"/><circle cx="44" cy="-112" r="6" fill="#C98F6B"/></g>
+    <path d="M-8 -206 C-12 -180 -10 -160 -6 -142 L8 -142 C10 -160 10 -184 8 -206 Z" fill="#9DB4CC"/>
+    <g id="s7-col-fore">
+      <path d="M-5 -146 L8 -146 L44 -136 L42 -124 Z" fill="#B9845F"/>
+      <path d="M-6 -150 L9 -150 L12 -138 L-3 -136 Z" fill="#9DB4CC"/>
+      <path d="M42 -138 C50 -138 54 -134 52 -128 C48 -124 42 -124 40 -127 Z" fill="#B9845F"/>
+      <path id="s7-col-thumb" d="M48 -136 L50 -146" stroke="#B9845F" stroke-width="4.5" stroke-linecap="round" opacity="0"/>
+    </g>
   </g>
 </g>
   <!-- Maya's desk -->
@@ -186,6 +217,12 @@
     <polygon points="985,584 1015,584 1018,594 980,594" fill="#FDFBF7" stroke="#E2DACD" stroke-width="1"/>
     <rect x="1150" y="560" width="16" height="16" fill="#F0DFA9" transform="rotate(-4 1158 568)"/>
     <rect x="1153" y="540" width="15" height="15" fill="#C99A3B" opacity=".7" transform="rotate(6 1160 548)"/>
+    <!-- desk lamp and a small plant -->
+    <ellipse cx="1478" cy="579" rx="11" ry="3" fill="#3A3631"/>
+    <path d="M1478 578 L1470 536 L1446 526" stroke="#3A3631" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1432 534 L1447 520 L1457 530 Z" fill="#A9773F"/>
+    <path d="M1186 594 L1204 594 L1202 580 L1188 580 Z" fill="#EDE5D8" stroke="#D8CDBD" stroke-width="1"/>
+    <path d="M1195 580 Q1184 566 1178 568 Q1188 572 1192 580 M1195 580 Q1206 562 1212 565 Q1202 572 1198 580 M1195 580 Q1196 562 1192 554 Q1200 566 1198 580" fill="#7D9276" stroke="#7D9276" stroke-width="2.5" stroke-linejoin="round"/>
     <!-- coffee placed on the desk -->
     <g id="s7-deskcup" opacity="1">
       <ellipse cx="1040" cy="596" rx="16" ry="3.5" fill="#4A3A2A" opacity=".2"/>
@@ -199,36 +236,46 @@
   <svg class="full" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0">
     
 <g id="s7-mb" transform="translate(1095 798)" opacity="0">
-  <ellipse id="s7-mb-shadow" cx="0" cy="0" rx="44" ry="7" fill="#4A3A2A" opacity=".16"/>
+  <ellipse cx="0" cy="0" rx="50" ry="7" fill="#4A3A2A" opacity=".16"/>
   <g id="s7-mb-legs">
-    <rect x="-17" y="-170" width="16" height="160" rx="7.5" fill="#3A3940"/>
-    <rect x="1" y="-170" width="16" height="160" rx="7.5" fill="#2F2E35"/>
-    <path d="M-18 -12 L-1 -12 L-1 0 L-19 0 Z" fill="#26231F"/><path d="M1 -12 L18 -12 L19 0 L1 0 Z" fill="#26231F"/>
+    <path d="M-25 -196 C-25 -130 -24 -60 -26 -8 L-3 -8 C-2 -60 -2 -130 -1 -196 Z" fill="#33333B"/>
+    <path d="M1 -196 C2 -130 2 -60 3 -8 L26 -8 C24 -60 25 -130 25 -196 Z" fill="#26262D"/>
+    <path d="M-24 -8 L-4 -8 L-4 2 C-10 4 -18 4 -24 2 Z" fill="#1F1B18"/><path d="M4 -8 L24 -8 L24 2 C18 4 10 4 4 2 Z" fill="#1F1B18"/>
   </g>
   <g id="s7-mb-up">
     <g id="s7-mb-armL">
-      <rect x="-31" y="-256" width="13" height="58" rx="6.5" fill="#DFCDB2"/>
-      <g id="s7-mb-foreL"><rect x="-30" y="-202" width="11" height="52" rx="5.5" fill="#DFCDB2"/><circle cx="-24.5" cy="-150" r="6" fill="#D49C78"/>
-        <g id="s7-mb-cupL" opacity="0" transform="translate(-24.5 -152)"><path d="M-10 -13 L10 -13 L8 9 L-8 9 Z" fill="#FFFFFF" stroke="#CFC6B9" stroke-width="1.2"/><rect x="-10.5" y="-7" width="21" height="7" fill="#A9773F"/></g></g>
-    </g>
+    <path d="M-43 -296 C-45 -270 -44 -250 -42 -228 L-26 -228 C-24 -250 -23 -272 -25 -296 Z" fill="#A87F55"/>
+    <path d="M-37 -296 C-40 -270 -40 -250 -39 -228 L-42 -228 C-44 -250 -45 -272 -43 -296 Z" fill="#92704B" opacity=".7"/>
+    <g id="s7-mb-foreL">
+      <path d="M-42 -231 L-26 -231 L-27.5 -180 L-40.5 -180 Z" fill="#A87F55"/>
+      <rect x="-40.5" y="-181" width="13" height="6" rx="2" fill="#F4EEE4"/>
+      <path d="M-40 -175.5 C-41 -165 -38 -156 -34 -155 C-30 -156 -27 -165 -28 -175.5 Z" fill="#CC9474"/>
+      <g id="s7-mb-cupL" opacity="0" transform="translate(-34 -158)"><path d="M-10 -14 L10 -14 L8 10 L-8 10 Z" fill="#fff" stroke="#D7CEC1" stroke-width="1"/><rect x="-9.6" y="-7" width="19.2" height="8" fill="#A9773F"/></g>
+    </g></g>
     <g id="s7-mb-armR">
-      <rect x="18" y="-256" width="13" height="58" rx="6.5" fill="#F0E4D0"/>
-      <g id="s7-mb-foreR"><rect x="19" y="-202" width="11" height="52" rx="5.5" fill="#F0E4D0"/><circle cx="24.5" cy="-150" r="6" fill="#E7B793"/>
-        <g id="s7-mb-cup" transform="translate(24.5 -152)"><path d="M-10 -13 L10 -13 L8 9 L-8 9 Z" fill="#FFFFFF" stroke="#CFC6B9" stroke-width="1.2"/><rect x="-10.5" y="-7" width="21" height="7" fill="#A9773F"/></g>
-      </g>
-    </g>
-    <path d="M-26 -262 C-30 -230 -28 -196 -24 -160 L24 -160 C28 -196 30 -230 26 -262 Q0 -270 -26 -262 Z" fill="#F0E4D0" stroke="#3A332D" stroke-width="1.2" stroke-opacity=".3"/>
-    <path d="M-18 -258 Q0 -246 18 -258" stroke="#DFCDB2" stroke-width="2" fill="none"/>
-    <path d="M0 -252 L0 -168" stroke="#DFCDB2" stroke-width="1.5" opacity=".6"/>
-    <rect x="-6" y="-282" width="12" height="22" fill="#D49C78"/>
-    <g id="s7-mb-head">
-      <ellipse cx="-21" cy="-297" rx="4" ry="6.5" fill="#D49C78"/><ellipse cx="21" cy="-297" rx="4" ry="6.5" fill="#D49C78"/>
-      <circle cx="-21" cy="-289" r="1.8" fill="#A9773F"/><circle cx="21" cy="-289" r="1.8" fill="#A9773F"/>
-      <ellipse cx="0" cy="-299" rx="21" ry="24.5" fill="#2B211C"/>
-      <path d="M-14 -316 Q0 -322 14 -314" stroke="#463830" stroke-width="2" fill="none" opacity=".7"/>
-      <circle cx="0" cy="-280" r="12" fill="#2B211C"/>
-      <path d="M-8 -283 Q0 -276 8 -283" stroke="#463830" stroke-width="1.6" fill="none" opacity=".8"/>
-    </g>
+    <path d="M25 -296 C23 -270 24 -250 26 -228 L42 -228 C44 -250 45 -272 43 -296 Z" fill="#C49A6C"/>
+    <path d="M37 -296 C40 -270 40 -250 39 -228 L42 -228 C44 -250 45 -272 43 -296 Z" fill="#A87F55" opacity=".7"/>
+    <g id="s7-mb-foreR">
+      <path d="M26 -231 L42 -231 L40.5 -180 L27.5 -180 Z" fill="#C49A6C"/>
+      <rect x="27.5" y="-181" width="13" height="6" rx="2" fill="#F4EEE4"/>
+      <path d="M28 -175.5 C27 -165 30 -156 34 -155 C38 -156 41 -165 40 -175.5 Z" fill="#E2B08E"/>
+      <g id="s7-mb-cupR" opacity="0" transform="translate(34 -158)"><path d="M-10 -14 L10 -14 L8 10 L-8 10 Z" fill="#fff" stroke="#D7CEC1" stroke-width="1"/><rect x="-9.6" y="-7" width="19.2" height="8" fill="#A9773F"/></g>
+    </g></g>
+    <path d="M-38 -296 C-30 -304 30 -304 38 -296 C40 -270 34 -240 33 -184 C10 -180 -10 -180 -33 -184 C-34 -240 -40 -270 -38 -296 Z" fill="#C49A6C"/>
+    <path d="M-38 -296 C-40 -270 -34 -240 -33 -184 C-26 -182.5 -20 -181.5 -14 -181 C-18 -230 -22 -270 -20 -301 Z" fill="#A87F55" opacity=".85"/>
+    <path d="M0 -296 L0 -186" stroke="#A87F55" stroke-width="1.6" opacity=".8"/>
+    <path d="M-24 -290 C-28 -270 -27 -255 -24 -246 M24 -290 C28 -270 27 -255 24 -246" stroke="#A87F55" stroke-width="1.3" fill="none" opacity=".7"/>
+    <path d="M-7 -322 L7 -322 L8 -300 L-8 -300 Z" fill="#CC9474"/>
+    <path d="M-16 -308 C-8 -313 8 -313 16 -308 L18 -298 C8 -302 -8 -302 -18 -298 Z" fill="#F4EEE4"/>
+    <path d="M-20 -300 C-8 -296 8 -296 20 -300 L24 -294 C8 -289 -8 -289 -24 -294 Z" fill="#A87F55"/>
+    <g id="s7-mb-head"><g transform="translate(0 -318) scale(.86) translate(0 318)">
+      <ellipse cx="-22.5" cy="-339" rx="4" ry="7" fill="#CC9474"/><ellipse cx="22.5" cy="-339" rx="4" ry="7" fill="#CC9474"/>
+      <circle cx="-22.5" cy="-331" r="1.7" fill="#C9A24A"/><circle cx="22.5" cy="-331" r="1.7" fill="#C9A24A"/>
+      <path d="M-22 -340 C-24 -364 -12 -374 0 -374 C12 -374 24 -364 22 -340 C21 -330 14 -322 0 -320 C-14 -322 -21 -330 -22 -340 Z" fill="#2A1F1A"/>
+      <path d="M-12 -368 C-4 -372 8 -371 14 -366 M-17 -356 C-12 -362 -4 -364 2 -362 M4 -366 C10 -364 16 -358 18 -350" stroke="#4A3A31" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".85"/>
+      <ellipse cx="0" cy="-324" rx="13" ry="11.5" fill="#2A1F1A"/>
+      <path d="M-10 -327 C-4 -333 6 -332 11 -325 M-8 -320 C-2 -324 5 -323 9 -318" stroke="#4A3A31" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".85"/>
+    </g></g>
   </g>
 </g>
     
@@ -250,12 +297,7 @@
   <div id="s7-screen" class="abs">
 <div class="app" >
   <div class="app-nav">
-    <div class="brand">
-<svg  width="24" height="24" viewBox="0 0 40 40" fill="none">
-  <circle class="bm-ring" cx="18" cy="21" r="12" stroke="#A9773F" stroke-width="4" pathLength="100"/>
-  <path class="bm-stem" d="M30 9 V33" stroke="#A9773F" stroke-width="4" stroke-linecap="round" pathLength="100"/>
-  <path class="bm-bar" d="M8 27 H30" stroke="#A9773F" stroke-width="4" stroke-linecap="round" pathLength="100"/>
-</svg><span>argentm<span style="color:#A9773F">.ai</span></span></div>
+    <div class="brand" style="font-size:16px;color:#4A463F">AR Workspace</div>
     <div class="nav-i "><i></i>Dashboard</div><div class="nav-i "><i></i>Remittances</div><div class="nav-i "><i></i>Customers</div><div class="nav-i "><i></i>Matching</div><div class="nav-i "><i></i>Exceptions</div><div class="nav-i on"><i></i>Posting & Audit</div>
   </div>
   <div class="app-main">
@@ -270,16 +312,19 @@
   </div>
 </div></div>
   <div id="s7-d0" class="abs" style="left:0;top:0;width:24px;height:30px;border-radius:3px;background:#F1E5D6;border:1.5px solid #A9773F;opacity:0"><div style="margin:6px 4px 0;height:2.5px;background:#A9773F;opacity:.6"></div><div style="margin:3px 4px 0;height:2.5px;background:#A9773F;opacity:.4"></div></div><div id="s7-d1" class="abs" style="left:0;top:0;width:24px;height:30px;border-radius:3px;background:#F1E5D6;border:1.5px solid #A9773F;opacity:0"><div style="margin:6px 4px 0;height:2.5px;background:#A9773F;opacity:.6"></div><div style="margin:3px 4px 0;height:2.5px;background:#A9773F;opacity:.4"></div></div><div id="s7-d2" class="abs" style="left:0;top:0;width:24px;height:30px;border-radius:3px;background:#F1E5D6;border:1.5px solid #A9773F;opacity:0"><div style="margin:6px 4px 0;height:2.5px;background:#A9773F;opacity:.6"></div><div style="margin:3px 4px 0;height:2.5px;background:#A9773F;opacity:.4"></div></div><div id="s7-d3" class="abs" style="left:0;top:0;width:24px;height:30px;border-radius:3px;background:#F1E5D6;border:1.5px solid #A9773F;opacity:0"><div style="margin:6px 4px 0;height:2.5px;background:#A9773F;opacity:.6"></div><div style="margin:3px 4px 0;height:2.5px;background:#A9773F;opacity:.4"></div></div><div id="s7-d4" class="abs" style="left:0;top:0;width:24px;height:30px;border-radius:3px;background:#F1E5D6;border:1.5px solid #A9773F;opacity:0"><div style="margin:6px 4px 0;height:2.5px;background:#A9773F;opacity:.6"></div><div style="margin:3px 4px 0;height:2.5px;background:#A9773F;opacity:.4"></div></div><div id="s7-d5" class="abs" style="left:0;top:0;width:24px;height:30px;border-radius:3px;background:#F1E5D6;border:1.5px solid #A9773F;opacity:0"><div style="margin:6px 4px 0;height:2.5px;background:#A9773F;opacity:.6"></div><div style="margin:3px 4px 0;height:2.5px;background:#A9773F;opacity:.4"></div></div><div id="s7-amber" class="abs" style="left:1410px;top:468px;width:58px;height:34px;border-radius:5px;background:#F6EAD0;border:1.5px solid #C99A3B;font:700 8.5px Inter;color:#8E6A22;padding:4px 5px;line-height:1.25;opacity:0">INV-55203<br>$118.40 open</div>
+  
+<svg class="full" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0;pointer-events:none">
+  <defs><filter id="s7-fgblur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+  <g filter="url(#s7-fgblur)" opacity=".92">
+    <path d="M-30 1110 Q-80 970 -10 830 Q40 990 10 1110 Z" fill="#5F7559"/><path d="M40 1120 Q40 990 120 860 Q120 1010 80 1120 Z" fill="#6E8467"/><path d="M100 1130 Q145 1015 230 900 Q185 1035 140 1130 Z" fill="#5F7559"/><path d="M-60 1100 Q-75 930 60 760 Q75 950 -20 1100 Z" fill="#6E8467"/><path d="M150 1140 Q215 1050 300 960 Q235 1070 190 1140 Z" fill="#5F7559"/>
+    <path d="M1960 1120 Q1950 1000 1840 880 Q1850 1020 1920 1120 Z" fill="#5F7559"/><path d="M1900 1130 Q1860 1030 1760 930 Q1800 1050 1860 1130 Z" fill="#6E8467"/><path d="M1990 1100 Q2005 960 1900 820 Q1885 980 1950 1100 Z" fill="#5F7559"/>
+  </g>
+</svg>
 </div>
 <div id="s7-ui" class="full">
   <div id="s7-zoom" class="full">
     <div class="card" style="left:360px;top:220px;width:1200px;height:640px;padding:44px 52px">
-      <div style="display:flex;align-items:center;gap:16px">
-<svg  width="34" height="34" viewBox="0 0 40 40" fill="none">
-  <circle class="bm-ring" cx="18" cy="21" r="12" stroke="#A9773F" stroke-width="2.823529411764706" pathLength="100"/>
-  <path class="bm-stem" d="M30 9 V33" stroke="#A9773F" stroke-width="2.823529411764706" stroke-linecap="round" pathLength="100"/>
-  <path class="bm-bar" d="M8 27 H30" stroke="#A9773F" stroke-width="2.823529411764706" stroke-linecap="round" pathLength="100"/>
-</svg><span style="font-size:22px;color:#6B665E">Remittance HX-778120 · Helix Health Distribution</span></div>
+      <div style="display:flex;align-items:center;gap:16px"><span style="font-size:22px;color:#6B665E">Remittance HX-778120 · Helix Health Distribution</span></div>
       <div style="font-size:52px;font-weight:700;letter-spacing:-.03em;margin:18px 0 22px">Ready to post</div>
       <div style="display:flex;justify-content:space-between;width:620px;font-size:26px;padding:12px 0;border-bottom:1px solid #F0EAE0"><span style="color:#6B665E">Applied to 59 invoices</span><b class="num" style="color:#2B2A28">$48,275.40</b></div><div style="display:flex;justify-content:space-between;width:620px;font-size:26px;padding:12px 0;border-bottom:1px solid #F0EAE0"><span style="color:#6B665E">Chargebacks · $0 invoice</span><b class="num" style="color:#9A4E47">−$515.75</b></div><div style="display:flex;justify-content:space-between;width:620px;font-size:26px;padding:12px 0;border-bottom:1px solid #F0EAE0"><span style="color:#6B665E">Chargeback recovery</span><b class="num" style="color:#8A5E2E">+$212.75</b></div><div style="display:flex;justify-content:space-between;width:620px;font-size:26px;padding:12px 0;border-bottom:1px solid #F0EAE0"><span style="color:#6B665E">Unapplied credit · held</span><b class="num" style="color:#2B2A28">$640.00</b></div>
       <div style="display:flex;justify-content:space-between;width:620px;font-size:28px;padding:14px 0;font-weight:700"><span>= Bank deposit</span><span class="num">$48,612.40</span></div>
@@ -294,12 +339,7 @@
   <div style="display:flex;font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B665E;padding-bottom:12px;border-bottom:1px solid #E6DFD3"><span style="flex:1">Who</span><span style="flex:2.6">What</span><span style="flex:.8">When</span><span style="flex:1.6">Why</span></div>
   <div style="display:flex;font-size:22px;padding:12px 0;border-bottom:1px solid #F0EAE0"><b style="flex:1">argentm.ai</b><span style="flex:2.6">Applied 59 invoices across HX-1001–1003</span><span style="flex:.8;color:#6B665E">9:12 AM</span><span style="flex:1.6;color:#6B665E">Invoice no. + amount</span></div><div style="display:flex;font-size:22px;padding:12px 0;border-bottom:1px solid #F0EAE0"><b style="flex:1">argentm.ai</b><span style="flex:2.6">Held $640.00 as unapplied credit</span><span style="flex:.8;color:#6B665E">9:12 AM</span><span style="flex:1.6;color:#6B665E">Duplicate of paid INV-54877</span></div><div style="display:flex;font-size:22px;padding:12px 0;border-bottom:1px solid #F0EAE0"><b style="flex:1">Maya Chen</b><span style="flex:2.6">Approved $0 invoice for CB-40112, CB-40113</span><span style="flex:.8;color:#6B665E">9:14 AM</span><span style="flex:1.6;color:#6B665E">Chargeback handling</span></div><div style="display:flex;font-size:22px;padding:12px 0;border-bottom:1px solid #F0EAE0"><b style="flex:1">Maya Chen</b><span style="flex:2.6">Kept INV-55203 open · $118.40</span><span style="flex:.8;color:#6B665E">9:14 AM</span><span style="flex:1.6;color:#6B665E">Short payment</span></div>
 </div>
-<div id="s7-rec" class="abs"><span class="chip chip-white" style="font-size:22px;padding:10px 20px">
-<svg  width="22" height="22" viewBox="0 0 40 40" fill="none">
-  <circle class="bm-ring" cx="18" cy="21" r="12" stroke="#A9773F" stroke-width="4.363636363636363" pathLength="100"/>
-  <path class="bm-stem" d="M30 9 V33" stroke="#A9773F" stroke-width="4.363636363636363" stroke-linecap="round" pathLength="100"/>
-  <path class="bm-bar" d="M8 27 H30" stroke="#A9773F" stroke-width="4.363636363636363" stroke-linecap="round" pathLength="100"/>
-</svg> Audit record AR-20931 · 6 entries · Who · What · When · Why</span></div>
+<div id="s7-rec" class="abs"><span class="chip chip-white" style="font-size:22px;padding:10px 20px"> Audit record AR-20931 · 6 entries · Who · What · When · Why</span></div>
 <div id="s7-t" class="t-hero"><span class="w s7-w" >Applied.</span> <span class="w s7-w" >Posted.</span> <span class="w s7-w serif">Traceable.</span></div>
 
 <svg id="s7-cur" class="cursor" viewBox="0 0 64 64">
@@ -350,16 +390,18 @@ const poseBack = (o) => {
   const sit = o.sit ?? 0;
   setT('s7-mb', 'translate(' + o.x.toFixed(2) + ' 798)');
   setO('s7-mb', o.op ?? 1);
-  setT('s7-mb-up', 'translate(0 ' + (44*sit + (o.bob ?? 0)).toFixed(2) + ') rotate(' + (o.lean ?? 0) + ' 0 -165)');
+  setT('s7-mb-up', 'translate(0 ' + (88*sit + (o.bob ?? 0)).toFixed(2) + ') rotate(' + (o.lean ?? 0) + ' 0 -165)');
   setT('s7-mb-legs', 'translate(0 ' + (40*sit).toFixed(2) + ') scale(1 ' + (1 - 0.55*sit).toFixed(3) + ')');
   setO('s7-mb-legs', 1 - sit*0.98);
-  rot('s7-mb-armL', o.armL ?? 4, -24, -252);
-  rot('s7-mb-foreL', o.foreL ?? 0, -24.5, -200);
-  rot('s7-mb-armR', o.armR ?? -4, 24, -252);
-  rot('s7-mb-foreR', o.foreR ?? 0, 24.5, -200);
-  setO('s7-mb-cup', o.cup ?? 0);
+  rot('s7-mb-armL', o.armL ?? 4, -34, -294);
+  rot('s7-mb-foreL', o.foreL ?? 0, -34, -229);
+  rot('s7-mb-armR', o.armR ?? -4, 34, -294);
+  rot('s7-mb-foreR', o.foreR ?? 0, 34, -229);
+  setO('s7-mb-cupR', o.cup ?? 0);
+  setO('s7-mb-foreL', o.foreLVis ?? (1 - sit));
+  setO('s7-mb-foreR', o.foreRVis ?? (1 - sit));
   setO('s7-mb-cupL', o.cupL ?? 0);
-  setT('s7-mb-head', 'rotate(' + (o.head ?? 0).toFixed(2) + ' 0 -280) translate(' + (o.headX ?? 0) + ' 0)');
+  setT('s7-mb-head', 'rotate(' + (o.head ?? 0).toFixed(2) + ' 0 -318) translate(' + (o.headX ?? 0) + ' 0)');
 };
 
 const world = document.getElementById('s7-world');

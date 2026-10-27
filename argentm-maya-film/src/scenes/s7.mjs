@@ -25,7 +25,7 @@ export default {
   dur: 4.6,
   css: `
 ${screenCSS(p)}
-#${p}-ui{transform-origin:0 0;background:${C.ivory}}
+#${p}-ui{transform-origin:0 0;background:var(--ground)}
 #${p}-zoom{transform-origin:0 0}
 #${p}-world{opacity:0}
 #${p}-audit{left:260px;top:620px;width:1400px;padding:26px 34px;opacity:0;transform-origin:50% 100%}

@@ -27,10 +27,10 @@ export default {
   dur: 7,
   css: `
 ${screenCSS(p)}
-#${p}-map{transform-origin:0 0;background:${C.ivory}}
+#${p}-map{transform-origin:0 0;background:var(--ground)}
 #${p}-world{opacity:0}
 #${p}-face{opacity:0}
-#${p}-match{opacity:0;background:${C.ivory}}
+#${p}-match{opacity:0;background:var(--ground)}
 #${p}-t1{left:110px;top:90px}
 #${p}-t2{left:110px;top:180px}
 .${p}-chip{position:absolute;top:575px;transform:translate(-50%,-50%)}
@@ -104,9 +104,9 @@ tl.set('#${p}-face', { opacity: 1 }, 4.55);
 tl.set('#${p}-face', { opacity: 0 }, 5.55);
 tl.fromTo('#${p}-browN', { y: 0 }, { y: -7, duration: 0.25, ease: 'power2.out' }, 4.8);
 tl.fromTo('#${p}-browF', { y: 0 }, { y: -5, duration: 0.25, ease: 'power2.out' }, 4.82);
-tl.fromTo('#${p}-mouth', { attr: { d: 'M852 513 Q866 517 879 512' } }, { attr: { d: 'M850 511 Q866 523 881 509' }, duration: 0.3, ease: 'power2.out' }, 4.95);
-tl.fromTo('#${p}-headg', { rotation: 0 }, { rotation: 2.5, svgOrigin: '780 720', duration: 0.22, ease: 'power2.out', yoyo: true, repeat: 1 }, 5.05);
-tl.fromTo('#${p}-irisN', { x: 0 }, { x: 3, duration: 0.3 }, 4.6);
+tl.fromTo('#${p}-mouth', { attr: { d: 'M872 538 C884 534 898 533 910 536 C900 546 884 548 872 538 Z' } }, { attr: { d: 'M869 533 C884 537 898 535 913 527 C903 547 882 551 869 533 Z' }, duration: 0.3, ease: 'power2.out' }, 4.95);
+tl.fromTo('#${p}-mouthL', { attr: { d: 'M872 538 C886 541 898 540 910 536' } }, { attr: { d: 'M869 533 C886 541 900 538 913 527' }, duration: 0.3, ease: 'power2.out' }, 4.95);
+tl.fromTo('#${p}-headg', { rotation: 0 }, { rotation: 2.5, svgOrigin: '820 700', duration: 0.22, ease: 'power2.out', yoyo: true, repeat: 1 }, 5.05);
 // bank match
 tl.set('#${p}-match', { opacity: 1 }, 5.55);
 tl.to('#${p}-world', { opacity: 0, duration: 0.05 }, 4.56);

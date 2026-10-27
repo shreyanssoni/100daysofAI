@@ -7,16 +7,20 @@
 - **Preview:** `npx hyperframes preview` · **Check:** `npx hyperframes check` · **Render:** `npx hyperframes render --quality looks --output renders/maya-60s-1080p.mp4`
 - **Sound:** `python3 src/score.py` regenerates the original score and foley (`assets/audio/`); UI sounds in `assets/sfx/` are HyperFrames' bundled library. Cue sheet: `src/audio-cues.mjs`.
 
+**Story:** Maya arrives at 8:58. Dev from Sales messages: *"Helix says they paid in full. Can you confirm before my 10:00 call?"* The product works through the remittance, and each complex case is part of the answer. At 9:14 Maya replies ("not quite in full: $118.40 still open, a $640 duplicate held as credit") and Dev gives a thumbs-up across the office.
+
 | Time | Scene | File |
 | --- | --- | --- |
-| 0:00–0:07 | The morning — Maya arrives, sits, wakes her monitor | `s1` |
-| 0:07–0:15 | The complex payment — deposit, remittance PDF, three fragmented sources | `s2` |
-| 0:15–0:23 | AI reads the PDF into a structured table; TOTAL recognised as a summary | `s3` |
-| 0:23–0:30 | Three accounts → one parent; Maya's recognition; exact bank match | `s4` |
-| 0:30–0:44 | Six decisions: matching, 2% discount, chargebacks, recovery, short pay, duplicate | `s5` |
-| 0:44–0:51 | Maya approves the $0 invoice, keeps INV-55203 open; leans back | `s6` |
-| 0:51–0:56 | Apply & post → records filed to the ERP shelf; audit trail | `s7` |
-| 0:56–1:00 | Sunlit office, coffee, summary; logo end card | `s8` |
+| 0:00–0:07 | Maya arrives (8:58), Dev waves, she sits and wakes her monitor | `s1` |
+| 0:07–0:15 | Dev's question; the deposit and remittance arrive; three fragmented sources | `s2` |
+| 0:15–0:22.5 | The PDF becomes a structured table; TOTAL recognised as a summary | `s3` |
+| 0:22.5–0:29.5 | Three accounts → one parent; Maya's recognition; exact bank match | `s4` |
+| 0:29.5–0:43 | Six decisions (matching, 2% discount, chargebacks, recovery, short pay, duplicate), with Dev's question pinned | `s5` |
+| 0:43–0:50 | Maya approves the $0 invoice and keeps INV-55203 open | `s6` |
+| 0:50–0:54.6 | Apply & post → records filed to the ERP shelf; audit trail | `s7` |
+| 0:54.6–1:00 | Maya's reply, Dev's thumbs-up, end card (no logo) | `s8` |
+
+Characters live in `src/characters.mjs` (Maya: side walk, back/seated, close-up; Dev: seated). `node src/harness.mjs out.png` renders them large for review.
 
 ## Reconciliation (all fictional, internally consistent)
 
@@ -32,6 +36,6 @@ INV-55203: invoiced $1,000.00, paid $881.60, **$118.40 kept open**. 64 remittanc
 End-card metrics (142 remittances, 97% no-touch) are illustrative.
 
 ## Placeholders to swap before release
-- **Logo:** the mark and wordmark are drawn in code — replace with the real argentm.ai logo files.
+- **Logo:** none by request; the end card names argentm.ai in plain text only.
 - **Product UI:** rebuilt as a plausible design, not captured from the real product — swap in real screens/labels where they differ.
 - **Music:** synthesized in `src/score.py` because no music library was reachable from the build machine; a licensed or composed track can replace `assets/audio/score.m4a`.

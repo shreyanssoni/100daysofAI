@@ -49,7 +49,9 @@ const hosts = scenes
   .join("\n");
 const total = +t.toFixed(2);
 
-const audio = AUDIO.filter((a) => a.t < total)
+const starts = {}; { let acc = 0; for (const sc of scenes) { starts[sc.id] = +acc.toFixed(3); acc += sc.dur; } }
+fs.writeFileSync(path.join(here, "timing.json"), JSON.stringify({ starts, total }, null, 2));
+const audio = AUDIO.map((a) => ({ ...a, t: (a.scene ? starts[a.scene] : 0) + a.t })).filter((a) => a.t < total)
   .map((a, i) => `      <audio id="${a.id ?? "sfx" + i}" class="clip" src="assets/${a.file}" data-start="${a.t.toFixed(3)}" ${a.dur ? `data-duration="${a.dur}"` : ""} data-track-index="${a.track ?? 3}" data-volume="${a.vol ?? 0.35}"></audio>`)
   .join("\n");
 

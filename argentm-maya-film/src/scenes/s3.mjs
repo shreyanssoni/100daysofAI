@@ -30,7 +30,7 @@ const totY = TY + ROWS.length * RH + 8;
 
 export default {
   id: p,
-  dur: 8,
+  dur: 7.5,
   css: `
 #${p}-pdf{left:700px;top:150px;width:480px;height:800px;transform-origin:0 0}
 #${p}-win{left:110px;top:190px;width:1700px;height:850px;opacity:0}

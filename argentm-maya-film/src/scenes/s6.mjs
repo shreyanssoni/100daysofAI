@@ -73,9 +73,10 @@ hideWords(tl, '.${p}-w1', 4.4, 0.03);
 tl.set('#${p}-face', { opacity: 1 }, 4.6);
 tl.fromTo('#${p}-world', { opacity: 1 }, { opacity: 0, duration: 0.05 }, 4.62);
 tl.fromTo('#${p}-fig', { rotation: 0, x: 0 }, { rotation: -3.5, x: -30, svgOrigin: '780 1080', duration: 0.9, ease: 'power2.inOut' }, 4.7);
-tl.fromTo('#${p}-mouth', { attr: { d: 'M852 513 Q866 517 879 512' } }, { attr: { d: 'M850 511 Q866 523 881 509' }, duration: 0.4, ease: 'power2.out' }, 5.0);
-tl.fromTo('#${p}-eyeN', { scaleY: 1 }, { scaleY: 0.1, svgOrigin: '830 434', duration: 0.07, yoyo: true, repeat: 1 }, 5.75);
-tl.fromTo('#${p}-eyeF', { scaleY: 1 }, { scaleY: 0.1, svgOrigin: '886 430', duration: 0.07, yoyo: true, repeat: 1 }, 5.75);
+tl.fromTo('#${p}-mouth', { attr: { d: 'M872 538 C884 534 898 533 910 536 C900 546 884 548 872 538 Z' } }, { attr: { d: 'M869 533 C884 537 898 535 913 527 C903 547 882 551 869 533 Z' }, duration: 0.4, ease: 'power2.out' }, 5.0);
+tl.fromTo('#${p}-mouthL', { attr: { d: 'M872 538 C886 541 898 540 910 536' } }, { attr: { d: 'M869 533 C886 541 900 538 913 527' }, duration: 0.4, ease: 'power2.out' }, 5.0);
+tl.fromTo('#${p}-eyeN', { scaleY: 1 }, { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.07, yoyo: true, repeat: 1 }, 5.75);
+tl.fromTo('#${p}-eyeF', { scaleY: 1 }, { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.07, yoyo: true, repeat: 1 }, 5.75);
 revealWords(tl, '.${p}-w2', 5.0, 0.1);
 `,
 };
