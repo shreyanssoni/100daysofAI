@@ -1,0 +1,381 @@
+<template>
+<style>
+
+#root{position:absolute;inset:0;overflow:hidden;background:#FBF8F2;font-family:Inter,sans-serif;color:#2B2A28;-webkit-font-smoothing:antialiased}
+.abs{position:absolute}
+.full{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.world{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.num{font-variant-numeric:tabular-nums}
+.serif{font-family:"EB Garamond",serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+.t-hero{position:absolute;font-weight:700;font-size:72px;line-height:1.06;letter-spacing:-.035em;color:#2B2A28}
+.t-hero .serif{font-size:1.12em;color:#A9773F}
+.t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:#6B665E}
+.w{display:inline-block;white-space:pre}
+.card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:18px;box-shadow:0 1px 2px rgba(70,50,30,.06),0 14px 36px rgba(70,50,30,.09)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;letter-spacing:-.005em;white-space:nowrap}
+.chip-blue{background:#E3EBF3;color:#3F6489}
+.chip-amber{background:#F6EAD0;color:#8E6A22}
+.chip-red{background:#F3E0DC;color:#9A4E47}
+.chip-bronze{background:#F1E5D6;color:#8A5E2E}
+.chip-grey{background:#ECE8E1;color:#6B665E}
+.chip-white{background:#fff;color:#2B2A28;border:1px solid #E6DFD3}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.label{font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B665E}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;font-weight:700;white-space:nowrap}
+.btn-bronze{background:#A9773F;color:#fff}
+.btn-ghost{background:#fff;color:#2B2A28;border:1.5px solid #E6DFD3}
+.cursor{position:absolute;width:64px;height:64px;left:0;top:0;z-index:50}
+/* ----- the app, authored at 1280x720 and scaled where it is shown ----- */
+.app{position:absolute;left:0;top:0;width:1280px;height:720px;background:#FBF9F5;display:flex;font-family:Inter,sans-serif;color:#2B2A28;overflow:hidden;transform-origin:0 0}
+.app-nav{width:192px;flex:none;background:#F3EEE5;border-right:1px solid #E6DFD3;padding:22px 14px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:19px;letter-spacing:-.02em;margin:0 6px 26px}
+.nav-i{font-size:14px;padding:9px 12px;border-radius:9px;color:#6B665E;margin-bottom:3px;display:flex;align-items:center;gap:10px}
+.nav-i i{width:14px;height:14px;border-radius:4px;border:1.6px solid currentColor;display:inline-block;opacity:.7}
+.nav-i.on{background:#fff;color:#2B2A28;font-weight:700;box-shadow:0 1px 2px rgba(70,50,30,.08)}
+.nav-i.on i{border-color:#A9773F;background:#F1E5D6;opacity:1}
+.app-main{flex:1;position:relative;padding:22px 30px}
+.topbar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#6B665E;margin-bottom:18px}
+.avatar{width:28px;height:28px;border-radius:50%;background:#F1E5D6;color:#8A5E2E;font-weight:700;font-size:11px;display:inline-flex;align-items:center;justify-content:center}
+.a-title{font-size:30px;font-weight:700;letter-spacing:-.03em;margin-bottom:4px}
+.a-sub{font-size:15px;color:#6B665E}
+.a-card{background:#fff;border:1px solid #ECE5D9;border-radius:14px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 8px 20px rgba(70,50,30,.06)}
+.a-row{display:flex;align-items:center;font-size:15px;padding:12px 18px;border-top:1px solid #F0EAE0}
+.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+
+
+
+#s8-screen{left:1180px;top:452px;width:222px;height:125px;overflow:hidden;background:#FBF9F5}
+#s8-screen .app{transform:scale(0.1734375)}
+#s8-glow{background:radial-gradient(ellipse at 30% 30%, rgba(255,236,200,.55), rgba(255,236,200,0) 60%);opacity:0;pointer-events:none}
+#s8-end{background:#FBF8F2;opacity:0}
+#s8-lock{left:960px;top:330px;transform:translateX(-50%);display:flex;align-items:center;gap:30px}
+#s8-wm{font-size:104px;font-weight:700;letter-spacing:-.045em;color:#2B2A28;white-space:nowrap}
+#s8-tag{left:0;width:1920px;top:500px;text-align:center;font-size:26px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6B665E}
+#s8-line{left:0;width:1920px;top:580px;text-align:center;font-size:56px;font-weight:700;letter-spacing:-.03em;color:#2B2A28}
+#s8-cta{left:960px;top:700px;transform:translateX(-50%)}
+#s8-note{left:0;width:1920px;top:1020px;text-align:center;font-size:16px;color:#A39C92}
+
+</style>
+<div id="root" data-composition-id="s8" data-width="1920" data-height="1080" data-start="0" data-duration="4.4">
+
+
+<div id="s8-world" class="world">
+  
+<svg class="full" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0">
+  <defs>
+    <linearGradient id="s8-wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8F3EB"/><stop offset="1" stop-color="#F1E9DD"/></linearGradient>
+    <linearGradient id="s8-floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9DFCF"/><stop offset="1" stop-color="#E2D6C3"/></linearGradient>
+    <linearGradient id="s8-glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF0F1"/><stop offset="1" stop-color="#F7F4EC"/></linearGradient>
+    <linearGradient id="s8-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFDF7" stop-opacity=".85"/><stop offset="1" stop-color="#FFFDF7" stop-opacity="0"/></linearGradient>
+    <radialGradient id="s8-sh"><stop offset="0" stop-color="#4A3A2A" stop-opacity=".22"/><stop offset="1" stop-color="#4A3A2A" stop-opacity="0"/></radialGradient>
+  </defs>
+  <!-- ceiling, side walls, back wall, floor -->
+  <polygon points="0,0 1920,0 1770,30 150,30" fill="#FAF6EF"/>
+  <polygon points="0,0 150,30 150,640 0,770" fill="#EFE7DB"/>
+  <polygon points="1920,0 1770,30 1770,640 1920,770" fill="#F2EBE0"/>
+  <rect x="150" y="30" width="1620" height="610" fill="url(#s8-wall)"/>
+  <polygon points="0,770 150,640 1770,640 1920,770 1920,1080 0,1080" fill="url(#s8-floor)"/>
+  <rect x="150" y="628" width="1620" height="12" fill="#E4D9C9"/>
+  <!-- floor boards, subtle -->
+  <line x1="150" y1="640" x2="-822.0000000000002" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="285" y1="640" x2="-525.0000000000002" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="420" y1="640" x2="-228" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="555" y1="640" x2="68.99999999999989" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="690" y1="640" x2="366" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="825" y1="640" x2="663" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="960" y1="640" x2="960" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="1095" y1="640" x2="1257" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="1230" y1="640" x2="1554" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="1365" y1="640" x2="1851" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="1500" y1="640" x2="2148" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="1635" y1="640" x2="2445" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/><line x1="1770" y1="640" x2="2742" y2="1080" stroke="#DCCFBB" stroke-width="1.2" opacity=".55"/>
+  <!-- windows -->
+  
+  <g>
+    <rect x="322" y="72" width="336" height="496" rx="4" fill="#E7DED0"/>
+    <rect x="330" y="80" width="320" height="480" fill="url(#s8-glass)"/>
+    <path d="M330 470 L370 430 L400 450 L400 380 L450 380 L450 440 L500 410 L530 430 L530 350 L580 350 L580 450 L650 420 L650 560 L330 560 Z" fill="#DDE5E8" opacity=".75"/>
+    <ellipse cx="400" cy="520" rx="90" ry="60" fill="#D7DECB" opacity=".7"/>
+    <ellipse cx="590" cy="530" rx="80" ry="50" fill="#D3DBC6" opacity=".6"/>
+    <rect x="487" y="80" width="6" height="480" fill="#E7DED0"/>
+    <rect x="330" y="230" width="320" height="6" fill="#E7DED0"/>
+    <rect x="316" y="560" width="348" height="12" rx="3" fill="#EAE2D5"/>
+  </g>
+  <g>
+    <rect x="692" y="72" width="336" height="496" rx="4" fill="#E7DED0"/>
+    <rect x="700" y="80" width="320" height="480" fill="url(#s8-glass)"/>
+    <path d="M700 470 L740 430 L770 450 L770 380 L820 380 L820 440 L870 410 L900 430 L900 350 L950 350 L950 450 L1020 420 L1020 560 L700 560 Z" fill="#DDE5E8" opacity=".75"/>
+    <ellipse cx="770" cy="520" rx="90" ry="60" fill="#D7DECB" opacity=".7"/>
+    <ellipse cx="960" cy="530" rx="80" ry="50" fill="#D3DBC6" opacity=".6"/>
+    <rect x="857" y="80" width="6" height="480" fill="#E7DED0"/>
+    <rect x="700" y="230" width="320" height="6" fill="#E7DED0"/>
+    <rect x="686" y="560" width="348" height="12" rx="3" fill="#EAE2D5"/>
+  </g>
+  <g>
+    <rect x="1062" y="72" width="336" height="496" rx="4" fill="#E7DED0"/>
+    <rect x="1070" y="80" width="320" height="480" fill="url(#s8-glass)"/>
+    <path d="M1070 470 L1110 430 L1140 450 L1140 380 L1190 380 L1190 440 L1240 410 L1270 430 L1270 350 L1320 350 L1320 450 L1390 420 L1390 560 L1070 560 Z" fill="#DDE5E8" opacity=".75"/>
+    <ellipse cx="1140" cy="520" rx="90" ry="60" fill="#D7DECB" opacity=".7"/>
+    <ellipse cx="1330" cy="530" rx="80" ry="50" fill="#D3DBC6" opacity=".6"/>
+    <rect x="1227" y="80" width="6" height="480" fill="#E7DED0"/>
+    <rect x="1070" y="230" width="320" height="6" fill="#E7DED0"/>
+    <rect x="1056" y="560" width="348" height="12" rx="3" fill="#EAE2D5"/>
+  </g>
+  <!-- sunlight on the floor -->
+  <g id="s8-sun" opacity="0.55">
+    <polygon points="360,642 660,642 890,1000 510,1000" fill="url(#s8-sun)"/><polygon points="730,642 1030,642 1260,1000 880,1000" fill="url(#s8-sun)"/><polygon points="1100,642 1400,642 1630,1000 1250,1000" fill="url(#s8-sun)"/>
+  </g>
+  <!-- pendant lamps -->
+  <line x1="760" y1="30" x2="760" y2="150" stroke="#8C8378" stroke-width="2"/><path d="M726 176 Q760 132 794 176 Z" fill="#A9773F"/><ellipse cx="760" cy="176" rx="34" ry="5" fill="#E9D3B4"/><line x1="1290" y1="30" x2="1290" y2="150" stroke="#8C8378" stroke-width="2"/><path d="M1256 176 Q1290 132 1324 176 Z" fill="#A9773F"/><ellipse cx="1290" cy="176" rx="34" ry="5" fill="#E9D3B4"/>
+  <!-- tall plant -->
+  <g>
+    <ellipse cx="236" cy="712" rx="60" ry="10" fill="url(#s8-sh)"/>
+    <path d="M206 640 L266 640 L258 710 L214 710 Z" fill="#D9CDBB"/>
+    <path d="M236 640 Q212 530 176 420 Q152 450 200 480 Z" fill="#7D9276" opacity=".95"/><path d="M236 640 Q224 510 206 380 Q194 410 218 440 Z" fill="#8FA287" opacity=".95"/><path d="M236 640 Q236 500 236 360 Q236 390 236 420 Z" fill="#7D9276" opacity=".95"/><path d="M236 640 Q248 515 266 390 Q278 420 254 450 Z" fill="#8FA287" opacity=".95"/><path d="M236 640 Q258 535 291 430 Q313 460 269 490 Z" fill="#7D9276" opacity=".95"/><path d="M236 640 Q218 570 191 500 Q173 530 209 560 Z" fill="#8FA287" opacity=".95"/><path d="M236 640 Q254 575 281 510 Q299 540 263 570 Z" fill="#7D9276" opacity=".95"/><path d="M236 640 Q230 545 221 450 Q215 480 227 510 Z" fill="#8FA287" opacity=".95"/><path d="M236 640 Q244 555 256 470 Q264 500 248 530 Z" fill="#7D9276" opacity=".95"/>
+  </g>
+  <!-- ERP archive shelf (right of the desk) -->
+  <g id="s8-shelf">
+    <ellipse cx="1612" cy="764" rx="150" ry="12" fill="url(#s8-sh)"/>
+    <rect x="1490" y="300" width="244" height="460" rx="4" fill="#EEE6D9" stroke="#E0D5C4" stroke-width="2"/>
+    <rect x="1490" y="294" width="244" height="10" fill="#E2D7C6"/><rect x="1490" y="444" width="244" height="10" fill="#E2D7C6"/><rect x="1490" y="594" width="244" height="10" fill="#E2D7C6"/><rect x="1490" y="744" width="244" height="10" fill="#E2D7C6"/>
+    <rect id="s8-bind-0-0" x="1508" y="318" width="30" height="126" transform="translate(0 0)" rx="3" fill="#E8D8C2" stroke="#CDBFA9" stroke-width="1"/><rect x="1514" y="336" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-0-1" x="1544" y="318" width="30" height="120" transform="translate(0 6)" rx="3" fill="#D9C7AE" stroke="#CDBFA9" stroke-width="1"/><rect x="1550" y="342" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-0-2" x="1580" y="318" width="30" height="114" transform="translate(0 12)" rx="3" fill="#E1E5E8" stroke="#CDBFA9" stroke-width="1"/><rect x="1586" y="348" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-0-3" x="1616" y="318" width="30" height="126" transform="translate(0 0)" rx="3" fill="#CFD8E1" stroke="#CDBFA9" stroke-width="1"/><rect x="1622" y="336" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-0-4" x="1652" y="318" width="30" height="120" transform="translate(0 6)" rx="3" fill="#E8D8C2" stroke="#CDBFA9" stroke-width="1"/><rect x="1658" y="342" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-0-5" x="1688" y="318" width="30" height="114" transform="translate(0 12)" rx="3" fill="#E6DFD3" stroke="#CDBFA9" stroke-width="1"/><rect x="1694" y="348" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-1-0" x="1508" y="468" width="30" height="126" transform="translate(0 0)" rx="3" fill="#D9C7AE" stroke="#CDBFA9" stroke-width="1"/><rect x="1514" y="486" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-1-1" x="1544" y="468" width="30" height="120" transform="translate(0 6)" rx="3" fill="#E6DFD3" stroke="#CDBFA9" stroke-width="1"/><rect x="1550" y="492" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-1-2" x="1580" y="468" width="30" height="114" transform="translate(0 12)" rx="3" fill="#CFD8E1" stroke="#CDBFA9" stroke-width="1"/><rect x="1586" y="498" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-1-3" x="1616" y="468" width="30" height="126" transform="translate(0 0)" rx="3" fill="#E8D8C2" stroke="#CDBFA9" stroke-width="1"/><rect x="1622" y="486" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-1-4" x="1652" y="468" width="30" height="120" transform="translate(0 6)" rx="3" fill="#D9C7AE" stroke="#CDBFA9" stroke-width="1"/><rect x="1658" y="492" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-1-5" x="1688" y="468" width="30" height="114" transform="translate(0 12)" rx="3" fill="#E1E5E8" stroke="#CDBFA9" stroke-width="1"/><rect x="1694" y="498" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-2-0" x="1508" y="618" width="30" height="126" transform="translate(0 0)" rx="3" fill="#E6DFD3" stroke="#CDBFA9" stroke-width="1"/><rect x="1514" y="636" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-2-1" x="1544" y="618" width="30" height="120" transform="translate(0 6)" rx="3" fill="#E8D8C2" stroke="#CDBFA9" stroke-width="1"/><rect x="1550" y="642" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-2-2" x="1580" y="618" width="30" height="114" transform="translate(0 12)" rx="3" fill="#D9C7AE" stroke="#CDBFA9" stroke-width="1"/><rect x="1586" y="648" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-2-3" x="1616" y="618" width="30" height="126" transform="translate(0 0)" rx="3" fill="#CFD8E1" stroke="#CDBFA9" stroke-width="1"/><rect x="1622" y="636" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-2-4" x="1652" y="618" width="30" height="120" transform="translate(0 6)" rx="3" fill="#E6DFD3" stroke="#CDBFA9" stroke-width="1"/><rect x="1658" y="642" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/><rect id="s8-bind-2-5" x="1688" y="618" width="30" height="114" transform="translate(0 12)" rx="3" fill="#E8D8C2" stroke="#CDBFA9" stroke-width="1"/><rect x="1694" y="648" width="18" height="6" rx="1.5" fill="#fff" opacity=".8"/>
+    <rect x="1574" y="270" width="40" height="30" rx="4" fill="#D9CDBB"/>
+    <path d="M1594 270 Q1570 230 1556 236 Q1580 250 1590 270 M1594 270 Q1612 222 1630 228 Q1606 246 1598 270 M1594 270 Q1596 236 1590 214 Q1604 240 1598 270" fill="#7D9276" stroke="#7D9276" stroke-width="5" stroke-linejoin="round"/>
+    <text x="1612" y="290" font-family="Inter" font-size="11" font-weight="700" fill="#A3978A" text-anchor="middle" letter-spacing="2" opacity="0">ERP</text>
+  </g>
+  <!-- colleague's desk (background left) -->
+  <g id="s8-coldesk">
+    <ellipse cx="540" cy="726" rx="170" ry="10" fill="url(#s8-sh)"/>
+    <polygon points="420,612 700,612 688,598 432,598" fill="#F4EDE2"/>
+    <rect x="420" y="612" width="280" height="9" fill="#E3D9CA"/>
+    <rect x="432" y="621" width="6" height="103" fill="#4A4744"/><rect x="682" y="621" width="6" height="103" fill="#4A4744"/>
+    <polygon points="560,598 640,598 652,574 572,574" fill="#C9C4BC"/><polygon points="560,598 640,598 636,602 556,602" fill="#B2ACA2"/>
+    <rect x="600" y="586" width="44" height="12" rx="2" fill="#E9E1D3"/>
+  </g>
+  
+<g id="s8-col" transform="translate(520 724) scale(.82)">
+  <ellipse cx="0" cy="2" rx="55" ry="6" fill="#4A3A2A" opacity=".12"/>
+  <rect x="-34" y="-122" width="12" height="70" rx="5" fill="#4A4744"/>
+  <rect x="-36" y="-56" width="60" height="10" rx="4" fill="#4A4744"/>
+  <rect x="-4" y="-46" width="6" height="40" fill="#5A5653"/>
+  <path d="M-26 -4 L30 -4" stroke="#5A5653" stroke-width="5" stroke-linecap="round"/>
+  <rect x="0" y="-60" width="56" height="16" rx="7" fill="#4C5566"/>
+  <rect x="44" y="-60" width="15" height="60" rx="6" fill="#4C5566"/>
+  <path d="M44 -2 L70 -2 L70 2 L42 2 Z" fill="#26231F"/>
+  <path d="M-20 -150 C-26 -120 -24 -80 -18 -56 L18 -56 C22 -90 20 -125 12 -150 Z" fill="#8DA4BF"/>
+  <rect x="-4" y="-166" width="10" height="18" fill="#D49C78"/>
+  <g id="s8-col-head">
+    <ellipse cx="2" cy="-186" rx="19" ry="22" fill="#C98F6B"/>
+    <path d="M-18 -190 C-20 -214 8 -216 18 -202 C14 -206 2 -204 -6 -196 C-10 -186 -12 -178 -16 -174 Z" fill="#5B4A3E"/>
+    <ellipse cx="12" cy="-188" rx="2" ry="2.4" fill="#2B211C"/>
+    <path d="M20 -186 q5 5 0 8" stroke="#A9775A" stroke-width="2" fill="none"/>
+  </g>
+  <g id="s8-col-arm">
+    <rect x="-4" y="-146" width="13" height="50" rx="6" fill="#7F96B1"/>
+    <g id="s8-col-fore"><rect x="-2" y="-100" width="11" height="44" rx="5" fill="#7F96B1" transform="rotate(-70 3 -98)"/><circle cx="44" cy="-112" r="6" fill="#C98F6B"/></g>
+  </g>
+</g>
+  <!-- Maya's desk -->
+  <g id="s8-desk">
+    <ellipse cx="1225" cy="766" rx="300" ry="14" fill="url(#s8-sh)"/>
+    <rect x="975" y="608" width="7" height="152" fill="#4A4744"/><rect x="1468" y="608" width="7" height="152" fill="#4A4744"/>
+    <rect x="1000" y="606" width="5" height="138" fill="#5A5653"/><rect x="1446" y="606" width="5" height="138" fill="#5A5653"/>
+    <polygon points="980,578 1470,578 1490,598 960,598" fill="#F5EEE3"/>
+    <rect x="960" y="598" width="530" height="11" fill="#E4D9C9"/>
+    <!-- monitor -->
+    <ellipse cx="1291" cy="590" rx="44" ry="5" fill="#4A3A2A" opacity=".18"/>
+    <rect x="1284" y="560" width="14" height="26" fill="#BDB6AC"/>
+    <path d="M1258 590 L1324 590 L1316 582 L1266 582 Z" fill="#CFC8BD"/>
+    <rect x="1175" y="447" width="232" height="135" rx="5" fill="#34312E"/>
+    <!-- keyboard, mouse, notebook, notes, papers -->
+    <polygon points="1214,586 1350,586 1356,594 1208,594" fill="#E9E5DE" stroke="#D6D0C6" stroke-width="1"/>
+    <ellipse cx="1384" cy="590" rx="9" ry="5" fill="#E9E5DE" stroke="#D6D0C6" stroke-width="1"/>
+    <polygon points="1100,584 1170,584 1176,594 1094,594" fill="#A9773F" opacity=".85"/>
+    <polygon points="1104,583 1168,583 1172,588 1100,588" fill="#F7F1E6"/>
+    <polygon points="1414,580 1470,580 1476,594 1408,594" fill="#FFFFFF" stroke="#E2DACD" stroke-width="1"/>
+    <polygon points="1418,576 1468,576 1472,590 1412,590" fill="#FDFBF7" stroke="#E2DACD" stroke-width="1" transform="rotate(-3 1440 584)"/>
+    <rect x="1420" y="570" width="18" height="16" fill="#C99A3B" opacity=".75" transform="rotate(-6 1429 578)"/>
+    <rect x="1446" y="572" width="16" height="15" fill="#E9D7A8" transform="rotate(5 1454 580)"/>
+    <polygon points="985,584 1015,584 1018,594 980,594" fill="#FDFBF7" stroke="#E2DACD" stroke-width="1"/>
+    <rect x="1150" y="560" width="16" height="16" fill="#F0DFA9" transform="rotate(-4 1158 568)"/>
+    <rect x="1153" y="540" width="15" height="15" fill="#C99A3B" opacity=".7" transform="rotate(6 1160 548)"/>
+    <!-- coffee placed on the desk -->
+    <g id="s8-deskcup" opacity="1">
+      <ellipse cx="1040" cy="596" rx="16" ry="3.5" fill="#4A3A2A" opacity=".2"/>
+      <path d="M1028 570 L1052 570 L1049 595 L1031 595 Z" fill="#FFFFFF" stroke="#D8CFC2" stroke-width="1.2"/>
+      <rect x="1027" y="577" width="26" height="9" fill="#A9773F"/>
+      <path d="M1035 566 q3 -6 0 -12 M1043 566 q3 -6 0 -12" stroke="#CFC6B9" stroke-width="1.5" fill="none" opacity=".7"/>
+    </g>
+  </g>
+</svg>
+  
+  <svg class="full" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0">
+    
+<g id="s8-mb" transform="translate(1095 798)" opacity="0">
+  <ellipse id="s8-mb-shadow" cx="0" cy="0" rx="44" ry="7" fill="#4A3A2A" opacity=".16"/>
+  <g id="s8-mb-legs">
+    <rect x="-17" y="-170" width="16" height="160" rx="7.5" fill="#3A3940"/>
+    <rect x="1" y="-170" width="16" height="160" rx="7.5" fill="#2F2E35"/>
+    <path d="M-18 -12 L-1 -12 L-1 0 L-19 0 Z" fill="#26231F"/><path d="M1 -12 L18 -12 L19 0 L1 0 Z" fill="#26231F"/>
+  </g>
+  <g id="s8-mb-up">
+    <g id="s8-mb-armL">
+      <rect x="-31" y="-256" width="13" height="58" rx="6.5" fill="#DFCDB2"/>
+      <g id="s8-mb-foreL"><rect x="-30" y="-202" width="11" height="52" rx="5.5" fill="#DFCDB2"/><circle cx="-24.5" cy="-150" r="6" fill="#D49C78"/>
+        <g id="s8-mb-cupL" opacity="0" transform="translate(-24.5 -152)"><path d="M-10 -13 L10 -13 L8 9 L-8 9 Z" fill="#FFFFFF" stroke="#CFC6B9" stroke-width="1.2"/><rect x="-10.5" y="-7" width="21" height="7" fill="#A9773F"/></g></g>
+    </g>
+    <g id="s8-mb-armR">
+      <rect x="18" y="-256" width="13" height="58" rx="6.5" fill="#F0E4D0"/>
+      <g id="s8-mb-foreR"><rect x="19" y="-202" width="11" height="52" rx="5.5" fill="#F0E4D0"/><circle cx="24.5" cy="-150" r="6" fill="#E7B793"/>
+        <g id="s8-mb-cup" transform="translate(24.5 -152)"><path d="M-10 -13 L10 -13 L8 9 L-8 9 Z" fill="#FFFFFF" stroke="#CFC6B9" stroke-width="1.2"/><rect x="-10.5" y="-7" width="21" height="7" fill="#A9773F"/></g>
+      </g>
+    </g>
+    <path d="M-26 -262 C-30 -230 -28 -196 -24 -160 L24 -160 C28 -196 30 -230 26 -262 Q0 -270 -26 -262 Z" fill="#F0E4D0" stroke="#3A332D" stroke-width="1.2" stroke-opacity=".3"/>
+    <path d="M-18 -258 Q0 -246 18 -258" stroke="#DFCDB2" stroke-width="2" fill="none"/>
+    <path d="M0 -252 L0 -168" stroke="#DFCDB2" stroke-width="1.5" opacity=".6"/>
+    <rect x="-6" y="-282" width="12" height="22" fill="#D49C78"/>
+    <g id="s8-mb-head">
+      <ellipse cx="-21" cy="-297" rx="4" ry="6.5" fill="#D49C78"/><ellipse cx="21" cy="-297" rx="4" ry="6.5" fill="#D49C78"/>
+      <circle cx="-21" cy="-289" r="1.8" fill="#A9773F"/><circle cx="21" cy="-289" r="1.8" fill="#A9773F"/>
+      <ellipse cx="0" cy="-299" rx="21" ry="24.5" fill="#2B211C"/>
+      <path d="M-14 -316 Q0 -322 14 -314" stroke="#463830" stroke-width="2" fill="none" opacity=".7"/>
+      <circle cx="0" cy="-280" r="12" fill="#2B211C"/>
+      <path d="M-8 -283 Q0 -276 8 -283" stroke="#463830" stroke-width="1.6" fill="none" opacity=".8"/>
+    </g>
+  </g>
+</g>
+    
+<g id="s8-chair" transform="translate(1095 798)">
+  <ellipse cx="0" cy="2" rx="70" ry="9" fill="#4A3A2A" opacity=".16"/>
+  <path d="M-52 -4 L52 -4 M0 -4 L-30 -10 M0 -4 L30 -10" stroke="#4A4744" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="-52" cy="-1" r="5" fill="#33302D"/><circle cx="52" cy="-1" r="5" fill="#33302D"/><circle cx="0" cy="-1" r="5" fill="#33302D"/>
+  <rect x="-5" y="-82" width="10" height="78" fill="#5A5653"/>
+  <g id="s8-chair-seat">
+    <rect x="-64" y="-98" width="128" height="18" rx="9" fill="#55514D"/>
+    <rect x="-8" y="-130" width="16" height="40" fill="#4A4744"/>
+    <rect x="-56" y="-180" width="112" height="92" rx="22" fill="#5C5853"/>
+    <rect x="-50" y="-174" width="100" height="80" rx="18" fill="#67625C"/>
+    <path d="M-40 -164 Q0 -172 40 -164" stroke="#7A746D" stroke-width="2" fill="none"/>
+  </g>
+</g>
+    
+  </svg>
+  <div id="s8-screen" class="abs">
+<div class="app" >
+  <div class="app-nav">
+    <div class="brand">
+<svg  width="24" height="24" viewBox="0 0 40 40" fill="none">
+  <circle class="bm-ring" cx="18" cy="21" r="12" stroke="#A9773F" stroke-width="4" pathLength="100"/>
+  <path class="bm-stem" d="M30 9 V33" stroke="#A9773F" stroke-width="4" stroke-linecap="round" pathLength="100"/>
+  <path class="bm-bar" d="M8 27 H30" stroke="#A9773F" stroke-width="4" stroke-linecap="round" pathLength="100"/>
+</svg><span>argentm<span style="color:#A9773F">.ai</span></span></div>
+    <div class="nav-i on"><i></i>Dashboard</div><div class="nav-i "><i></i>Remittances</div><div class="nav-i "><i></i>Customers</div><div class="nav-i "><i></i>Matching</div><div class="nav-i "><i></i>Exceptions</div><div class="nav-i "><i></i>Posting & Audit</div>
+  </div>
+  <div class="app-main">
+    <div class="topbar"><span>Cash application &nbsp;/&nbsp; <b style="color:#2B2A28">Dashboard</b></span><span style="display:flex;gap:14px;align-items:center">Tue, Oct 27 · 9:12 AM <span class="avatar">MC</span></span></div>
+    
+  <div class="a-sub" style="font-size:18px">Today · Cash application</div>
+  <div style="font-size:84px;font-weight:700;letter-spacing:-.04em;margin-top:30px" class="num">142</div>
+  <div style="font-size:28px;color:#6B665E;margin-top:-6px">remittances today</div>
+  <div style="font-size:84px;font-weight:700;letter-spacing:-.04em;margin-top:30px;color:#A9773F" class="num">97%</div>
+  <div style="font-size:28px;color:#6B665E;margin-top:-6px">applied without a touch</div>
+  <div style="position:absolute;right:30px;bottom:20px;font-size:13px;color:#A39C92">Illustrative figures</div>
+  </div>
+</div></div>
+  
+</div>
+<div id="s8-glow" class="full"></div>
+<div id="s8-end" class="full">
+  <div id="s8-lock" class="abs">
+    <svg id="s8-mark" width="150" height="150" viewBox="0 0 40 40" fill="none">
+      <circle id="s8-ring" cx="18" cy="21" r="12" stroke="#A9773F" stroke-width="2.6" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" transform="rotate(-90 18 21)"/>
+      <path id="s8-stem" d="M30 9 V33" stroke="#A9773F" stroke-width="2.6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1"/>
+      <path id="s8-bar" d="M8 27 H30" stroke="#A9773F" stroke-width="2.6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1"/>
+    </svg>
+    <div id="s8-wm">argentm<span style="color:#A9773F">.ai</span></div>
+  </div>
+  <div id="s8-tag" class="abs">Finance AI for FinOps</div>
+  <div id="s8-line" class="abs">Complex cash. <span class="serif" style="color:#A9773F;font-size:1.12em">Clear decisions.</span></div>
+  <div id="s8-cta" class="abs"><div class="btn btn-bronze" style="height:84px;padding:0 54px;font-size:32px">Book a demo</div></div>
+  <div id="s8-note" class="abs">Product data and metrics shown are illustrative.</div>
+</div>
+
+</div>
+<script>
+(function () {
+
+gsap.config({force3D:false});
+const $ = (s) => document.querySelector(s);
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+const lerp = (a,b,t) => a + (b-a)*t;
+const sm = (t) => { t = clamp(t,0,1); return t*t*(3-2*t); };
+const eio = (t) => { t = clamp(t,0,1); return t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; };
+const eout = (t) => { t = clamp(t,0,1); return 1-Math.pow(1-t,3); };
+// keyed values: keys = [[t, v], ...] eased in-out between keys
+const key = (t, keys, ease = eio) => {
+  if (t <= keys[0][0]) return keys[0][1];
+  for (let i = 1; i < keys.length; i++) {
+    if (t <= keys[i][0]) { const [t0,v0] = keys[i-1], [t1,v1] = keys[i]; return lerp(v0, v1, ease((t-t0)/(t1-t0))); }
+  }
+  return keys[keys.length-1][1];
+};
+const rot = (id, a, cx, cy) => { const e = document.getElementById(id); if (e) e.setAttribute('transform', 'rotate(' + a.toFixed(3) + ' ' + cx + ' ' + cy + ')'); };
+const setT = (id, s) => { const e = document.getElementById(id); if (e) e.setAttribute('transform', s); };
+const setO = (id, o) => { const e = document.getElementById(id); if (e) e.setAttribute('opacity', o); };
+// camera: put world point (cx,cy) at screen (sx,sy) with scale s
+const camTo = (s, cx, cy, sx = 960, sy = 540) => ({ scale: s, x: sx - cx*s, y: sy - cy*s });
+// per-word blur reveal
+const revealWords = (tl, sel, t, gap = 0.08, dur = 0.5) => {
+  tl.fromTo(sel, { opacity: 0, filter: 'blur(10px)', y: 14 }, { opacity: 1, filter: 'blur(0px)', y: 0, duration: dur, ease: 'expo.out', stagger: gap }, t);
+};
+const hideWords = (tl, sel, t, gap = 0.04) => {
+  tl.to(sel, { opacity: 0, filter: 'blur(8px)', duration: 0.22, ease: 'power2.in', stagger: gap }, t);
+};
+// a clock that calls fn(t) for every frame of the scene, deterministic under seeking
+const drive = (tl, dur, fn) => { const c = { t: 0 }; tl.fromTo(c, { t: 0 }, { t: dur, duration: dur, ease: 'none', onUpdate: () => fn(c.t) }, 0); fn(0); };
+// number counter
+const countTo = (tl, sel, from, to, t, dur, fmt) => { const o = { v: from }; tl.fromTo(o, { v: from }, { v: to, duration: dur, ease: 'power2.out', onUpdate: () => { const e = $(sel); if (e) e.textContent = fmt(o.v); } }, t); };
+const money = (v) => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+const tl = gsap.timeline({ paused: true });
+
+
+const poseBack = (o) => {
+  const sit = o.sit ?? 0;
+  setT('s8-mb', 'translate(' + o.x.toFixed(2) + ' 798)');
+  setO('s8-mb', o.op ?? 1);
+  setT('s8-mb-up', 'translate(0 ' + (44*sit + (o.bob ?? 0)).toFixed(2) + ') rotate(' + (o.lean ?? 0) + ' 0 -165)');
+  setT('s8-mb-legs', 'translate(0 ' + (40*sit).toFixed(2) + ') scale(1 ' + (1 - 0.55*sit).toFixed(3) + ')');
+  setO('s8-mb-legs', 1 - sit*0.98);
+  rot('s8-mb-armL', o.armL ?? 4, -24, -252);
+  rot('s8-mb-foreL', o.foreL ?? 0, -24.5, -200);
+  rot('s8-mb-armR', o.armR ?? -4, 24, -252);
+  rot('s8-mb-foreR', o.foreR ?? 0, 24.5, -200);
+  setO('s8-mb-cup', o.cup ?? 0);
+  setO('s8-mb-cupL', o.cupL ?? 0);
+  setT('s8-mb-head', 'rotate(' + (o.head ?? 0).toFixed(2) + ' 0 -280) translate(' + (o.headX ?? 0) + ' 0)');
+};
+
+const world = document.getElementById('s8-world');
+const cam = (s, cx, cy, sx = 960, sy = 540) => { cx = clamp(cx, sx / s, 1920 - (1920 - sx) / s); cy = clamp(cy, sy / s, 1080 - (1080 - sy) / s); world.style.transform = 'translate(' + (sx - cx * s).toFixed(2) + 'px,' + (sy - cy * s).toFixed(2) + 'px) scale(' + s.toFixed(4) + ')'; };
+// seated, typing pose
+const seated = (t, extra = {}) => poseBack(Object.assign({ x: 1095, op: 1, sit: 1, armR: -12, foreR: -18, armL: 10, foreL: 14, head: 4 + 1.2 * Math.sin(t * 0.9) }, extra));
+
+drive(tl, 4.4, (t) => {
+  // Maya reaches for her coffee and lifts it
+  const reach = key(t, [[0.15, 0], [0.55, 1]]);
+  const lift = key(t, [[0.65, 0], [1.15, 1]]);
+  seated(t, {
+    armL: lerp(lerp(10, 18, reach), 22, lift), foreL: lerp(lerp(14, 70, reach), 150, lift),
+    cupL: t >= 0.55 ? 1 : 0, head: 4 + key(t, [[0.8, 0], [1.2, -3]]),
+  });
+  setO('s8-deskcup', t >= 0.55 ? 0 : 1);
+  cam(key(t, [[0, 2.4], [1.7, 1.04]]), key(t, [[0, 1250], [1.7, 960]]), key(t, [[0, 520], [1.7, 540]]));
+});
+tl.fromTo('#s8-sun', { opacity: 0.55 }, { opacity: 1, duration: 1.4, ease: 'power2.inOut' }, 0.1);
+tl.fromTo('#s8-glow', { opacity: 0 }, { opacity: 1, duration: 1.4, ease: 'power2.inOut' }, 0.1);
+// warm-white flood, then the mark draws
+tl.fromTo('#s8-end', { opacity: 0 }, { opacity: 1, duration: 0.45, ease: 'power2.inOut' }, 1.5);
+tl.to('#s8-ring', { strokeDashoffset: 0, duration: 0.6, ease: 'power2.inOut' }, 1.75);
+tl.to('#s8-stem', { strokeDashoffset: 0, duration: 0.3, ease: 'power2.out' }, 2.15);
+tl.to('#s8-bar', { strokeDashoffset: 0, duration: 0.3, ease: 'power2.out' }, 2.3);
+tl.fromTo('#s8-wm', { clipPath: 'inset(0% 100% 0% 0%)', x: -20 }, { clipPath: 'inset(0% 0% 0% 0%)', x: 0, duration: 0.6, ease: 'power3.out' }, 2.25);
+tl.fromTo('#s8-tag', { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'expo.out' }, 2.55);
+tl.fromTo('#s8-line', { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.4, ease: 'expo.out' }, 2.7);
+tl.fromTo('#s8-cta', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, 2.9);
+tl.fromTo('#s8-note', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 3.0);
+
+window.__timelines = window.__timelines || {};
+window.__timelines["s8"] = tl;
+})();
+</script>
+</template>

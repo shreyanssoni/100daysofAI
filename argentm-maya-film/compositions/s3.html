@@ -1,0 +1,224 @@
+<template>
+<style>
+
+#root{position:absolute;inset:0;overflow:hidden;background:#FBF8F2;font-family:Inter,sans-serif;color:#2B2A28;-webkit-font-smoothing:antialiased}
+.abs{position:absolute}
+.full{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.world{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.num{font-variant-numeric:tabular-nums}
+.serif{font-family:"EB Garamond",serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+.t-hero{position:absolute;font-weight:700;font-size:72px;line-height:1.06;letter-spacing:-.035em;color:#2B2A28}
+.t-hero .serif{font-size:1.12em;color:#A9773F}
+.t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:#6B665E}
+.w{display:inline-block;white-space:pre}
+.card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:18px;box-shadow:0 1px 2px rgba(70,50,30,.06),0 14px 36px rgba(70,50,30,.09)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;letter-spacing:-.005em;white-space:nowrap}
+.chip-blue{background:#E3EBF3;color:#3F6489}
+.chip-amber{background:#F6EAD0;color:#8E6A22}
+.chip-red{background:#F3E0DC;color:#9A4E47}
+.chip-bronze{background:#F1E5D6;color:#8A5E2E}
+.chip-grey{background:#ECE8E1;color:#6B665E}
+.chip-white{background:#fff;color:#2B2A28;border:1px solid #E6DFD3}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.label{font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B665E}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;font-weight:700;white-space:nowrap}
+.btn-bronze{background:#A9773F;color:#fff}
+.btn-ghost{background:#fff;color:#2B2A28;border:1.5px solid #E6DFD3}
+.cursor{position:absolute;width:64px;height:64px;left:0;top:0;z-index:50}
+/* ----- the app, authored at 1280x720 and scaled where it is shown ----- */
+.app{position:absolute;left:0;top:0;width:1280px;height:720px;background:#FBF9F5;display:flex;font-family:Inter,sans-serif;color:#2B2A28;overflow:hidden;transform-origin:0 0}
+.app-nav{width:192px;flex:none;background:#F3EEE5;border-right:1px solid #E6DFD3;padding:22px 14px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:19px;letter-spacing:-.02em;margin:0 6px 26px}
+.nav-i{font-size:14px;padding:9px 12px;border-radius:9px;color:#6B665E;margin-bottom:3px;display:flex;align-items:center;gap:10px}
+.nav-i i{width:14px;height:14px;border-radius:4px;border:1.6px solid currentColor;display:inline-block;opacity:.7}
+.nav-i.on{background:#fff;color:#2B2A28;font-weight:700;box-shadow:0 1px 2px rgba(70,50,30,.08)}
+.nav-i.on i{border-color:#A9773F;background:#F1E5D6;opacity:1}
+.app-main{flex:1;position:relative;padding:22px 30px}
+.topbar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#6B665E;margin-bottom:18px}
+.avatar{width:28px;height:28px;border-radius:50%;background:#F1E5D6;color:#8A5E2E;font-weight:700;font-size:11px;display:inline-flex;align-items:center;justify-content:center}
+.a-title{font-size:30px;font-weight:700;letter-spacing:-.03em;margin-bottom:4px}
+.a-sub{font-size:15px;color:#6B665E}
+.a-card{background:#fff;border:1px solid #ECE5D9;border-radius:14px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 8px 20px rgba(70,50,30,.06)}
+.a-row{display:flex;align-items:center;font-size:15px;padding:12px 18px;border-top:1px solid #F0EAE0}
+.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+
+
+#s3-pdf{left:700px;top:150px;width:480px;height:800px;transform-origin:0 0}
+#s3-win{left:110px;top:190px;width:1700px;height:850px;opacity:0}
+#s3-title{left:110px;top:60px}
+.s3-clean{opacity:0}
+#s3-scan{left:500px;top:0;width:1290px;height:4px;background:#5B7FA6;border-radius:2px;box-shadow:0 0 0 6px rgba(91,127,166,.12),0 0 30px rgba(91,127,166,.35);opacity:0}
+#s3-total{left:520px;top:926px;width:1250px;height:60px;border-radius:12px;background:#F7F3EC;font-size:24px;line-height:60px;font-weight:700}
+#s3-dock{left:1150px;top:290px;width:620px;height:110px;border:2px dashed #E6DFD3;border-radius:14px;opacity:0}
+.s3-lift{position:absolute;opacity:0;transform-origin:50% 50%}
+
+</style>
+<div id="root" data-composition-id="s3" data-width="1920" data-height="1080" data-start="0" data-duration="8">
+
+<div id="s3-win" class="card">
+  <div style="position:absolute;left:0;right:0;top:0;height:76px;border-bottom:1px solid #E6DFD3;display:flex;align-items:center;padding:0 32px;gap:16px;font-size:22px">
+    
+<svg  width="30" height="30" viewBox="0 0 40 40" fill="none">
+  <circle class="bm-ring" cx="18" cy="21" r="12" stroke="#A9773F" stroke-width="3.2" pathLength="100"/>
+  <path class="bm-stem" d="M30 9 V33" stroke="#A9773F" stroke-width="3.2" stroke-linecap="round" pathLength="100"/>
+  <path class="bm-bar" d="M8 27 H30" stroke="#A9773F" stroke-width="3.2" stroke-linecap="round" pathLength="100"/>
+</svg><b>Remittances</b><span style="color:#6B665E">/ HX-778120 · Helix Health Distribution</span>
+    <span id="s3-status" class="chip chip-blue" style="margin-left:auto;font-size:18px"><span class="dot" style="background:#5B7FA6"></span><span id="s3-count">Reading 0 / 64 lines</span></span>
+  </div>
+  <div class="label abs" style="left:40px;top:104px">Source</div>
+  <div class="label abs" style="left:410px;top:104px">Extracted lines</div>
+</div>
+<div id="s3-bankbox" class="card" style="left:520px;top:290px;width:600px;height:110px;opacity:0;display:flex;align-items:center;gap:20px;padding:0 26px">
+  <span class="chip chip-grey" style="font-size:16px">Bank deposit</span><span class="num" style="font-size:36px;font-weight:700;letter-spacing:-.02em">+$48,612.40</span>
+</div>
+<div id="s3-dock" class="abs"></div>
+<div id="s3-dtotal" class="card" style="left:1150px;top:290px;width:620px;height:110px;opacity:0;display:flex;align-items:center;gap:20px;padding:0 26px">
+  <span class="chip chip-blue" style="font-size:16px">Remittance total</span><span class="num" style="font-size:36px;font-weight:700;letter-spacing:-.02em">$48,612.40</span>
+</div>
+<div id="s3-thead" class="abs label" style="left:520px;top:434px;width:1250px;height:30px;opacity:0">
+  <span style="position:absolute;left:0px;width:250px;text-align:left;">Invoice</span><span style="position:absolute;left:250px;width:200px;text-align:left;">Account</span><span style="position:absolute;left:450px;width:230px;text-align:right;">Gross</span><span style="position:absolute;left:690px;width:180px;text-align:right;">Discount</span><span style="position:absolute;left:880px;width:210px;text-align:right;">Net</span><span style="position:absolute;left:1110px;width:150px;text-align:left;">Read as</span>
+</div>
+<div class="s3-raw abs" id="s3-raw0" style="left:520px;top:470px;width:1250px;height:56px;font-family:'IBM Plex Mono',monospace;font-size:19px;color:#6F685F;line-height:56px">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;margin-left:6px">INV-55141</span><span style="position:absolute;left:450px;width:230px;text-align:right;margin-left:-9px">12,480.00</span><span style="position:absolute;left:690px;width:180px;text-align:right;margin-left:12px">249.60</span><span style="position:absolute;left:880px;width:210px;text-align:right;margin-left:-4px">12,230.40</span></div><div class="s3-clean abs" id="s3-clean0" style="left:520px;top:470px;width:1250px;height:56px;font-size:22px;line-height:56px;color:#2B2A28;border-bottom:1px solid #F0EAE0">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;font-weight:700">INV-55141</span><span style="position:absolute;left:250px;width:200px;text-align:left;"><span class="chip chip-white s3-ac0" style="font-size:17px;padding:4px 12px">HX-1001</span></span><span style="position:absolute;left:450px;width:230px;text-align:right;font-variant-numeric:tabular-nums">12,480.00</span><span style="position:absolute;left:690px;width:180px;text-align:right;font-variant-numeric:tabular-nums">249.60</span><span style="position:absolute;left:880px;width:210px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:inherit">12,230.40</span><span style="position:absolute;left:1110px;width:150px;text-align:left;"><span class="chip chip-blue" style="font-size:16px;padding:4px 12px">Invoice</span></span></div><div class="s3-raw abs" id="s3-raw1" style="left:520px;top:526px;width:1250px;height:56px;font-family:'IBM Plex Mono',monospace;font-size:19px;color:#6F685F;line-height:56px">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;margin-left:-4px">INV-55188</span><span style="position:absolute;left:450px;width:230px;text-align:right;margin-left:8px">4,250.00</span><span style="position:absolute;left:690px;width:180px;text-align:right;margin-left:-12px">85.00</span><span style="position:absolute;left:880px;width:210px;text-align:right;margin-left:5px">4,165.00</span></div><div class="s3-clean abs" id="s3-clean1" style="left:520px;top:526px;width:1250px;height:56px;font-size:22px;line-height:56px;color:#2B2A28;border-bottom:1px solid #F0EAE0">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;font-weight:700">INV-55188</span><span style="position:absolute;left:250px;width:200px;text-align:left;"><span class="chip chip-white s3-ac1" style="font-size:17px;padding:4px 12px">HX-1002</span></span><span style="position:absolute;left:450px;width:230px;text-align:right;font-variant-numeric:tabular-nums">4,250.00</span><span style="position:absolute;left:690px;width:180px;text-align:right;font-variant-numeric:tabular-nums">85.00</span><span style="position:absolute;left:880px;width:210px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:inherit">4,165.00</span><span style="position:absolute;left:1110px;width:150px;text-align:left;"><span class="chip chip-blue" style="font-size:16px;padding:4px 12px">Invoice</span></span></div><div class="s3-raw abs" id="s3-raw2" style="left:520px;top:582px;width:1250px;height:56px;font-family:'IBM Plex Mono',monospace;font-size:19px;color:#6F685F;line-height:56px">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;margin-left:5px">INV-55203</span><span style="position:absolute;left:450px;width:230px;text-align:right;margin-left:-7px">1,000.00</span><span style="position:absolute;left:690px;width:180px;text-align:right;margin-left:10px">—</span><span style="position:absolute;left:880px;width:210px;text-align:right;margin-left:6px">881.60</span></div><div class="s3-clean abs" id="s3-clean2" style="left:520px;top:582px;width:1250px;height:56px;font-size:22px;line-height:56px;color:#2B2A28;border-bottom:1px solid #F0EAE0">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;font-weight:700">INV-55203</span><span style="position:absolute;left:250px;width:200px;text-align:left;"><span class="chip chip-white s3-ac2" style="font-size:17px;padding:4px 12px">HX-1003</span></span><span style="position:absolute;left:450px;width:230px;text-align:right;font-variant-numeric:tabular-nums">1,000.00</span><span style="position:absolute;left:690px;width:180px;text-align:right;font-variant-numeric:tabular-nums">—</span><span style="position:absolute;left:880px;width:210px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:inherit">881.60</span><span style="position:absolute;left:1110px;width:150px;text-align:left;"><span class="chip chip-blue" style="font-size:16px;padding:4px 12px">Invoice</span></span></div><div class="s3-raw abs" id="s3-raw3" style="left:520px;top:638px;width:1250px;height:56px;font-family:'IBM Plex Mono',monospace;font-size:19px;color:#6F685F;line-height:56px">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;margin-left:6px">INV-54877</span><span style="position:absolute;left:450px;width:230px;text-align:right;margin-left:-9px">640.00</span><span style="position:absolute;left:690px;width:180px;text-align:right;margin-left:12px">—</span><span style="position:absolute;left:880px;width:210px;text-align:right;margin-left:-4px">640.00</span></div><div class="s3-clean abs" id="s3-clean3" style="left:520px;top:638px;width:1250px;height:56px;font-size:22px;line-height:56px;color:#2B2A28;border-bottom:1px solid #F0EAE0">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;font-weight:700">INV-54877</span><span style="position:absolute;left:250px;width:200px;text-align:left;"><span class="chip chip-white s3-ac3" style="font-size:17px;padding:4px 12px">HX-1001</span></span><span style="position:absolute;left:450px;width:230px;text-align:right;font-variant-numeric:tabular-nums">640.00</span><span style="position:absolute;left:690px;width:180px;text-align:right;font-variant-numeric:tabular-nums">—</span><span style="position:absolute;left:880px;width:210px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:inherit">640.00</span><span style="position:absolute;left:1110px;width:150px;text-align:left;"><span class="chip chip-blue" style="font-size:16px;padding:4px 12px">Invoice</span></span></div><div class="s3-raw abs" id="s3-raw4" style="left:520px;top:694px;width:1250px;height:56px;font-family:'IBM Plex Mono',monospace;font-size:19px;color:#6F685F;line-height:56px">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;margin-left:-4px">CB-40112</span><span style="position:absolute;left:450px;width:230px;text-align:right;margin-left:8px">—</span><span style="position:absolute;left:690px;width:180px;text-align:right;margin-left:-12px">—</span><span style="position:absolute;left:880px;width:210px;text-align:right;margin-left:5px">−326.50</span></div><div class="s3-clean abs" id="s3-clean4" style="left:520px;top:694px;width:1250px;height:56px;font-size:22px;line-height:56px;color:#2B2A28;border-bottom:1px solid #F0EAE0">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;font-weight:700">CB-40112</span><span style="position:absolute;left:250px;width:200px;text-align:left;"><span class="chip chip-white s3-ac4" style="font-size:17px;padding:4px 12px">HX-1002</span></span><span style="position:absolute;left:450px;width:230px;text-align:right;font-variant-numeric:tabular-nums">—</span><span style="position:absolute;left:690px;width:180px;text-align:right;font-variant-numeric:tabular-nums">—</span><span style="position:absolute;left:880px;width:210px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:#9A4E47">−326.50</span><span style="position:absolute;left:1110px;width:150px;text-align:left;"><span class="chip chip-red" style="font-size:16px;padding:4px 12px">Deduction</span></span></div><div class="s3-raw abs" id="s3-raw5" style="left:520px;top:750px;width:1250px;height:56px;font-family:'IBM Plex Mono',monospace;font-size:19px;color:#6F685F;line-height:56px">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;margin-left:5px">CB-40113</span><span style="position:absolute;left:450px;width:230px;text-align:right;margin-left:-7px">—</span><span style="position:absolute;left:690px;width:180px;text-align:right;margin-left:10px">—</span><span style="position:absolute;left:880px;width:210px;text-align:right;margin-left:6px">−189.25</span></div><div class="s3-clean abs" id="s3-clean5" style="left:520px;top:750px;width:1250px;height:56px;font-size:22px;line-height:56px;color:#2B2A28;border-bottom:1px solid #F0EAE0">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;font-weight:700">CB-40113</span><span style="position:absolute;left:250px;width:200px;text-align:left;"><span class="chip chip-white s3-ac5" style="font-size:17px;padding:4px 12px">HX-1003</span></span><span style="position:absolute;left:450px;width:230px;text-align:right;font-variant-numeric:tabular-nums">—</span><span style="position:absolute;left:690px;width:180px;text-align:right;font-variant-numeric:tabular-nums">—</span><span style="position:absolute;left:880px;width:210px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:#9A4E47">−189.25</span><span style="position:absolute;left:1110px;width:150px;text-align:left;"><span class="chip chip-red" style="font-size:16px;padding:4px 12px">Deduction</span></span></div><div class="s3-raw abs" id="s3-raw6" style="left:520px;top:806px;width:1250px;height:56px;font-family:'IBM Plex Mono',monospace;font-size:19px;color:#6F685F;line-height:56px">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;margin-left:6px">CB-39870</span><span style="position:absolute;left:450px;width:230px;text-align:right;margin-left:-9px">—</span><span style="position:absolute;left:690px;width:180px;text-align:right;margin-left:12px">—</span><span style="position:absolute;left:880px;width:210px;text-align:right;margin-left:-4px">+212.75</span></div><div class="s3-clean abs" id="s3-clean6" style="left:520px;top:806px;width:1250px;height:56px;font-size:22px;line-height:56px;color:#2B2A28;border-bottom:1px solid #F0EAE0">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;font-weight:700">CB-39870</span><span style="position:absolute;left:250px;width:200px;text-align:left;"><span class="chip chip-white s3-ac6" style="font-size:17px;padding:4px 12px">HX-1001</span></span><span style="position:absolute;left:450px;width:230px;text-align:right;font-variant-numeric:tabular-nums">—</span><span style="position:absolute;left:690px;width:180px;text-align:right;font-variant-numeric:tabular-nums">—</span><span style="position:absolute;left:880px;width:210px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:#8A5E2E">+212.75</span><span style="position:absolute;left:1110px;width:150px;text-align:left;"><span class="chip chip-bronze" style="font-size:16px;padding:4px 12px">Repayment</span></span></div><div class="s3-raw abs" id="s3-raw7" style="left:520px;top:862px;width:1250px;height:56px;font-family:'IBM Plex Mono',monospace;font-size:19px;color:#6F685F;line-height:56px">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;margin-left:-4px">+ 56 invoice lines</span><span style="position:absolute;left:450px;width:230px;text-align:right;margin-left:8px">31,076.40</span><span style="position:absolute;left:690px;width:180px;text-align:right;margin-left:-12px">78.00</span><span style="position:absolute;left:880px;width:210px;text-align:right;margin-left:5px">30,998.40</span></div><div class="s3-clean abs" id="s3-clean7" style="left:520px;top:862px;width:1250px;height:56px;font-size:22px;line-height:56px;color:#6B665E;border-bottom:1px solid #F0EAE0">
+    <span style="position:absolute;left:0px;width:250px;text-align:left;font-weight:700">+ 56 invoice lines</span><span style="position:absolute;left:250px;width:200px;text-align:left;"><span class="chip chip-white s3-ac7" style="font-size:17px;padding:4px 12px">3 accounts</span></span><span style="position:absolute;left:450px;width:230px;text-align:right;font-variant-numeric:tabular-nums">31,076.40</span><span style="position:absolute;left:690px;width:180px;text-align:right;font-variant-numeric:tabular-nums">78.00</span><span style="position:absolute;left:880px;width:210px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:inherit">30,998.40</span><span style="position:absolute;left:1110px;width:150px;text-align:left;"><span class="chip chip-blue" style="font-size:16px;padding:4px 12px">Invoice ×56</span></span></div>
+<div id="s3-total" class="abs" style="opacity:0">
+  <span style="position:absolute;left:24px">TOTAL</span>
+  <span id="s3-sumchip" class="chip chip-blue" style="position:absolute;left:180px;top:11px;font-size:17px;padding:6px 14px">Summary row · not an invoice</span>
+  <span class="num" style="position:absolute;right:160px">48,612.40</span>
+</div>
+<div id="s3-scan" class="abs"></div>
+<div id="s3-pdf" class="abs">
+<div style="position:absolute;inset:0;background:#FFFEFB;border-radius:6px;box-shadow:0 2px 4px rgba(70,50,30,.08),0 24px 60px rgba(70,50,30,.14);padding:38px 36px;font-family:'IBM Plex Mono',monospace;color:#5E5952;overflow:hidden">
+  <div style="font-family:Inter;font-weight:700;font-size:13px;letter-spacing:.14em;color:#8E877D">HELIX HEALTH DISTRIBUTION</div>
+  <div style="font-family:Inter;font-weight:700;font-size:30px;letter-spacing:-.02em;color:#2B2A28;margin-top:14px">Remittance advice</div>
+  <div style="font-family:Inter;font-size:19px;color:#2B2A28;margin-top:4px">#HX-778120 &nbsp;·&nbsp; Oct 26, 2026</div>
+  <div id="s3-pdfmeta" style="font-family:Inter;font-size:16px;margin-top:16px;padding:10px 12px;border-radius:8px;background:#F1E5D6;color:#8A5E2E;font-weight:700;line-height:1.5">64 payment lines<br>3 related customer accounts</div>
+  <div style="font-size:12.5px;margin-top:20px;display:flex;color:#A39C92;border-bottom:1px solid #EEE8DE;padding-bottom:6px"><span style="flex:1.3">REF</span><span style="flex:1;text-align:right">GROSS</span><span style="flex:.8;text-align:right">DISC</span><span style="flex:1;text-align:right">NET</span></div>
+  <div class="s3-prow" style="font-size:13.5px;display:flex;padding:7px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3">INV-55141</span><span style="flex:1;text-align:right">12,480.00</span><span style="flex:.8;text-align:right">249.60</span><span style="flex:1;text-align:right">12,230.40</span></div><div class="s3-prow" style="font-size:13.5px;display:flex;padding:7px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3">INV-55188</span><span style="flex:1;text-align:right">4,250.00</span><span style="flex:.8;text-align:right">85.00</span><span style="flex:1;text-align:right">4,165.00</span></div><div class="s3-prow" style="font-size:13.5px;display:flex;padding:7px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3">INV-55203</span><span style="flex:1;text-align:right">1,000.00</span><span style="flex:.8;text-align:right">0.00</span><span style="flex:1;text-align:right">881.60</span></div><div class="s3-prow" style="font-size:13.5px;display:flex;padding:7px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3">INV-54877</span><span style="flex:1;text-align:right">640.00</span><span style="flex:.8;text-align:right">0.00</span><span style="flex:1;text-align:right">640.00</span></div><div class="s3-prow" style="font-size:13.5px;display:flex;padding:7px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3">CB-40112</span><span style="flex:1;text-align:right"></span><span style="flex:.8;text-align:right"></span><span style="flex:1;text-align:right">-326.50</span></div><div class="s3-prow" style="font-size:13.5px;display:flex;padding:7px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3">CB-40113</span><span style="flex:1;text-align:right"></span><span style="flex:.8;text-align:right"></span><span style="flex:1;text-align:right">-189.25</span></div><div class="s3-prow" style="font-size:13.5px;display:flex;padding:7px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3">CB-39870 RPY</span><span style="flex:1;text-align:right"></span><span style="flex:.8;text-align:right"></span><span style="flex:1;text-align:right">212.75</span></div>
+  <div class="s3-pbar" style="display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3;height:8px;border-radius:3px;background:#EEE9E1"></span><span style="flex:1;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:.8;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:1;height:8px;border-radius:3px;background:#EEE9E1"></span></div><div class="s3-pbar" style="display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3;height:8px;border-radius:3px;background:#EEE9E1"></span><span style="flex:1;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:.8;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:1;height:8px;border-radius:3px;background:#EEE9E1"></span></div><div class="s3-pbar" style="display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3;height:8px;border-radius:3px;background:#EEE9E1"></span><span style="flex:1;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:.8;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:1;height:8px;border-radius:3px;background:#EEE9E1"></span></div><div class="s3-pbar" style="display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3;height:8px;border-radius:3px;background:#EEE9E1"></span><span style="flex:1;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:.8;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:1;height:8px;border-radius:3px;background:#EEE9E1"></span></div><div class="s3-pbar" style="display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3;height:8px;border-radius:3px;background:#EEE9E1"></span><span style="flex:1;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:.8;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:1;height:8px;border-radius:3px;background:#EEE9E1"></span></div><div class="s3-pbar" style="display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3;height:8px;border-radius:3px;background:#EEE9E1"></span><span style="flex:1;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:.8;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:1;height:8px;border-radius:3px;background:#EEE9E1"></span></div><div class="s3-pbar" style="display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3;height:8px;border-radius:3px;background:#EEE9E1"></span><span style="flex:1;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:.8;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:1;height:8px;border-radius:3px;background:#EEE9E1"></span></div><div class="s3-pbar" style="display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed #F0EBE2"><span style="flex:1.3;height:8px;border-radius:3px;background:#EEE9E1"></span><span style="flex:1;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:.8;height:8px;border-radius:3px;background:#F2EEE7"></span><span style="flex:1;height:8px;border-radius:3px;background:#EEE9E1"></span></div>
+  <div style="font-size:12.5px;color:#A39C92;padding:8px 0">… 56 more lines</div>
+  <div class="s3-ptotal" style="font-size:15px;display:flex;padding:9px 0;border-top:1.5px solid #D9D2C6;color:#2B2A28;font-weight:600"><span style="flex:1">TOTAL</span><span style="text-align:right">48,612.40</span></div>
+</div></div>
+<div id="s3-title" class="t-hero"><span class="w s3-w" >From </span><span class="w s3-w" >documents </span><span class="w s3-w" >to</span> <span class="w s3-w serif">understanding.</span></div>
+<span id="s3-l1" data-layout-allow-overlap class="chip chip-white s3-lift" style="font-size:40px;padding:14px 30px">HX-1001</span>
+<span id="s3-l2" data-layout-allow-overlap class="chip chip-white s3-lift" style="font-size:40px;padding:14px 30px">HX-1002</span>
+<span id="s3-l3" data-layout-allow-overlap class="chip chip-white s3-lift" style="font-size:40px;padding:14px 30px">HX-1003</span>
+
+</div>
+<script>
+(function () {
+
+gsap.config({force3D:false});
+const $ = (s) => document.querySelector(s);
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+const lerp = (a,b,t) => a + (b-a)*t;
+const sm = (t) => { t = clamp(t,0,1); return t*t*(3-2*t); };
+const eio = (t) => { t = clamp(t,0,1); return t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; };
+const eout = (t) => { t = clamp(t,0,1); return 1-Math.pow(1-t,3); };
+// keyed values: keys = [[t, v], ...] eased in-out between keys
+const key = (t, keys, ease = eio) => {
+  if (t <= keys[0][0]) return keys[0][1];
+  for (let i = 1; i < keys.length; i++) {
+    if (t <= keys[i][0]) { const [t0,v0] = keys[i-1], [t1,v1] = keys[i]; return lerp(v0, v1, ease((t-t0)/(t1-t0))); }
+  }
+  return keys[keys.length-1][1];
+};
+const rot = (id, a, cx, cy) => { const e = document.getElementById(id); if (e) e.setAttribute('transform', 'rotate(' + a.toFixed(3) + ' ' + cx + ' ' + cy + ')'); };
+const setT = (id, s) => { const e = document.getElementById(id); if (e) e.setAttribute('transform', s); };
+const setO = (id, o) => { const e = document.getElementById(id); if (e) e.setAttribute('opacity', o); };
+// camera: put world point (cx,cy) at screen (sx,sy) with scale s
+const camTo = (s, cx, cy, sx = 960, sy = 540) => ({ scale: s, x: sx - cx*s, y: sy - cy*s });
+// per-word blur reveal
+const revealWords = (tl, sel, t, gap = 0.08, dur = 0.5) => {
+  tl.fromTo(sel, { opacity: 0, filter: 'blur(10px)', y: 14 }, { opacity: 1, filter: 'blur(0px)', y: 0, duration: dur, ease: 'expo.out', stagger: gap }, t);
+};
+const hideWords = (tl, sel, t, gap = 0.04) => {
+  tl.to(sel, { opacity: 0, filter: 'blur(8px)', duration: 0.22, ease: 'power2.in', stagger: gap }, t);
+};
+// a clock that calls fn(t) for every frame of the scene, deterministic under seeking
+const drive = (tl, dur, fn) => { const c = { t: 0 }; tl.fromTo(c, { t: 0 }, { t: dur, duration: dur, ease: 'none', onUpdate: () => fn(c.t) }, 0); fn(0); };
+// number counter
+const countTo = (tl, sel, from, to, t, dur, fmt) => { const o = { v: from }; tl.fromTo(o, { v: from }, { v: to, duration: dur, ease: 'power2.out', onUpdate: () => { const e = $(sel); if (e) e.textContent = fmt(o.v); } }, t); };
+const money = (v) => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+const tl = gsap.timeline({ paused: true });
+
+// the document settles into the source pane while the app builds around it
+tl.fromTo('#s3-win', { opacity: 0, scale: 1.03 }, { opacity: 1, scale: 1, duration: 0.7, ease: 'power3.out' }, 0.3);
+tl.fromTo('#s3-pdf', { x: 0, y: 0, scale: 1 }, { x: 150 - 700, y: 300 - 150, scale: 0.6, duration: 0.85, ease: 'power3.inOut' }, 0.15);
+tl.fromTo('#s3-thead', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.9);
+// raw lines lift off the page into the table
+tl.fromTo('#s3-raw0', { opacity: 0, x: -350, y: 20, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.00);
+tl.fromTo('#s3-raw1', { opacity: 0, x: -350, y: -22, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.07);
+tl.fromTo('#s3-raw2', { opacity: 0, x: -350, y: -64, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.14);
+tl.fromTo('#s3-raw3', { opacity: 0, x: -350, y: -106, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.21);
+tl.fromTo('#s3-raw4', { opacity: 0, x: -350, y: -148, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.28);
+tl.fromTo('#s3-raw5', { opacity: 0, x: -350, y: -190, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.35);
+tl.fromTo('#s3-raw6', { opacity: 0, x: -350, y: -232, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.42);
+tl.fromTo('#s3-raw7', { opacity: 0, x: -350, y: -274, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.49);
+tl.fromTo('#s3-total', { opacity: 0, y: -380 }, { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out' }, 1.6);
+// the reading pass
+tl.fromTo('#s3-scan', { opacity: 0, y: 464 }, { opacity: 1, y: 464, duration: 0.2 }, 2.1);
+tl.to('#s3-scan', { y: 988, duration: 2.0, ease: 'none' }, 2.3);
+tl.to('#s3-scan', { opacity: 0, duration: 0.25 }, 4.3);
+tl.to('#s3-raw0', { opacity: 0, duration: 0.25 }, 2.43);
+tl.fromTo('#s3-clean0', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 2.43);
+tl.to('#s3-raw1', { opacity: 0, duration: 0.25 }, 2.64);
+tl.fromTo('#s3-clean1', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 2.64);
+tl.to('#s3-raw2', { opacity: 0, duration: 0.25 }, 2.86);
+tl.fromTo('#s3-clean2', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 2.86);
+tl.to('#s3-raw3', { opacity: 0, duration: 0.25 }, 3.07);
+tl.fromTo('#s3-clean3', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 3.07);
+tl.to('#s3-raw4', { opacity: 0, duration: 0.25 }, 3.28);
+tl.fromTo('#s3-clean4', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 3.28);
+tl.to('#s3-raw5', { opacity: 0, duration: 0.25 }, 3.50);
+tl.fromTo('#s3-clean5', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 3.50);
+tl.to('#s3-raw6', { opacity: 0, duration: 0.25 }, 3.71);
+tl.fromTo('#s3-clean6', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 3.71);
+tl.to('#s3-raw7', { opacity: 0, duration: 0.25 }, 3.92);
+tl.fromTo('#s3-clean7', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 3.92);
+countTo(tl, '#s3-count', 0, 64, 2.3, 2.0, (v) => 'Reading ' + Math.round(v) + ' / 64 lines');
+tl.call(() => {}, null, 4.3);
+tl.fromTo('#s3-status', { backgroundColor: '#E3EBF3', color: '#3F6489' }, { backgroundColor: '#F1E5D6', color: '#8A5E2E', duration: 0.3 }, 4.35);
+tl.fromTo('#s3-count', { opacity: 1 }, { opacity: 1, duration: 0.01, onComplete: () => { const e = $('#s3-count'); if (e) e.textContent = '64 lines processed'; }, onReverseComplete: () => {} }, 4.35);
+// TOTAL is recognised as a summary and docks beside the bank amount
+tl.fromTo('#s3-sumchip', { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.35, ease: 'expo.out' }, 4.25);
+tl.fromTo('#s3-bankbox', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, 4.4);
+tl.fromTo('#s3-dock', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.5);
+tl.to('#s3-total', { x: 1150 - 520, y: -611, opacity: 0, duration: 0.7, ease: 'power3.inOut' }, 4.75);
+tl.fromTo('#s3-dtotal', { opacity: 0, y: 60, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'expo.out' }, 5.05);
+tl.to('#s3-sumchip', { opacity: 0, duration: 0.2 }, 4.7);
+tl.to('#s3-dock', { opacity: 0, duration: 0.3 }, 5.4);
+// titles
+revealWords(tl, '.s3-w', 2.5, 0.1);
+hideWords(tl, '.s3-w', 6.05, 0.03);
+// the three account ids lift out of the table
+const lifts = [['#s3-l1', '.s3-ac0', 460], ['#s3-l2', '.s3-ac1', 960], ['#s3-l3', '.s3-ac2', 1460]];
+const startPos = [[770, 480], [770, 536], [770, 592]];
+lifts.forEach(([sel, src, fx], i) => {
+  const e = $(sel); const w = e.offsetWidth, h = e.offsetHeight;
+  tl.fromTo(sel, { opacity: 0, x: startPos[i][0] - w / 2 + 50, y: startPos[i][1] - h / 2 + 18, scale: 0.42 },
+    { opacity: 1, x: startPos[i][0] - w / 2 + 50, y: startPos[i][1] - h / 2 + 18, scale: 0.42, duration: 0.15 }, 6.0 + i * 0.08);
+  tl.to(sel, { x: fx - w / 2, y: 575 - h / 2, scale: 1, duration: 0.95, ease: 'power3.inOut' }, 6.2 + i * 0.08);
+});
+tl.to('#s3-win, #s3-pdf, .s3-clean, #s3-thead, #s3-total, #s3-bankbox, #s3-dtotal', { opacity: 0, filter: 'blur(8px)', duration: 0.5, ease: 'power2.in' }, 6.4);
+
+window.__timelines = window.__timelines || {};
+window.__timelines["s3"] = tl;
+})();
+</script>
+</template>
