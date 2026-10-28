@@ -58,7 +58,7 @@ fs.writeFileSync(path.join(here, "timing.json"), JSON.stringify({ starts, total 
 const overlayHosts = overlays.map((o) => `      <div id="${o.id}" data-composition-id="${o.id}" data-composition-src="compositions/${o.id}.html" data-start="${(starts[o.at.scene] + o.at.t).toFixed(2)}" data-duration="${o.dur}" data-track-index="9" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index:100"></div>`).join("\n");
 // Voice-over cut: VO=1 swaps the score for the ducked VO mix and adds the narrator track.
 const VO = !!process.env.VO;
-const CUES = VO ? [...AUDIO.map((c) => (c.id === "score" ? { ...c, file: "audio/score-vo.m4a" } : c)), { id: "narration", file: "audio/narration.m4a", t: 0, dur: 60, vol: 1.0, track: 10 }] : AUDIO;
+const CUES = VO ? [...AUDIO.map((c) => (c.id === "score" ? { ...c, file: "audio/score-vo.m4a" } : c.id.startsWith("vo-") ? { ...c, vol: 0.68 } : c)), { id: "narration", file: "audio/narration.m4a", t: 0, dur: 60, vol: 1.0, track: 10 }] : AUDIO;
 const audio = CUES.map((a) => ({ ...a, t: (a.scene ? starts[a.scene] : 0) + a.t })).filter((a) => a.t < total)
   .map((a, i) => `      <audio id="${a.id ?? "sfx" + i}" class="clip" src="assets/${a.file}" data-start="${a.t.toFixed(3)}" ${a.dur ? `data-duration="${a.dur}"` : ""} data-track-index="${a.track ?? 3}" data-volume="${a.vol ?? 0.35}"${a.fadeIn ? ` data-fade-in="${a.fadeIn}"` : ""}${a.fadeOut ? ` data-fade-out="${a.fadeOut}"` : ""}></audio>`)
   .join("\n");
