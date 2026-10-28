@@ -6,7 +6,7 @@ export default {
   id: p,
   dur: 7,
   css: `
-#${p}-newrow{display:none}
+#${p}-newrow{display:none !important}
 #${p}-screen{left:${SCREEN.x}px;top:${SCREEN.y}px;width:${SCREEN.w}px;height:${SCREEN.h}px;overflow:hidden;background:#FBF9F5}
 #${p}-screen .app{transform:scale(${SCREEN.w / 1280})}
 #${p}-off{position:absolute;inset:0;background:#2E2C2A}

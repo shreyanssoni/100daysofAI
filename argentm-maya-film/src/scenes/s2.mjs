@@ -20,7 +20,7 @@ const inbox = `
   <div style="width:58px;height:76px;border-radius:6px;background:#FFFEFB;border:1px solid ${C.line};position:relative;flex:none"><div style="position:absolute;left:8px;right:8px;top:12px;height:5px;background:#E6DFD3;border-radius:2px"></div><div style="position:absolute;left:8px;right:16px;top:24px;height:4px;background:#EEE9E1;border-radius:2px"></div><div style="position:absolute;left:8px;right:12px;top:34px;height:4px;background:#EEE9E1;border-radius:2px"></div><div style="position:absolute;left:6px;bottom:6px;font-size:9px;font-weight:700;color:#fff;background:${C.red};padding:1px 4px;border-radius:3px;line-height:1.2">PDF</div></div>
   <div><div style="font-size:12.5px;color:${C.ink2};display:flex;align-items:center;gap:6px">${icon.mail(14)} ap@helixhealth.com</div><div style="font-size:18px;font-weight:700;margin:3px 0 6px">Remittance #HX-778120</div><div style="font-size:13px;line-height:1.5;color:${C.ink}">64 payment lines<br>3 related customer accounts</div></div>
 </div>`;
-const dash = `<div style="width:640px">${dashContent(p).replace(`id="${p}-newrow"`, `id="${p}-row"`).replace("ACH · First Harbor ••4417", "ACH")}</div>${inbox}`;
+const dash = `<div style="width:640px">${dashContent(p).replace(`id="${p}-newrow"`, `id="${p}-row"`)}</div>${inbox}`;
 
 // ---- screen-space "incoming" layer: bank transfer from the left, email from the right ----
 // app → screen at the push-in camera: sx = 294 + 1.0406·ax, sy = 132 + 1.0406·ay
