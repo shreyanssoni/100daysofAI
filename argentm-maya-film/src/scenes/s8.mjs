@@ -47,7 +47,7 @@ ${worldLayer(p, screen, { sun: 0.55, clock: [9, 14] })}
   <div id="${p}-line" class="abs">Complex cash. <span class="serif" style="color:${C.bronze};font-size:1.1em">Clear decisions.</span></div>
   <div id="${p}-tag" class="abs">argentm.ai · Finance AI for FinOps</div>
   <div id="${p}-cta" class="abs"><div class="btn btn-bronze" style="height:84px;padding:0 54px;font-size:32px">Book a demo</div></div>
-  <div id="${p}-note" class="abs">Product data, customers and metrics shown are illustrative.</div>
+  <div id="${p}-note" class="abs">Product data, customers and metrics shown are illustrative. · Music: “Awanee” by Blue Dot Sessions (CC BY 3.0)</div>
 </div>
 `,
   js: `

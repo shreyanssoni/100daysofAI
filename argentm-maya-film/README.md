@@ -5,7 +5,7 @@
 - **Final render:** `renders/maya-60s-1080p.mp4`
 - **Edit:** scenes are generated from `src/` — change a scene in `src/scenes/sN.mjs` (or the shared office, Maya rigs and UI system in `src/shared.mjs`), then `node src/build.mjs`.
 - **Preview:** `npx hyperframes preview` · **Check:** `npx hyperframes check` · **Render:** `npx hyperframes render --quality looks --output renders/maya-60s-1080p.mp4`
-- **Sound:** `python3 src/score.py` regenerates the original score and foley (`assets/audio/`); UI sounds in `assets/sfx/` are HyperFrames' bundled library. Cue sheet: `src/audio-cues.mjs`.
+- **Sound:** music is "Awanee" by Blue Dot Sessions (CC BY 3.0, credited on the end card), edited by `src/music.py` so its final chord lands on the end card. Foley is `src/score.py`; real CC0 effects from Freesound plus HyperFrames bundled clicks are in `assets/sfx/` (see `assets/sfx/CREDITS.md`). Cue sheet: `src/audio-cues.mjs`. Full render + −16 LUFS master: `bash src/master.sh`.
 
 **Story:** Maya arrives at 8:58. Dev from Sales messages: *"Helix says they paid in full. Can you confirm before my 10:00 call?"* The product works through the remittance, and each complex case is part of the answer. At 9:14 Maya replies ("not quite in full: $118.40 still open, a $640 duplicate held as credit") and Dev gives a thumbs-up across the office.
 
@@ -38,4 +38,4 @@ End-card metrics (142 remittances, 97% no-touch) are illustrative.
 ## Placeholders to swap before release
 - **Logo:** none by request; the end card names argentm.ai in plain text only.
 - **Product UI:** rebuilt as a plausible design, not captured from the real product — swap in real screens/labels where they differ.
-- **Music:** synthesized in `src/score.py` because no music library was reachable from the build machine; a licensed or composed track can replace `assets/audio/score.m4a`.
+- **Music credit:** CC BY 3.0 requires crediting *"Awanee" by Blue Dot Sessions* wherever the video is published (it is on the end card; add it to post descriptions too).

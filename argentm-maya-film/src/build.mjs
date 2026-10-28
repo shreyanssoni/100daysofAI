@@ -52,7 +52,7 @@ const total = +t.toFixed(2);
 const starts = {}; { let acc = 0; for (const sc of scenes) { starts[sc.id] = +acc.toFixed(3); acc += sc.dur; } }
 fs.writeFileSync(path.join(here, "timing.json"), JSON.stringify({ starts, total }, null, 2));
 const audio = AUDIO.map((a) => ({ ...a, t: (a.scene ? starts[a.scene] : 0) + a.t })).filter((a) => a.t < total)
-  .map((a, i) => `      <audio id="${a.id ?? "sfx" + i}" class="clip" src="assets/${a.file}" data-start="${a.t.toFixed(3)}" ${a.dur ? `data-duration="${a.dur}"` : ""} data-track-index="${a.track ?? 3}" data-volume="${a.vol ?? 0.35}"></audio>`)
+  .map((a, i) => `      <audio id="${a.id ?? "sfx" + i}" class="clip" src="assets/${a.file}" data-start="${a.t.toFixed(3)}" ${a.dur ? `data-duration="${a.dur}"` : ""} data-track-index="${a.track ?? 3}" data-volume="${a.vol ?? 0.35}"${a.fadeIn ? ` data-fade-in="${a.fadeIn}"` : ""}${a.fadeOut ? ` data-fade-out="${a.fadeOut}"` : ""}></audio>`)
   .join("\n");
 
 const index = `<!doctype html>
