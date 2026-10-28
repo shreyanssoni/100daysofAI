@@ -10,7 +10,7 @@ const ENV = JSON.parse(fs.readFileSync(path.join(here, "vo-env.json"), "utf8"));
 const p = "vo";
 // local timings (seconds from overlay start)
 const M0 = 0.05, A0 = 1.9; // Maya's line, AI's line
-const PHR = [[0, 1.46], [1.57, 3.47], [3.79, 5.07], [5.35, 6.82]].map(([a, b]) => [A0 + a, A0 + b]);
+const PHR = [[0, 1.46], [1.78, 3.58], [3.9, 5.02], [5.34, 6.76]].map(([a, b]) => [A0 + a, A0 + b]);
 const bars = (cls, n) => Array.from({ length: n }, (_, i) => `<i class="${cls}" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i>`).join("");
 
 export default {
