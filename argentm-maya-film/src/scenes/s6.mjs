@@ -19,6 +19,12 @@ const review = `
   <div id="${p}-k2b">${btn(p + "-keep", "Keep open", "btn-bronze", 24, 132, 130)}${btn("", "Write off", "btn-ghost", 166, 132, 110)}</div>
   <span id="${p}-kept" class="a-pill" style="position:absolute;left:24px;top:142px;background:${C.amberL};color:${C.amberD};font-size:15px;opacity:0;border:1.5px solid ${C.amber}">Kept open · $118.40 tracked on INV-55203</span>
 </div>
+<div id="${p}-rule" class="a-card" style="position:absolute;left:30px;top:360px;width:640px;height:96px;padding:16px 22px;display:flex;align-items:center;gap:16px;border:1.5px solid ${C.bronzeL};opacity:0">
+  <div style="width:40px;height:40px;border-radius:12px;background:${C.bronzeL};flex:none;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 6 H18 M4 11 H14 M4 16 H11" stroke="${C.bronzeD}" stroke-width="2.4" stroke-linecap="round"/><circle cx="17" cy="15.5" r="3" fill="${C.bronzeD}"/></svg></div>
+  <div style="flex:1;min-width:0"><div style="font-size:17px;font-weight:700">Make this a rule for Helix?</div><div id="${p}-ruleS" style="font-size:13.5px;color:${C.ink2};margin-top:2px;white-space:nowrap">Keep short payments under $250 open automatically</div></div>
+  <div id="${p}-ruleB" class="btn btn-bronze" style="height:40px;padding:0 18px;font-size:15px;flex:none">Create rule</div>
+  <div id="${p}-ruleOK" class="a-pill" style="position:absolute;right:22px;top:33px;background:#EEF2EA;color:#4F6B45;font-size:13px;opacity:0">✓ Rule created · from next remittance</div>
+</div>
 <div class="a-card" style="position:absolute;left:700px;top:142px;width:330px;height:420px;padding:18px 20px">
   <div style="font-size:15px;font-weight:700;margin-bottom:12px">ERP posting queue</div>
   ${[["59 invoice applications", "$48,275.40"], ["Discounts taken", "$412.60"], ["Chargeback recovery", "$212.75"], ["Unapplied credit", "$640.00"]].map((r) => `<div style="display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;border-top:1px solid #F0EAE0"><span>${r[0]}</span><b class="num">${r[1]}</b></div>`).join("")}
@@ -66,17 +72,24 @@ tl.to('#${p}-k2b', { opacity: 0, duration: 0.15 }, 3.9);
 tl.fromTo('#${p}-kept', { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.35, ease: 'expo.out' }, 3.95);
 tl.fromTo('#${p}-badge', { opacity: 1 }, { opacity: 1, duration: 0.01, onStart: () => { const b = $('#${p}-badge'); b.textContent = '0'; b.style.background = '${C.bronze}'; }, onReverseComplete: () => { const b = $('#${p}-badge'); b.textContent = '1'; b.style.background = '${C.amber}'; } }, 4.0);
 tl.fromTo('#${p}-clear', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.1);
-tl.to('#${p}-cur', { opacity: 0, duration: 0.2 }, 4.3);
+// the AI learns from her decision
+tl.fromTo('#${p}-rule', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, 4.15);
+tl.to('#${p}-cur', { x: 1152, y: 479, duration: 0.35, ease: 'power3.inOut' }, 4.3);
+tl.to('#${p}-cur', { scale: 0.86, transformOrigin: '10px 6px', duration: 0.07, yoyo: true, repeat: 1 }, 4.66);
+tl.fromTo('#${p}-ruleB', { backgroundColor: '${C.bronze}' }, { backgroundColor: '${C.bronzeD}', duration: 0.08, yoyo: true, repeat: 1 }, 4.66);
+tl.to('#${p}-ruleB', { opacity: 0, duration: 0.12 }, 4.8);
+tl.fromTo('#${p}-ruleOK', { opacity: 0, x: 8 }, { opacity: 1, x: 0, duration: 0.3, ease: 'expo.out' }, 4.82);
+tl.to('#${p}-cur', { opacity: 0, duration: 0.2 }, 4.85);
 revealWords(tl, '.${p}-w1', 1.6, 0.09);
-hideWords(tl, '.${p}-w1', 4.4, 0.03);
+hideWords(tl, '.${p}-w1', 4.85, 0.03);
 // Maya leans back
-tl.set('#${p}-face', { opacity: 1 }, 4.6);
-tl.fromTo('#${p}-world', { opacity: 1 }, { opacity: 0, duration: 0.05 }, 4.62);
-tl.fromTo('#${p}-fig', { rotation: 0, x: 0 }, { rotation: -3.5, x: -30, svgOrigin: '780 1080', duration: 0.9, ease: 'power2.inOut' }, 4.7);
-tl.fromTo('#${p}-mouth', { attr: { d: 'M872 538 C884 534 898 533 910 536 C900 546 884 548 872 538 Z' } }, { attr: { d: 'M869 533 C884 537 898 535 913 527 C903 547 882 551 869 533 Z' }, duration: 0.4, ease: 'power2.out' }, 5.0);
-tl.fromTo('#${p}-mouthL', { attr: { d: 'M872 538 C886 541 898 540 910 536' } }, { attr: { d: 'M869 533 C886 541 900 538 913 527' }, duration: 0.4, ease: 'power2.out' }, 5.0);
-tl.fromTo('#${p}-eyeN', { scaleY: 1 }, { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.07, yoyo: true, repeat: 1 }, 5.75);
-tl.fromTo('#${p}-eyeF', { scaleY: 1 }, { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.07, yoyo: true, repeat: 1 }, 5.75);
-revealWords(tl, '.${p}-w2', 5.0, 0.1);
+tl.set('#${p}-face', { opacity: 1 }, 5.0);
+tl.fromTo('#${p}-world', { opacity: 1 }, { opacity: 0, duration: 0.05 }, 5.02);
+tl.fromTo('#${p}-fig', { rotation: 0, x: 0 }, { rotation: -3.5, x: -30, svgOrigin: '780 1080', duration: 0.9, ease: 'power2.inOut' }, 5.05);
+tl.fromTo('#${p}-mouth', { attr: { d: 'M872 538 C884 534 898 533 910 536 C900 546 884 548 872 538 Z' } }, { attr: { d: 'M869 533 C884 537 898 535 913 527 C903 547 882 551 869 533 Z' }, duration: 0.4, ease: 'power2.out' }, 5.35);
+tl.fromTo('#${p}-mouthL', { attr: { d: 'M872 538 C886 541 898 540 910 536' } }, { attr: { d: 'M869 533 C886 541 900 538 913 527' }, duration: 0.4, ease: 'power2.out' }, 5.35);
+tl.fromTo('#${p}-eyeN', { scaleY: 1 }, { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.07, yoyo: true, repeat: 1 }, 6.2);
+tl.fromTo('#${p}-eyeF', { scaleY: 1 }, { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.07, yoyo: true, repeat: 1 }, 6.2);
+revealWords(tl, '.${p}-w2', 5.3, 0.1);
 `,
 };

@@ -315,6 +315,12 @@
   <div id="s6-k2b"><div id="s6-keep" class="btn btn-bronze" style="position:absolute;left:24px;top:132px;width:130px;height:44px;font-size:16px">Keep open</div><div id="" class="btn btn-ghost" style="position:absolute;left:166px;top:132px;width:110px;height:44px;font-size:16px">Write off</div></div>
   <span id="s6-kept" class="a-pill" style="position:absolute;left:24px;top:142px;background:#F6EAD0;color:#8E6A22;font-size:15px;opacity:0;border:1.5px solid #C99A3B">Kept open · $118.40 tracked on INV-55203</span>
 </div>
+<div id="s6-rule" class="a-card" style="position:absolute;left:30px;top:360px;width:640px;height:96px;padding:16px 22px;display:flex;align-items:center;gap:16px;border:1.5px solid #F1E5D6;opacity:0">
+  <div style="width:40px;height:40px;border-radius:12px;background:#F1E5D6;flex:none;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 6 H18 M4 11 H14 M4 16 H11" stroke="#8A5E2E" stroke-width="2.4" stroke-linecap="round"/><circle cx="17" cy="15.5" r="3" fill="#8A5E2E"/></svg></div>
+  <div style="flex:1;min-width:0"><div style="font-size:17px;font-weight:700">Make this a rule for Helix?</div><div id="s6-ruleS" style="font-size:13.5px;color:#6B665E;margin-top:2px;white-space:nowrap">Keep short payments under $250 open automatically</div></div>
+  <div id="s6-ruleB" class="btn btn-bronze" style="height:40px;padding:0 18px;font-size:15px;flex:none">Create rule</div>
+  <div id="s6-ruleOK" class="a-pill" style="position:absolute;right:22px;top:33px;background:#EEF2EA;color:#4F6B45;font-size:13px;opacity:0">✓ Rule created · from next remittance</div>
+</div>
 <div class="a-card" style="position:absolute;left:700px;top:142px;width:330px;height:420px;padding:18px 20px">
   <div style="font-size:15px;font-weight:700;margin-bottom:12px">ERP posting queue</div>
   <div style="display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;border-top:1px solid #F0EAE0"><span>59 invoice applications</span><b class="num">$48,275.40</b></div><div style="display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;border-top:1px solid #F0EAE0"><span>Discounts taken</span><b class="num">$412.60</b></div><div style="display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;border-top:1px solid #F0EAE0"><span>Chargeback recovery</span><b class="num">$212.75</b></div><div style="display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;border-top:1px solid #F0EAE0"><span>Unapplied credit</span><b class="num">$640.00</b></div>
@@ -512,18 +518,25 @@ tl.to('#s6-k2b', { opacity: 0, duration: 0.15 }, 3.9);
 tl.fromTo('#s6-kept', { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.35, ease: 'expo.out' }, 3.95);
 tl.fromTo('#s6-badge', { opacity: 1 }, { opacity: 1, duration: 0.01, onStart: () => { const b = $('#s6-badge'); b.textContent = '0'; b.style.background = '#A9773F'; }, onReverseComplete: () => { const b = $('#s6-badge'); b.textContent = '1'; b.style.background = '#C99A3B'; } }, 4.0);
 tl.fromTo('#s6-clear', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.1);
-tl.to('#s6-cur', { opacity: 0, duration: 0.2 }, 4.3);
+// the AI learns from her decision
+tl.fromTo('#s6-rule', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: 'expo.out' }, 4.15);
+tl.to('#s6-cur', { x: 1152, y: 479, duration: 0.35, ease: 'power3.inOut' }, 4.3);
+tl.to('#s6-cur', { scale: 0.86, transformOrigin: '10px 6px', duration: 0.07, yoyo: true, repeat: 1 }, 4.66);
+tl.fromTo('#s6-ruleB', { backgroundColor: '#A9773F' }, { backgroundColor: '#8A5E2E', duration: 0.08, yoyo: true, repeat: 1 }, 4.66);
+tl.to('#s6-ruleB', { opacity: 0, duration: 0.12 }, 4.8);
+tl.fromTo('#s6-ruleOK', { opacity: 0, x: 8 }, { opacity: 1, x: 0, duration: 0.3, ease: 'expo.out' }, 4.82);
+tl.to('#s6-cur', { opacity: 0, duration: 0.2 }, 4.85);
 revealWords(tl, '.s6-w1', 1.6, 0.09);
-hideWords(tl, '.s6-w1', 4.4, 0.03);
+hideWords(tl, '.s6-w1', 4.85, 0.03);
 // Maya leans back
-tl.set('#s6-face', { opacity: 1 }, 4.6);
-tl.fromTo('#s6-world', { opacity: 1 }, { opacity: 0, duration: 0.05 }, 4.62);
-tl.fromTo('#s6-fig', { rotation: 0, x: 0 }, { rotation: -3.5, x: -30, svgOrigin: '780 1080', duration: 0.9, ease: 'power2.inOut' }, 4.7);
-tl.fromTo('#s6-mouth', { attr: { d: 'M872 538 C884 534 898 533 910 536 C900 546 884 548 872 538 Z' } }, { attr: { d: 'M869 533 C884 537 898 535 913 527 C903 547 882 551 869 533 Z' }, duration: 0.4, ease: 'power2.out' }, 5.0);
-tl.fromTo('#s6-mouthL', { attr: { d: 'M872 538 C886 541 898 540 910 536' } }, { attr: { d: 'M869 533 C886 541 900 538 913 527' }, duration: 0.4, ease: 'power2.out' }, 5.0);
-tl.fromTo('#s6-eyeN', { scaleY: 1 }, { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.07, yoyo: true, repeat: 1 }, 5.75);
-tl.fromTo('#s6-eyeF', { scaleY: 1 }, { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.07, yoyo: true, repeat: 1 }, 5.75);
-revealWords(tl, '.s6-w2', 5.0, 0.1);
+tl.set('#s6-face', { opacity: 1 }, 5.0);
+tl.fromTo('#s6-world', { opacity: 1 }, { opacity: 0, duration: 0.05 }, 5.02);
+tl.fromTo('#s6-fig', { rotation: 0, x: 0 }, { rotation: -3.5, x: -30, svgOrigin: '780 1080', duration: 0.9, ease: 'power2.inOut' }, 5.05);
+tl.fromTo('#s6-mouth', { attr: { d: 'M872 538 C884 534 898 533 910 536 C900 546 884 548 872 538 Z' } }, { attr: { d: 'M869 533 C884 537 898 535 913 527 C903 547 882 551 869 533 Z' }, duration: 0.4, ease: 'power2.out' }, 5.35);
+tl.fromTo('#s6-mouthL', { attr: { d: 'M872 538 C886 541 898 540 910 536' } }, { attr: { d: 'M869 533 C886 541 900 538 913 527' }, duration: 0.4, ease: 'power2.out' }, 5.35);
+tl.fromTo('#s6-eyeN', { scaleY: 1 }, { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.07, yoyo: true, repeat: 1 }, 6.2);
+tl.fromTo('#s6-eyeF', { scaleY: 1 }, { scaleY: 0.1, transformOrigin: '50% 50%', duration: 0.07, yoyo: true, repeat: 1 }, 6.2);
+revealWords(tl, '.s6-w2', 5.3, 0.1);
 
 window.__timelines = window.__timelines || {};
 window.__timelines["s6"] = tl;

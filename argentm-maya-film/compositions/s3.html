@@ -108,6 +108,12 @@
   <div style="font-size:12.5px;color:#A39C92;padding:8px 0">… 56 more lines</div>
   <div class="s3-ptotal" style="font-size:15px;display:flex;padding:9px 0;border-top:1.5px solid #D9D2C6;color:#2B2A28;font-weight:600"><span style="flex:1">TOTAL</span><span style="text-align:right">48,612.40</span></div>
 </div></div>
+<div id="s3-fmts" class="abs" style="left:150px;top:842px;width:300px">
+  <div class="label" style="font-size:15px;margin-bottom:10px">Reads any format</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px">
+    <span class="chip chip-bronze s3-fmt" style="font-size:15px;padding:5px 11px;gap:6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2.2" stroke="currentColor" stroke-width="2"/><path d="M3.5 7 L12 13 L20.5 7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>PDF</span><span class="chip chip-white s3-fmt" style="font-size:15px;padding:5px 11px;gap:6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2.2" stroke="currentColor" stroke-width="2"/><path d="M3.5 7 L12 13 L20.5 7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Email body</span><span class="chip chip-white s3-fmt" style="font-size:15px;padding:5px 11px;gap:6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="currentColor" stroke-width="2"/><path d="M4 6 V18 C4 19.7 7.6 21 12 21 C16.4 21 20 19.7 20 18 V6 M4 12 C4 13.7 7.6 15 12 15 C16.4 15 20 13.7 20 12" stroke="currentColor" stroke-width="2"/></svg>Portal CSV</span><span class="chip chip-white s3-fmt" style="font-size:15px;padding:5px 11px;gap:6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="currentColor" stroke-width="2"/><path d="M4 6 V18 C4 19.7 7.6 21 12 21 C16.4 21 20 19.7 20 18 V6 M4 12 C4 13.7 7.6 15 12 15 C16.4 15 20 13.7 20 12" stroke="currentColor" stroke-width="2"/></svg>EDI 820</span><span class="chip chip-white s3-fmt" style="font-size:15px;padding:5px 11px;gap:6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 9.5 L12 4 L21 9.5 Z" fill="currentColor"/><rect x="5" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="10.7" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="16.4" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="3" y="18.6" width="18" height="2.2" rx=".8" fill="currentColor"/></svg>Check scan</span>
+  </div>
+</div>
 <div id="s3-title" class="t-hero"><span class="w s3-w" >From </span><span class="w s3-w" >documents </span><span class="w s3-w" >to</span> <span class="w s3-w serif">understanding.</span></div>
 <span id="s3-l1" data-layout-allow-overlap class="chip chip-white s3-lift" style="font-size:40px;padding:14px 30px">HX-1001</span>
 <span id="s3-l2" data-layout-allow-overlap class="chip chip-white s3-lift" style="font-size:40px;padding:14px 30px">HX-1002</span>
@@ -200,6 +206,8 @@ tl.to('#s3-sumchip', { opacity: 0, duration: 0.2 }, 4.7);
 tl.to('#s3-dock', { opacity: 0, duration: 0.3 }, 5.4);
 // titles
 revealWords(tl, '.s3-w', 2.5, 0.1);
+tl.fromTo('#s3-fmts .label', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.6);
+tl.fromTo('.s3-fmt', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out', stagger: 0.08 }, 1.7);
 hideWords(tl, '.s3-w', 6.05, 0.03);
 // the three account ids lift out of the table
 const lifts = [['#s3-l1', '.s3-ac0', 460], ['#s3-l2', '.s3-ac1', 960], ['#s3-l3', '.s3-ac2', 1460]];
@@ -210,7 +218,7 @@ lifts.forEach(([sel, src, fx], i) => {
     { opacity: 1, x: startPos[i][0] - w / 2 + 50, y: startPos[i][1] - h / 2 + 18, scale: 0.42, duration: 0.15 }, 6.0 + i * 0.08);
   tl.to(sel, { x: fx - w / 2, y: 575 - h / 2, scale: 1, duration: 0.95, ease: 'power3.inOut' }, 6.2 + i * 0.08);
 });
-tl.to('#s3-win, #s3-pdf, .s3-clean, #s3-thead, #s3-total, #s3-bankbox, #s3-dtotal', { opacity: 0, filter: 'blur(8px)', duration: 0.5, ease: 'power2.in' }, 6.4);
+tl.to('#s3-win, #s3-pdf, .s3-clean, #s3-thead, #s3-total, #s3-bankbox, #s3-dtotal, #s3-fmts', { opacity: 0, filter: 'blur(8px)', duration: 0.5, ease: 'power2.in' }, 6.4);
 
 window.__timelines = window.__timelines || {};
 window.__timelines["s3"] = tl;

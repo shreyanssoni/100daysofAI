@@ -15,8 +15,12 @@ for (const n of names) {
   if (fs.existsSync(f)) scenes.push((await import(f)).default);
 }
 
+// overlays: compositions that sit above the scenes, placed relative to a scene start
+const overlays = [];
+for (const f of fs.existsSync(path.join(here, "overlays")) ? fs.readdirSync(path.join(here, "overlays")).filter((x) => x.endsWith(".mjs")) : []) overlays.push((await import(path.join(here, "overlays", f))).default);
+
 fs.mkdirSync(path.join(root, "compositions"), { recursive: true });
-for (const s of scenes) {
+for (const s of [...scenes, ...overlays]) {
   const html = `<template>
 <style>
 ${CSS}
@@ -51,6 +55,7 @@ const total = +t.toFixed(2);
 
 const starts = {}; { let acc = 0; for (const sc of scenes) { starts[sc.id] = +acc.toFixed(3); acc += sc.dur; } }
 fs.writeFileSync(path.join(here, "timing.json"), JSON.stringify({ starts, total }, null, 2));
+const overlayHosts = overlays.map((o) => `      <div id="${o.id}" data-composition-id="${o.id}" data-composition-src="compositions/${o.id}.html" data-start="${(starts[o.at.scene] + o.at.t).toFixed(2)}" data-duration="${o.dur}" data-track-index="9" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index:100"></div>`).join("\n");
 const audio = AUDIO.map((a) => ({ ...a, t: (a.scene ? starts[a.scene] : 0) + a.t })).filter((a) => a.t < total)
   .map((a, i) => `      <audio id="${a.id ?? "sfx" + i}" class="clip" src="assets/${a.file}" data-start="${a.t.toFixed(3)}" ${a.dur ? `data-duration="${a.dur}"` : ""} data-track-index="${a.track ?? 3}" data-volume="${a.vol ?? 0.35}"${a.fadeIn ? ` data-fade-in="${a.fadeIn}"` : ""}${a.fadeOut ? ` data-fade-out="${a.fadeOut}"` : ""}></audio>`)
   .join("\n");
@@ -71,6 +76,7 @@ const index = `<!doctype html>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="${total}" data-width="1920" data-height="1080">
 ${hosts}
+${overlayHosts}
 ${audio}
     </div>
     <script>

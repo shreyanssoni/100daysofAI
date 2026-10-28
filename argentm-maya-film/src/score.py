@@ -211,6 +211,11 @@ mus = lp_fast(mus, 9000)
 fade_in = np.minimum(1, t_all / 1.5)
 fade_out = np.clip((DUR - t_all) / 1.2, 0, 1)
 mus *= fade_in * fade_out
+# duck the music under the voice exchange (Maya + AI): -9 dB with soft ramps
+def _ramp(a, b):
+    return np.clip((t_all - a) / (b - a), 0, 1)
+_d0, _d1 = S["s4"] + 3.75, S["s4"] + 11.75
+mus *= 1 - (1 - 10 ** (-9 / 20)) * (_ramp(_d0, _d0 + 0.35) - _ramp(_d1, _d1 + 0.6))
 mus_st = reverb(mus, mix=0.32, decay=2.6)
 
 # ---------------- foley / ui fx ----------------

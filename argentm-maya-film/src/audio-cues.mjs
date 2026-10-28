@@ -17,6 +17,9 @@ export const AUDIO = [
   { id: "sx-ids", scene: "s3", file: "sfx/whoosh-short.mp3", t: 6.2, dur: 0.57, vol: 0.14, track: 4 },
   // s4: parent card
   { id: "sx-parent", scene: "s4", file: "sfx/pop.mp3", t: 2.26, dur: 0.7, vol: 0.14, track: 5 },
+  // s4 → s5: Maya asks, the AI answers (ElevenLabs voices)
+  { id: "vo-maya", scene: "s4", file: "audio/vo-maya.m4a", t: 3.95, dur: 1.8, vol: 1.0, track: 8 },
+  { id: "vo-ai", scene: "s4", file: "audio/vo-ai.m4a", t: 5.8, dur: 5.85, vol: 1.0, track: 9 },
   // s5: decision log entries
   ...[2.25, 4.3, 6.4, 8.3, 10.15, 12.4].map((t, i) => ({ id: "sx-log" + i, scene: "s5", file: "sfx/click-soft.mp3", t: t + 0.02, dur: 0.37, vol: 0.18, track: 4 + (i % 2) })),
   { id: "sx-strip", scene: "s5", file: "sfx/whoosh-short.mp3", t: 3.66, dur: 0.57, vol: 0.12, track: 6 },
@@ -24,6 +27,8 @@ export const AUDIO = [
   // s6: Maya's two clicks
   { id: "sx-approve", scene: "s6", file: "sfx/click.mp3", t: 2.31, dur: 0.37, vol: 0.32, track: 4 },
   { id: "sx-keep", scene: "s6", file: "sfx/click.mp3", t: 3.76, dur: 0.37, vol: 0.32, track: 5 },
+  { id: "sx-rule", scene: "s6", file: "sfx/click.mp3", t: 4.67, dur: 0.37, vol: 0.3, track: 4 },
+  { id: "sx-ruleok", scene: "s6", file: "sfx/pop.mp3", t: 4.83, dur: 0.7, vol: 0.14, track: 6 },
   // s7: apply
   { id: "sx-apply", scene: "s7", file: "sfx/click.mp3", t: 0.81, dur: 0.37, vol: 0.38, track: 4 },
   { id: "sx-fly", scene: "s7", file: "sfx/whoosh-short.mp3", t: 1.8, dur: 0.57, vol: 0.14, track: 5 },

@@ -1,0 +1,126 @@
+<template>
+<style>
+
+#root{--ground:radial-gradient(1400px 900px at 68% 22%, #FFFDF9 0%, #FAF5EC 55%, #F3EBDE 100%);position:absolute;inset:0;overflow:hidden;background:var(--ground);font-family:Inter,sans-serif;color:#2B2A28;-webkit-font-smoothing:antialiased}
+.abs{position:absolute}
+.full{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.world{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.num{font-variant-numeric:tabular-nums}
+.serif{font-family:"EB Garamond",serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+.t-hero{position:absolute;font-weight:700;font-size:72px;line-height:1.06;letter-spacing:-.035em;color:#2B2A28}
+.t-hero .serif{font-size:1.12em;color:#A9773F}
+.t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:#6B665E}
+.w{display:inline-block;white-space:pre}
+.card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:20px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 6px 14px rgba(70,50,30,.05),0 28px 60px rgba(70,50,30,.10)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.005em;white-space:nowrap;vertical-align:middle}
+.chip-blue{background:#E3EBF3;color:#3F6489}
+.chip-amber{background:#F6EAD0;color:#8E6A22}
+.chip-red{background:#F3E0DC;color:#9A4E47}
+.chip-bronze{background:#F1E5D6;color:#8A5E2E}
+.chip-grey{background:#ECE8E1;color:#6B665E}
+.chip-white{background:#fff;color:#2B2A28;border:1px solid #E6DFD3}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.label{font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B665E}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;font-weight:700;white-space:nowrap}
+.btn-bronze{background:#A9773F;color:#fff}
+.btn-ghost{background:#fff;color:#2B2A28;border:1.5px solid #E6DFD3}
+.cursor{position:absolute;width:64px;height:64px;left:0;top:0;z-index:50}
+/* ----- the app, authored at 1280x720 and scaled where it is shown ----- */
+.app{position:absolute;left:0;top:0;width:1280px;height:720px;background:#FBF9F5;display:flex;font-family:Inter,sans-serif;color:#2B2A28;overflow:hidden;transform-origin:0 0}
+.app-nav{width:192px;flex:none;background:#F3EEE5;border-right:1px solid #E6DFD3;padding:22px 14px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:19px;letter-spacing:-.02em;margin:0 6px 26px}
+.nav-i{font-size:14px;padding:9px 12px;border-radius:9px;color:#6B665E;margin-bottom:3px;display:flex;align-items:center;gap:10px}
+.nav-i i{width:14px;height:14px;border-radius:4px;border:1.6px solid currentColor;display:inline-block;opacity:.7}
+.nav-i.on{background:#fff;color:#2B2A28;font-weight:700;box-shadow:0 1px 2px rgba(70,50,30,.08)}
+.nav-i.on i{border-color:#A9773F;background:#F1E5D6;opacity:1}
+.app-main{flex:1;position:relative;padding:22px 30px}
+.topbar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#6B665E;margin-bottom:18px}
+.avatar{width:28px;height:28px;border-radius:50%;background:#F1E5D6;color:#8A5E2E;font-weight:700;font-size:11px;display:inline-flex;align-items:center;justify-content:center}
+.a-title{font-size:30px;font-weight:700;letter-spacing:-.03em;margin-bottom:4px}
+.a-sub{font-size:15px;color:#6B665E}
+.a-card{background:#fff;border:1px solid #ECE5D9;border-radius:14px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 8px 20px rgba(70,50,30,.06)}
+.a-row{display:flex;align-items:center;font-size:15px;padding:12px 18px;border-top:1px solid #F0EAE0}
+.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;line-height:1.2;white-space:nowrap;display:inline-block}
+
+
+#root{background:transparent}
+.vo-pill{position:absolute;left:960px;top:888px;transform:translateX(-50%);display:flex;align-items:center;gap:16px;padding:12px 24px 12px 14px;background:rgba(255,255,255,.96);border:1px solid #EAE3D7;border-radius:999px;box-shadow:0 2px 6px rgba(70,50,30,.08),0 18px 40px rgba(70,50,30,.14);white-space:nowrap;opacity:0}
+.vo-who{display:flex;align-items:center;gap:10px;padding-right:16px;border-right:1px solid #EFE8DD}
+.vo-txt{font-size:25px;letter-spacing:-.01em;color:#2B2A28}
+.vo-seg{color:#BDB5A9}
+.vo-seg b{color:inherit}
+.vo-wave{display:flex;align-items:center;gap:4px;height:34px}
+
+</style>
+<div id="root" data-composition-id="vo" data-width="1920" data-height="1080" data-start="0" data-duration="7.85">
+
+<div id="vo-m" class="vo-pill">
+  <div class="vo-who"><span style="width:36px;height:36px;border-radius:50%;background:#F1E5D6;color:#8A5E2E;font-weight:700;font-size:13px;display:inline-flex;align-items:center;justify-content:center">MC</span><span style="font-size:16px;font-weight:700;color:#6B665E">Maya</span><span class="vo-wave"><i class="vo-mb" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-mb" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-mb" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-mb" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-mb" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i></span></div>
+  <span class="vo-txt">“Show me how this matched.”</span>
+</div>
+<div id="vo-a" class="vo-pill">
+  <div class="vo-who"><span class="chip chip-bronze" style="font-size:15px;padding:5px 12px">AI</span><span class="vo-wave"><i class="vo-ab" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-ab" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-ab" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-ab" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-ab" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-ab" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-ab" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-ab" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i><i class="vo-ab" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i></span></div>
+  <span class="vo-txt"><span class="vo-seg" id="vo-s0"><b>64</b> lines</span><span class="vo-seg" id="vo-s1"> across 3 Helix accounts ·</span><span class="vo-seg" id="vo-s2"> <b>59</b> matched ·</span><span class="vo-seg" id="vo-s3"> <b>2</b> need you</span></span>
+</div>
+
+</div>
+<script>
+(function () {
+
+gsap.config({force3D:false});
+const $ = (s) => document.querySelector(s);
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+const lerp = (a,b,t) => a + (b-a)*t;
+const sm = (t) => { t = clamp(t,0,1); return t*t*(3-2*t); };
+const eio = (t) => { t = clamp(t,0,1); return t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; };
+const eout = (t) => { t = clamp(t,0,1); return 1-Math.pow(1-t,3); };
+// keyed values: keys = [[t, v], ...] eased in-out between keys
+const key = (t, keys, ease = eio) => {
+  if (t <= keys[0][0]) return keys[0][1];
+  for (let i = 1; i < keys.length; i++) {
+    if (t <= keys[i][0]) { const [t0,v0] = keys[i-1], [t1,v1] = keys[i]; return lerp(v0, v1, ease((t-t0)/(t1-t0))); }
+  }
+  return keys[keys.length-1][1];
+};
+const rot = (id, a, cx, cy) => { const e = document.getElementById(id); if (e) e.setAttribute('transform', 'rotate(' + a.toFixed(3) + ' ' + cx + ' ' + cy + ')'); };
+const setT = (id, s) => { const e = document.getElementById(id); if (e) e.setAttribute('transform', s); };
+const setO = (id, o) => { const e = document.getElementById(id); if (e) e.setAttribute('opacity', o); };
+// camera: put world point (cx,cy) at screen (sx,sy) with scale s
+const camTo = (s, cx, cy, sx = 960, sy = 540) => ({ scale: s, x: sx - cx*s, y: sy - cy*s });
+// per-word blur reveal
+const revealWords = (tl, sel, t, gap = 0.08, dur = 0.5) => {
+  tl.fromTo(sel, { opacity: 0, filter: 'blur(10px)', y: 14 }, { opacity: 1, filter: 'blur(0px)', y: 0, duration: dur, ease: 'expo.out', stagger: gap }, t);
+};
+const hideWords = (tl, sel, t, gap = 0.04) => {
+  tl.to(sel, { opacity: 0, filter: 'blur(8px)', duration: 0.22, ease: 'power2.in', stagger: gap }, t);
+};
+// a clock that calls fn(t) for every frame of the scene, deterministic under seeking
+const drive = (tl, dur, fn) => { const c = { t: 0 }; tl.fromTo(c, { t: 0 }, { t: dur, duration: dur, ease: 'none', onUpdate: () => fn(c.t) }, 0); fn(0); };
+// number counter
+const countTo = (tl, sel, from, to, t, dur, fmt) => { const o = { v: from }; tl.fromTo(o, { v: from }, { v: to, duration: dur, ease: 'power2.out', onUpdate: () => { const e = $(sel); if (e) e.textContent = fmt(o.v); } }, t); };
+const money = (v) => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+const tl = gsap.timeline({ paused: true });
+
+const EM = [0,0,0.1,0.287,0.326,0.374,0.424,0.45,0.678,0.883,1,0.937,0.77,0.55,0.492,0.387,0.327,0.431,0.517,0.526,0.545,0.616,0.543,0.543,0.804,0.719,0.508,0.506,0.53,0.359,0.806,0.666,0.641,0.577,0.654,0.645,0.586,0.591,0.293,0.412,0.282,0.338,0.378,0.426,0.303,0.296,0.23,0.18,0.104,0.145,0.099,0,0,0], EA = [0.131,0.732,0.941,0.952,0.956,0.805,0.889,0.612,0.501,0.888,0.631,0.646,0.856,0.82,0.725,0.528,0.405,0.254,0.403,0.848,0.885,0.908,0.921,0.926,0.819,0.76,0.758,0.744,0.748,0.771,0.589,0.475,0.378,0.294,0.16,0.382,0.818,0.846,0.889,0.811,0.608,0.279,0.035,0,0,0,0.217,0.621,0.372,0.189,0.476,0.63,0.941,0.996,0.875,0.609,0.894,0.799,0.617,0.106,0,0,0.484,0.526,0.503,0.764,0.853,0.806,0.792,0.768,0.548,0.452,0.413,0.62,0.763,0.76,0.692,0.702,0.594,0.332,0.817,0.874,0.655,0.342,0.142,0.334,0.323,0.522,0.412,0.292,0.2,0.141,0,0.639,0.815,0.804,0.742,0.391,0,0,0,0,0,0,0,0,0,0,0,0,0.117,0.664,0.963,0.722,0.43,0.189,0.758,0.917,0.861,0.845,1,0.969,0.912,0.844,0.86,0.836,0.798,0.848,0.93,0.905,0.882,0.85,0.793,0.575,0.272,0.668,0.738,0.799,0.438,0.239,0.724,0.219,0,0,0,0,0,0,0,0,0,0,0.809,0.781,0.5,0.779,0.823,0.734,0.667,0.68,0.678,0.69,0.758,0.747,0.667,0.468,0.353,0.549,0.449,0.503,0.481,0.3,0.182,0,0];
+const envAt = (E, t) => { const i = Math.floor(t * 30); return i >= 0 && i < E.length ? E[i] : 0; };
+const mb = [...document.querySelectorAll('.vo-mb')], ab = [...document.querySelectorAll('.vo-ab')];
+const shapeM = [0.55, 0.85, 1, 0.8, 0.5], shapeA = [0.35, 0.6, 0.85, 1, 0.9, 1, 0.8, 0.6, 0.35];
+drive(tl, 7.85, (t) => {
+  mb.forEach((b, i) => { const v = envAt(EM, t - 0.05 - i * 0.025); b.style.transform = 'scaleY(' + (0.16 + 0.84 * v * shapeM[i]).toFixed(3) + ')'; b.style.background = '#6B665E'; });
+  ab.forEach((b, i) => { const v = envAt(EA, t - 1.9 - Math.abs(i - 4) * 0.02); b.style.transform = 'scaleY(' + (0.12 + 0.88 * v * shapeA[i]).toFixed(3) + ')'; b.style.background = '#A9773F'; });
+});
+tl.fromTo('#vo-m', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out' }, 0.0);
+tl.to('#vo-m', { opacity: 0, y: -8, duration: 0.2, ease: 'power2.in' }, 1.72);
+tl.fromTo('#vo-a', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out' }, 1.8);
+tl.fromTo('#vo-s0', { color: '#BDB5A9' }, { color: '#2B2A28', duration: 0.25 }, 1.90);
+tl.fromTo('#vo-s1', { color: '#BDB5A9' }, { color: '#2B2A28', duration: 0.25 }, 3.45);
+tl.fromTo('#vo-s2', { color: '#BDB5A9' }, { color: '#2B2A28', duration: 0.25 }, 5.60);
+tl.fromTo('#vo-s3', { color: '#BDB5A9' }, { color: '#8A5E2E', duration: 0.25 }, 6.97);
+tl.to('#vo-a', { opacity: 0, y: -8, duration: 0.25, ease: 'power2.in' }, 7.6);
+
+window.__timelines = window.__timelines || {};
+window.__timelines["vo"] = tl;
+})();
+</script>
+</template>

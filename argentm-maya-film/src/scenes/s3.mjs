@@ -1,5 +1,5 @@
 // 0:15–0:23 — AI reads and understands. The PDF's rows become a structured table.
-import { C, remitPDF, words, brandMark } from "../shared.mjs";
+import { C, remitPDF, words, brandMark, icon } from "../shared.mjs";
 
 const p = "s3";
 const ROWS = [
@@ -68,6 +68,12 @@ ${rowsHTML}
 </div>
 <div id="${p}-scan" class="abs"></div>
 <div id="${p}-pdf" class="abs">${remitPDF(p)}</div>
+<div id="${p}-fmts" class="abs" style="left:150px;top:842px;width:300px">
+  <div class="label" style="font-size:15px;margin-bottom:10px">Reads any format</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px">
+    ${[["PDF", icon.mail(15)], ["Email body", icon.mail(15)], ["Portal CSV", icon.erp(15)], ["EDI 820", icon.erp(15)], ["Check scan", icon.bank(15)]].map(([n, ic], i) => `<span class="chip ${i === 0 ? "chip-bronze" : "chip-white"} ${p}-fmt" style="font-size:15px;padding:5px 11px;gap:6px">${ic}${n}</span>`).join("")}
+  </div>
+</div>
 <div id="${p}-title" class="t-hero">${words("From documents to", p + "-w")} <span class="w ${p}-w serif">understanding.</span></div>
 <span id="${p}-l1" data-layout-allow-overlap class="chip chip-white ${p}-lift" style="font-size:40px;padding:14px 30px">HX-1001</span>
 <span id="${p}-l2" data-layout-allow-overlap class="chip chip-white ${p}-lift" style="font-size:40px;padding:14px 30px">HX-1002</span>
@@ -104,6 +110,8 @@ tl.to('#${p}-sumchip', { opacity: 0, duration: 0.2 }, 4.7);
 tl.to('#${p}-dock', { opacity: 0, duration: 0.3 }, 5.4);
 // titles
 revealWords(tl, '.${p}-w', 2.5, 0.1);
+tl.fromTo('#${p}-fmts .label', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.6);
+tl.fromTo('.${p}-fmt', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out', stagger: 0.08 }, 1.7);
 hideWords(tl, '.${p}-w', 6.05, 0.03);
 // the three account ids lift out of the table
 const lifts = [['#${p}-l1', '.${p}-ac0', 460], ['#${p}-l2', '.${p}-ac1', 960], ['#${p}-l3', '.${p}-ac2', 1460]];
@@ -114,6 +122,6 @@ lifts.forEach(([sel, src, fx], i) => {
     { opacity: 1, x: startPos[i][0] - w / 2 + 50, y: startPos[i][1] - h / 2 + 18, scale: 0.42, duration: 0.15 }, 6.0 + i * 0.08);
   tl.to(sel, { x: fx - w / 2, y: 575 - h / 2, scale: 1, duration: 0.95, ease: 'power3.inOut' }, 6.2 + i * 0.08);
 });
-tl.to('#${p}-win, #${p}-pdf, .${p}-clean, #${p}-thead, #${p}-total, #${p}-bankbox, #${p}-dtotal', { opacity: 0, filter: 'blur(8px)', duration: 0.5, ease: 'power2.in' }, 6.4);
+tl.to('#${p}-win, #${p}-pdf, .${p}-clean, #${p}-thead, #${p}-total, #${p}-bankbox, #${p}-dtotal, #${p}-fmts', { opacity: 0, filter: 'blur(8px)', duration: 0.5, ease: 'power2.in' }, 6.4);
 `,
 };
