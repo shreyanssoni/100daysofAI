@@ -12,7 +12,7 @@
 .t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:#6B665E}
 .w{display:inline-block;white-space:pre}
 .card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:20px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 6px 14px rgba(70,50,30,.05),0 28px 60px rgba(70,50,30,.10)}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;letter-spacing:-.005em;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.005em;white-space:nowrap;vertical-align:middle}
 .chip-blue{background:#E3EBF3;color:#3F6489}
 .chip-amber{background:#F6EAD0;color:#8E6A22}
 .chip-red{background:#F3E0DC;color:#9A4E47}
@@ -40,7 +40,7 @@
 .a-sub{font-size:15px;color:#6B665E}
 .a-card{background:#fff;border:1px solid #ECE5D9;border-radius:14px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 8px 20px rgba(70,50,30,.06)}
 .a-row{display:flex;align-items:center;font-size:15px;padding:12px 18px;border-top:1px solid #F0EAE0}
-.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;line-height:1.2;white-space:nowrap;display:inline-block}
 
 
 
@@ -49,6 +49,7 @@
 #s2-row{opacity:0}
 #s2-pw{background:var(--ground);opacity:0}
 #s2-pdf{left:700px;top:150px;width:480px;height:800px;transform-origin:0 0}
+#s2-pdfl{position:absolute;left:0;top:-40px;display:flex;align-items:center;gap:8px}
 #s2-t1{left:110px;top:150px}
 #s2-t2{left:110px;top:240px}
 #s2-t3{left:110px;top:360px;width:520px}
@@ -303,7 +304,7 @@
   </div>
   <div class="app-main">
     <div class="topbar"><span>Cash application &nbsp;/&nbsp; <b style="color:#2B2A28">Dashboard</b></span><span style="display:flex;gap:14px;align-items:center">Tue, Oct 27 · 9:12 AM <span class="avatar">MC</span></span></div>
-    
+    <div style="width:640px">
   <div class="a-title">Good morning, Maya</div>
   <div class="a-sub" style="margin-bottom:18px">Here's what came in overnight.</div>
   <div style="display:flex;gap:14px;margin-bottom:16px">
@@ -313,22 +314,23 @@
   </div>
   <div class="a-card" style="overflow:hidden">
     <div style="display:flex;justify-content:space-between;padding:14px 18px;font-weight:700;font-size:15px">Incoming payments<span style="color:#6B665E;font-weight:400">Bank feed · live</span></div>
-    <div id="s2-row" class="a-row" style="background:#FFFCF6"><span style="flex:1.4;font-weight:700">Helix Health Distribution</span><span style="flex:1;color:#6B665E">ACH · First Harbor ••4417</span><span class="num" style="flex:.8;font-weight:700;color:#8A5E2E">+$48,612.40</span><span class="a-pill" style="background:#E3EBF3;color:#3F6489">Reading</span></div>
+    <div id="s2-row" class="a-row" style="background:#FFFCF6"><span style="flex:1.4;font-weight:700">Helix Health Distribution</span><span style="flex:1;color:#6B665E">ACH</span><span class="num" style="flex:.8;font-weight:700;color:#8A5E2E">+$48,612.40</span><span class="a-pill" style="background:#E3EBF3;color:#3F6489">Reading</span></div>
     <div class="a-row"><span style="flex:1.4">Northwind Clinics</span><span style="flex:1;color:#6B665E">ACH</span><span class="num" style="flex:.8">$12,904.00</span><span class="a-pill" style="background:#EEF2EA;color:#4F6B45">Applied</span></div>
     <div class="a-row"><span style="flex:1.4">Calder Medical Supply</span><span style="flex:1;color:#6B665E">Wire</span><span class="num" style="flex:.8">$7,218.55</span><span class="a-pill" style="background:#EEF2EA;color:#4F6B45">Applied</span></div>
     <div class="a-row"><span style="flex:1.4">Bayview Pharmacy Group</span><span style="flex:1;color:#6B665E">Check</span><span class="num" style="flex:.8">$3,460.20</span><span class="a-pill" style="background:#EEF2EA;color:#4F6B45">Applied</span></div>
-  </div>
-<div id="s2-toast" class="a-card" style="position:absolute;left:680px;top:58px;width:372px;padding:14px 18px;display:flex;gap:14px;align-items:center;box-shadow:0 2px 4px rgba(70,50,30,.08),0 18px 40px rgba(70,50,30,.16)">
-  <div style="width:44px;height:44px;border-radius:12px;background:#F1E5D6;display:flex;align-items:center;justify-content:center;font-weight:700;color:#8A5E2E;font-size:22px">$</div>
-  <div><div style="font-size:13px;color:#6B665E">Bank deposit received · ACH</div><div class="num" style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:#2B2A28">+$48,612.40</div><div style="font-size:13px;color:#2B2A28">Helix Health Distribution</div></div>
+  </div></div>
+<div style="position:absolute;left:680px;top:58px;width:378px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B665E;display:flex;justify-content:space-between"><span>Inbox</span><span style="color:#A9773F">● live</span></div>
+<div id="s2-dev" class="a-card" style="position:absolute;left:680px;top:84px;width:378px;height:124px;padding:14px 16px;display:flex;gap:12px;box-shadow:0 2px 4px rgba(70,50,30,.08),0 14px 30px rgba(70,50,30,.12)">
+  <div style="width:38px;height:38px;border-radius:50%;background:#E3EBF3;color:#3F6489;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none">DP</div>
+  <div><div style="font-size:12.5px;color:#6B665E"><b style="color:#2B2A28">Dev Patel</b> · Sales · now</div><div style="font-size:17px;line-height:1.35;margin-top:3px;color:#2B2A28">Helix says they <b>paid in full</b>. Can you confirm before my 10:00 call?</div></div>
 </div>
-<div id="s2-rcard" class="a-card" style="position:absolute;left:680px;top:178px;width:372px;height:150px;padding:16px 18px;display:flex;gap:14px;box-shadow:0 2px 4px rgba(70,50,30,.08),0 18px 40px rgba(70,50,30,.16)">
-  <div style="width:62px;height:80px;border-radius:6px;background:#FFFEFB;border:1px solid #E6DFD3;position:relative;flex:none"><div style="position:absolute;left:8px;right:8px;top:12px;height:5px;background:#E6DFD3;border-radius:2px"></div><div style="position:absolute;left:8px;right:16px;top:24px;height:4px;background:#EEE9E1;border-radius:2px"></div><div style="position:absolute;left:8px;right:12px;top:34px;height:4px;background:#EEE9E1;border-radius:2px"></div><div style="position:absolute;left:8px;right:18px;top:44px;height:4px;background:#EEE9E1;border-radius:2px"></div><div style="position:absolute;left:6px;bottom:6px;font-size:9px;font-weight:700;color:#fff;background:#B5615A;padding:1px 4px;border-radius:3px">PDF</div></div>
-  <div><div style="font-size:13px;color:#6B665E">Remittance from ap@helixhealth.com</div><div style="font-size:19px;font-weight:700;margin:2px 0 8px">Remittance #HX-778120</div><div style="font-size:13px;line-height:1.55;color:#2B2A28">64 payment lines<br>3 related customer accounts</div></div>
+<div id="s2-toast" class="a-card" style="position:absolute;left:680px;top:220px;width:378px;height:112px;padding:14px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 2px 4px rgba(70,50,30,.08),0 14px 30px rgba(70,50,30,.12)">
+  <div style="width:42px;height:42px;border-radius:12px;background:#F1E5D6;color:#8A5E2E;display:flex;align-items:center;justify-content:center;flex:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5 L12 4 L21 9.5 Z" fill="currentColor"/><rect x="5" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="10.7" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="16.4" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="3" y="18.6" width="18" height="2.2" rx=".8" fill="currentColor"/></svg></div>
+  <div><div style="font-size:12.5px;color:#6B665E">Bank deposit · ACH · First Harbor ••4417</div><div class="num" style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:#2B2A28;line-height:1.15">+$48,612.40</div><div style="font-size:12.5px;color:#2B2A28">Helix Health Distribution</div></div>
 </div>
-<div id="s2-dev" class="a-card" style="position:absolute;left:640px;top:530px;width:412px;padding:16px 18px;display:flex;gap:14px;box-shadow:0 2px 4px rgba(70,50,30,.08),0 18px 40px rgba(70,50,30,.16)">
-  <div style="width:42px;height:42px;border-radius:50%;background:#DCE6F0;color:#3F6489;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;flex:none">DP</div>
-  <div><div style="font-size:13px;color:#6B665E"><b style="color:#2B2A28">Dev Patel</b> · Sales · now</div><div style="font-size:19px;line-height:1.35;margin-top:4px;color:#2B2A28">Helix says they <b>paid in full</b>. Can you confirm before my 10:00 call?</div></div>
+<div id="s2-rcard" class="a-card" style="position:absolute;left:680px;top:346px;width:378px;height:146px;padding:14px 16px;display:flex;gap:14px;box-shadow:0 2px 4px rgba(70,50,30,.08),0 14px 30px rgba(70,50,30,.12)">
+  <div style="width:58px;height:76px;border-radius:6px;background:#FFFEFB;border:1px solid #E6DFD3;position:relative;flex:none"><div style="position:absolute;left:8px;right:8px;top:12px;height:5px;background:#E6DFD3;border-radius:2px"></div><div style="position:absolute;left:8px;right:16px;top:24px;height:4px;background:#EEE9E1;border-radius:2px"></div><div style="position:absolute;left:8px;right:12px;top:34px;height:4px;background:#EEE9E1;border-radius:2px"></div><div style="position:absolute;left:6px;bottom:6px;font-size:9px;font-weight:700;color:#fff;background:#B5615A;padding:1px 4px;border-radius:3px;line-height:1.2">PDF</div></div>
+  <div><div style="font-size:12.5px;color:#6B665E;display:flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2.2" stroke="currentColor" stroke-width="2"/><path d="M3.5 7 L12 13 L20.5 7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> ap@helixhealth.com</div><div style="font-size:18px;font-weight:700;margin:3px 0 6px">Remittance #HX-778120</div><div style="font-size:13px;line-height:1.5;color:#2B2A28">64 payment lines<br>3 related customer accounts</div></div>
 </div>
   </div>
 </div></div>
@@ -342,21 +344,41 @@
   </g>
 </svg>
 </div>
+
+<div id="s2-inc" class="full" style="pointer-events:none">
+  <svg class="full" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0">
+    <path id="s2-bpath" d="M268 236 C 560 40, 1000 60, 1201.4032 419.2056" stroke="#A9773F" stroke-width="3.5" stroke-dasharray="2 12" stroke-linecap="round" fill="none" opacity="0"/>
+    <path id="s2-mpath" d="M1676 640 C 1690 520, 1660 420, 1594.75 568.0114" stroke="#5B7FA6" stroke-width="3.5" stroke-dasharray="2 12" stroke-linecap="round" fill="none" opacity="0"/>
+  </svg>
+  <div id="s2-bsrc" class="card" style="left:36px;top:170px;width:232px;padding:16px 18px;opacity:0">
+    <div style="display:flex;align-items:center;gap:10px;color:#8A5E2E"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 9.5 L12 4 L21 9.5 Z" fill="#8A5E2E"/><rect x="5" y="11" width="2.6" height="6.5" rx=".6" fill="#8A5E2E"/><rect x="10.7" y="11" width="2.6" height="6.5" rx=".6" fill="#8A5E2E"/><rect x="16.4" y="11" width="2.6" height="6.5" rx=".6" fill="#8A5E2E"/><rect x="3" y="18.6" width="18" height="2.2" rx=".8" fill="#8A5E2E"/></svg><span class="label" style="color:#8A5E2E;font-size:15px">Bank</span></div>
+    <div style="font-size:20px;font-weight:700;margin-top:8px">First Harbor Bank</div><div style="font-size:16px;color:#6B665E">ACH transfer in</div>
+  </div>
+  <div id="s2-msrc" class="card" style="left:1652px;top:640px;width:236px;padding:16px 18px;opacity:0">
+    <div style="position:relative;width:64px;height:46px;margin-bottom:8px">
+      <div id="s2-paper" style="position:absolute;left:10px;top:4px;width:44px;height:38px;border-radius:3px;background:#FFFEFB;border:1px solid #E6DFD3"><div style="margin:7px 6px 0;height:3px;background:#E2DACD"></div><div style="margin:4px 6px 0;height:3px;background:#ECE6DC"></div><div style="margin:4px 6px 0;height:3px;background:#ECE6DC"></div></div>
+      <div style="position:absolute;left:0;top:14px;width:64px;height:32px;border-radius:4px;background:#E3EBF3;border:1.5px solid #5B7FA6"></div>
+      <svg id="s2-flap" width="64" height="24" viewBox="0 0 64 24" style="position:absolute;left:0;top:14px;transform-origin:50% 0"><path d="M1 1 L32 20 L63 1 Z" fill="#D2DEEB" stroke="#5B7FA6" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    </div>
+    <div style="font-size:20px;font-weight:700">Email</div><div style="font-size:16px;color:#6B665E">ap@helixhealth.com</div>
+  </div>
+  <div id="s2-coin" class="abs" style="left:0;top:0;opacity:0"><span class="chip chip-bronze" style="font-size:20px;box-shadow:0 8px 20px rgba(70,50,30,.18);transform:translate(-50%,-50%);border:1.5px solid #A9773F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 9.5 L12 4 L21 9.5 Z" fill="#8A5E2E"/><rect x="5" y="11" width="2.6" height="6.5" rx=".6" fill="#8A5E2E"/><rect x="10.7" y="11" width="2.6" height="6.5" rx=".6" fill="#8A5E2E"/><rect x="16.4" y="11" width="2.6" height="6.5" rx=".6" fill="#8A5E2E"/><rect x="3" y="18.6" width="18" height="2.2" rx=".8" fill="#8A5E2E"/></svg> +$48,612.40</span></div>
+  <div id="s2-doc" class="abs" style="left:0;top:0;opacity:0"><div style="transform:translate(-50%,-50%);width:46px;height:58px;border-radius:4px;background:#FFFEFB;border:1.5px solid #5B7FA6;box-shadow:0 8px 20px rgba(70,50,30,.18);position:relative"><div style="margin:9px 7px 0;height:3px;background:#E2DACD"></div><div style="margin:4px 7px 0;height:3px;background:#ECE6DC"></div><div style="margin:4px 7px 0;height:3px;background:#ECE6DC"></div><div style="position:absolute;left:5px;bottom:5px;font:700 8px Inter;color:#fff;background:#B5615A;padding:1px 3px;border-radius:2px">PDF</div></div></div>
+</div>
 <div id="s2-pw" class="full">
   <div id="s2-ws" class="abs">
-    <div style="position:absolute;left:36px;top:28px;display:flex;align-items:center;gap:14px;font-size:24px;font-weight:700">
-            Cash application workspace <span style="font-weight:400;color:#6B665E">· Helix Health Distribution</span></div>
+    <div style="position:absolute;left:36px;top:28px;display:flex;align-items:center;gap:14px;font-size:24px;font-weight:700;white-space:nowrap">Cash application workspace <span style="font-weight:400;color:#6B665E">· Helix Health Distribution</span></div>
   </div>
-  <div id="s2-bank" class="abs" style="left:1290px;top:150px"><div class="label" style="margin-bottom:12px">Bank deposit</div>
+  <div id="s2-bank" class="abs" style="left:1290px;top:150px;transform-origin:0 0"><div class="label" style="margin-bottom:12px;display:flex;align-items:center;gap:8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 9.5 L12 4 L21 9.5 Z" fill="currentColor"/><rect x="5" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="10.7" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="16.4" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="3" y="18.6" width="18" height="2.2" rx=".8" fill="currentColor"/></svg>Bank deposit</div>
 <div class="card" style="position:relative;width:460px;padding:26px 28px">
   <div style="display:flex;justify-content:space-between;align-items:center"><span class="chip chip-grey" style="font-size:16px">First Harbor Bank ••4417</span><span style="font-size:18px;color:#6B665E">Oct 27 · ACH</span></div>
-  <div class="num" style="font-size:56px;font-weight:700;letter-spacing:-.03em;margin-top:16px;color:#2B2A28">+$48,612.40</div>
-  <div style="font-size:19px;color:#6B665E;margin-top:4px">Ref: HELIX HLTH DIST PMT</div>
+  <div class="num" style="font-size:56px;font-weight:700;letter-spacing:-.03em;margin-top:16px;color:#2B2A28;line-height:1.1">+$48,612.40</div>
+  <div style="font-size:19px;color:#6B665E;margin-top:6px">Ref: HELIX HLTH DIST PMT</div>
 </div></div>
-  <div id="s2-erp" class="abs" style="left:1290px;top:520px"><div class="label" style="margin-bottom:12px">ERP · open invoices</div><div style="position:relative;width:460px;height:330px">
+  <div id="s2-erp" class="abs" style="left:1290px;top:520px;transform-origin:0 0"><div class="label" style="margin-bottom:12px;display:flex;align-items:center;gap:8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="currentColor" stroke-width="2"/><path d="M4 6 V18 C4 19.7 7.6 21 12 21 C16.4 21 20 19.7 20 18 V6 M4 12 C4 13.7 7.6 15 12 15 C16.4 15 20 13.7 20 12" stroke="currentColor" stroke-width="2"/></svg>ERP · open invoices</div><div style="position:relative;width:460px;height:330px">
   <div class="card" style="position:absolute;left:0;top:0px;width:460px;padding:18px 24px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:24px;font-weight:700">INV-55141</div><div style="font-size:17px;color:#6B665E">Open · HX-1001</div></div><div class="num" style="font-size:26px;font-weight:700">$12,480.00</div></div><div class="card" style="position:absolute;left:0;top:104px;width:460px;padding:18px 24px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:24px;font-weight:700">INV-55188</div><div style="font-size:17px;color:#6B665E">Open · HX-1002</div></div><div class="num" style="font-size:26px;font-weight:700">$4,250.00</div></div><div class="card" style="position:absolute;left:0;top:208px;width:460px;padding:18px 24px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:24px;font-weight:700">INV-55203</div><div style="font-size:17px;color:#6B665E">Open · HX-1003</div></div><div class="num" style="font-size:26px;font-weight:700">$1,000.00</div></div>
   <div style="position:absolute;top:304px;left:24px;font-size:18px;color:#6B665E">+ 56 more open invoices</div></div></div>
-  <div id="s2-pdf" class="abs">
+  <div id="s2-pdf" class="abs"><div id="s2-pdfl" class="label"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2.2" stroke="currentColor" stroke-width="2"/><path d="M3.5 7 L12 13 L20.5 7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Customer remittance · email</div>
 <div style="position:absolute;inset:0;background:#FFFEFB;border-radius:6px;box-shadow:0 2px 4px rgba(70,50,30,.08),0 24px 60px rgba(70,50,30,.14);padding:38px 36px;font-family:'IBM Plex Mono',monospace;color:#5E5952;overflow:hidden">
   <div style="font-family:Inter;font-weight:700;font-size:13px;letter-spacing:.14em;color:#8E877D">HELIX HEALTH DISTRIBUTION</div>
   <div style="font-family:Inter;font-weight:700;font-size:30px;letter-spacing:-.02em;color:#2B2A28;margin-top:14px">Remittance advice</div>
@@ -423,7 +445,7 @@ const poseBack = (o) => {
   setO('s2-mb', o.op ?? 1);
   setT('s2-mb-up', 'translate(0 ' + (88*sit + (o.bob ?? 0)).toFixed(2) + ') rotate(' + (o.lean ?? 0) + ' 0 -165)');
   setT('s2-mb-legs', 'translate(0 ' + (40*sit).toFixed(2) + ') scale(1 ' + (1 - 0.55*sit).toFixed(3) + ')');
-  setO('s2-mb-legs', 1 - sit*0.98);
+  setO('s2-mb-legs', Math.max(0, 1 - sit*2.6));
   rot('s2-mb-armL', o.armL ?? 4, -34, -294);
   rot('s2-mb-foreL', o.foreL ?? 0, -34, -229);
   rot('s2-mb-armR', o.armR ?? -4, 34, -294);
@@ -441,44 +463,64 @@ const cam = (s, cx, cy, sx = 960, sy = 540) => { cx = clamp(cx, sx / s, 1920 - (
 const seated = (t, extra = {}) => poseBack(Object.assign({ x: 1095, op: 1, sit: 1, armR: -12, foreR: -18, armL: 10, foreL: 14, head: 4 + 1.2 * Math.sin(t * 0.9) }, extra));
 
 drive(tl, 8, (t) => {
-  seated(t, { head: 4 + 1.2 * Math.sin(t * 0.9) + key(t, [[1.0, 0], [1.3, 2.5], [2.2, 2.5], [2.6, 0]]) });
-  const s = key(t, [[0, 3.25], [1.05, 6.0], [3.15, 6.0], [3.7, 11]], (u) => eio(u));
-  const cx = key(t, [[0, 1234], [1.05, 1291], [3.15, 1291], [3.7, 1333]]);
-  const cy = key(t, [[0, 538], [1.05, 520], [3.15, 520], [3.7, 500]]);
+  seated(t, { head: 4 + 1.2 * Math.sin(t * 0.9) + key(t, [[0.5, 0], [0.8, 2.5], [1.6, 2.5], [2.0, 0]]) });
+  const s = key(t, [[0, 3.25], [1.0, 6.0], [3.35, 6.0], [3.9, 11]], (u) => eio(u));
+  const cx = key(t, [[0, 1234], [1.0, 1291], [3.35, 1291], [3.9, 1333]]);
+  const cy = key(t, [[0, 538], [1.0, 520], [3.35, 520], [3.9, 500]]);
   cam(s, cx, cy);
 });
-// Dev's question arrives first
-tl.fromTo('#s2-dev', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 0.35);
-// payment lands on the dashboard
-tl.fromTo('#s2-toast', { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 1.0);
-tl.fromTo('#s2-row', { opacity: 0, x: 120 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 1.25);
-tl.fromTo('#s2-rcard', { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out' }, 1.85);
+// a token that travels along an SVG path
+const travel = (sel, pathSel, t0, dur) => {
+  const path = $(pathSel); const L = path.getTotalLength(); const o = { u: 0 };
+  tl.fromTo(o, { u: 0 }, { u: 1, duration: dur, ease: 'power2.inOut', onUpdate: () => { const pt = path.getPointAtLength(o.u * L); const e = $(sel); e.style.transform = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)'; } }, t0);
+  const pt0 = path.getPointAtLength(0); $(sel).style.transform = 'translate(' + pt0.x + 'px,' + pt0.y + 'px)';
+};
+// Dev's question
+tl.fromTo('#s2-dev', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.55, ease: 'expo.out' }, 0.35);
+// the deposit comes in from the bank
+tl.fromTo('#s2-bsrc', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 0.9);
+tl.fromTo('#s2-bpath', { opacity: 0, strokeDashoffset: 60 }, { opacity: 0.9, strokeDashoffset: 0, duration: 0.35 }, 1.05);
+tl.fromTo('#s2-coin', { opacity: 0 }, { opacity: 1, duration: 0.15 }, 1.15);
+travel('#s2-coin', '#s2-bpath', 1.15, 0.65);
+tl.to('#s2-coin', { opacity: 0, duration: 0.12 }, 1.8);
+tl.fromTo('#s2-toast', { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.4)' }, 1.78);
+tl.fromTo('#s2-row', { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 0.55, ease: 'expo.out' }, 1.92);
+// the remittance arrives by email
+tl.fromTo('#s2-msrc', { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 1.75);
+tl.fromTo('#s2-flap', { scaleY: 1 }, { scaleY: -1, duration: 0.3, ease: 'power2.inOut' }, 2.05);
+tl.fromTo('#s2-paper', { y: 0 }, { y: -20, duration: 0.3, ease: 'power2.out' }, 2.25);
+tl.fromTo('#s2-mpath', { opacity: 0, strokeDashoffset: 60 }, { opacity: 0.9, strokeDashoffset: 0, duration: 0.3 }, 2.3);
+tl.fromTo('#s2-doc', { opacity: 0 }, { opacity: 1, duration: 0.12 }, 2.4);
+travel('#s2-doc', '#s2-mpath', 2.4, 0.55);
+tl.to('#s2-doc', { opacity: 0, duration: 0.12 }, 2.95);
+tl.fromTo('#s2-rcard', { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.4)' }, 2.93);
 // Maya opens the remittance
-tl.fromTo('#s2-cur', { x: 1500, y: 1100, opacity: 1 }, { x: 1370, y: 380, duration: 0.7, ease: 'power3.out' }, 2.35);
-tl.to('#s2-cur', { scale: 0.86, duration: 0.07, yoyo: true, repeat: 1, transformOrigin: '10px 6px' }, 3.05);
-tl.to('#s2-cur', { opacity: 0, duration: 0.15 }, 3.3);
+tl.to('#s2-bsrc, #s2-msrc, #s2-bpath, #s2-mpath', { opacity: 0, duration: 0.3, ease: 'power2.in' }, 3.05);
+tl.fromTo('#s2-cur', { x: 1600, y: 1100, opacity: 1 }, { x: 1388, y: 562, duration: 0.55, ease: 'power3.out' }, 2.95);
+tl.to('#s2-cur', { scale: 0.86, duration: 0.07, yoyo: true, repeat: 1, transformOrigin: '10px 6px' }, 3.5);
+tl.to('#s2-cur', { opacity: 0, duration: 0.15 }, 3.62);
 // the card becomes the document (screen-space handoff)
-tl.fromTo('#s2-pw', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.inOut' }, 3.35);
-tl.fromTo('#s2-world', { opacity: 1 }, { opacity: 0, duration: 0.05 }, 3.66);
-tl.fromTo('#s2-pdf', { x: 1210 - 700, y: 309 - 150, scaleX: 0.8, scaleY: 0.22 }, { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: 0.75, ease: 'expo.out' }, 3.35);
-tl.fromTo('.s2-prow, .s2-pbar', { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.025 }, 3.7);
+tl.fromTo('#s2-pw', { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.inOut' }, 3.6);
+tl.fromTo('#s2-world', { opacity: 1 }, { opacity: 0, duration: 0.05 }, 3.92);
+tl.fromTo('#s2-pdf', { x: 501, y: 342, scaleX: 0.819, scaleY: 0.190 }, { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: 0.7, ease: 'expo.out' }, 3.6);
+tl.fromTo('.s2-prow, .s2-pbar, #s2-pdfl', { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.02 }, 3.95);
 // three sources, fragmented
-tl.fromTo('#s2-bank', { opacity: 0, x: 80, rotation: 0 }, { opacity: 1, x: 0, rotation: -1.6, duration: 0.8, ease: 'expo.out' }, 4.15);
-tl.fromTo('#s2-erp', { opacity: 0, x: 80, rotation: 0 }, { opacity: 1, x: 0, rotation: 1.4, duration: 0.8, ease: 'expo.out' }, 4.4);
-tl.to('#s2-pdf', { rotation: -1.2, duration: 0.8, ease: 'power2.out' }, 4.2);
+tl.fromTo('#s2-bank', { opacity: 0, x: 80, rotation: 0 }, { opacity: 1, x: 0, rotation: -1.6, duration: 0.8, ease: 'expo.out' }, 4.35);
+tl.fromTo('#s2-erp', { opacity: 0, x: 80, rotation: 0 }, { opacity: 1, x: 0, rotation: 1.4, duration: 0.8, ease: 'expo.out' }, 4.55);
+tl.to('#s2-pdf', { rotation: -1.2, duration: 0.8, ease: 'power2.out' }, 4.4);
 // titles
-revealWords(tl, '.s2-w1', 3.95);
-revealWords(tl, '.s2-w2', 4.6);
-revealWords(tl, '.s2-w3', 5.25, 0.06);
-hideWords(tl, '.s2-w1, .s2-w2, .s2-w3', 6.62, 0.02);
-// everything gathers into one workspace
-tl.fromTo('#s2-ws', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'power3.out' }, 6.65);
-tl.to('#s2-bank', { x: 360 - 1290, y: 400 - 150, scale: 0.72, rotation: 0, duration: 0.75, ease: 'power3.inOut' }, 6.7);
-tl.to('#s2-erp', { x: 1210 - 1290, y: 360 - 520, scale: 0.72, rotation: 0, duration: 0.75, ease: 'power3.inOut' }, 6.75);
-tl.to('#s2-pdf', { x: 790 - 700, y: 330 - 150, scale: 0.62, rotation: 0, duration: 0.75, ease: 'power3.inOut' }, 6.72);
+revealWords(tl, '.s2-w1', 4.15);
+revealWords(tl, '.s2-w2', 4.75);
+revealWords(tl, '.s2-w3', 5.35, 0.06);
+hideWords(tl, '.s2-w1, .s2-w2, .s2-w3', 6.72, 0.02);
+// everything gathers into one workspace: bank | remittance | ERP, no overlaps
+tl.fromTo('#s2-ws', { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.55, ease: 'power3.out' }, 6.8);
+tl.to('#s2-bank', { x: 350 - 1290, y: 400 - 150, scale: 0.7, rotation: 0, duration: 0.7, ease: 'power3.inOut' }, 6.82);
+tl.to('#s2-pdf', { x: 840 - 700, y: 370 - 150, scale: 0.5, rotation: 0, duration: 0.7, ease: 'power3.inOut' }, 6.84);
+tl.to('#s2-erp', { x: 1240 - 1290, y: 370 - 520, scale: 0.7, rotation: 0, duration: 0.7, ease: 'power3.inOut' }, 6.86);
 // follow the remittance
-tl.to('#s2-ws, #s2-bank, #s2-erp', { opacity: 0, filter: 'blur(10px)', duration: 0.3, ease: 'power2.in' }, 7.55);
-tl.to('#s2-pdf', { x: 0, y: 0, scale: 1, duration: 0.45, ease: 'power3.inOut' }, 7.55);
+tl.to('#s2-ws, #s2-bank, #s2-erp, #s2-pdfl', { opacity: 0, filter: 'blur(10px)', duration: 0.28, ease: 'power2.in' }, 7.58);
+tl.to('#s2-pdf', { x: 0, y: 0, scale: 1, duration: 0.42, ease: 'power3.inOut' }, 7.58);
 
 window.__timelines = window.__timelines || {};
 window.__timelines["s2"] = tl;

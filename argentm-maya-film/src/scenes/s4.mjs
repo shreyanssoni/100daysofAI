@@ -27,7 +27,8 @@ export default {
   dur: 7,
   css: `
 ${screenCSS(p)}
-#${p}-map{transform-origin:0 0;background:var(--ground)}
+#${p}-map{transform-origin:0 0}
+#${p}-mapbg{background:var(--ground)}
 #${p}-world{opacity:0}
 #${p}-face{opacity:0}
 #${p}-match{opacity:0;background:var(--ground)}
@@ -37,13 +38,14 @@ ${screenCSS(p)}
 `,
   html: `
 ${worldLayer(p, screenApp)}
+<div id="${p}-mapbg" class="full"></div>
 <div id="${p}-map" class="full">
   <svg class="full" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0">
     <path id="${p}-ln1" d="M${CX0[0] + 170} 620 L${CX0[1] - 170} 620" stroke="${C.bronze}" stroke-width="3" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
     <path id="${p}-ln2" d="M${CX0[1] + 170} 620 L${CX0[2] - 170} 620" stroke="${C.bronze}" stroke-width="3" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
     <path id="${p}-tree" d="M960 430 V475 M${CX1[0]} 475 H${CX1[2]} M${CX1[0]} 475 V520 M960 475 V520 M${CX1[2]} 475 V520" stroke="${C.bronze}" stroke-width="3" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
   </svg>
-  <div id="${p}-why" class="abs" style="left:960px;top:566px;transform:translateX(-50%);opacity:0"><span class="chip chip-blue" style="font-size:18px">Same parent · same remit-to address</span></div>
+  <div id="${p}-why" class="abs" style="left:960px;top:744px;transform:translateX(-50%);opacity:0"><span class="chip chip-blue" style="font-size:18px">Same parent · same remit-to address</span></div>
   ${ACCTS.map(card).join("")}
   <div id="${p}-parent" class="card" style="left:560px;top:270px;width:800px;height:160px;padding:30px 36px;opacity:0;display:flex;align-items:center;justify-content:space-between;border-color:${C.bronze}">
     <div><div class="label" style="color:${C.bronzeD}">Parent customer</div><div style="font-size:44px;font-weight:700;letter-spacing:-.025em;margin-top:6px">Helix Health Distribution</div></div>
@@ -96,7 +98,8 @@ revealWords(tl, '.${p}-w1', 0.5);
 revealWords(tl, '.${p}-w2', 2.35, 0.1);
 hideWords(tl, '.${p}-w1, .${p}-w2', 3.15, 0.02);
 // pull back: the picture is on Maya's monitor
-tl.fromTo('#${p}-world', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.35);
+tl.fromTo('#${p}-world', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.3);
+tl.to('#${p}-mapbg', { opacity: 0, duration: 0.3 }, 3.3);
 tl.fromTo('#${p}-map', { scale: 1, x: 0, y: 0 }, { scale: 721.5 / 1920, x: 784.5, y: 260.5, duration: 0.6, ease: 'power3.inOut' }, 3.3);
 tl.to('#${p}-map', { opacity: 0, duration: 0.25 }, 3.85);
 // recognition, close

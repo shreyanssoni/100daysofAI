@@ -64,8 +64,8 @@ drive(tl, 4.6, (t) => {
   cam(key(t, [[1.2, 1.55], [4.6, 1.5]]), 1380, 520);
 });
 // close on the button
-tl.fromTo('#${p}-zoom', { scale: 1.55, x: -1540 * 0.55 + 0, y: -820 * 0.55 }, { scale: 1.3, x: -1540 * 0.3, y: -820 * 0.3, duration: 1.0, ease: 'power2.out' }, 0);
-tl.fromTo('#${p}-cur', { x: 1700, y: 1150, opacity: 1 }, { x: 1400, y: 760, duration: 0.65, ease: 'power3.out' }, 0.1);
+tl.fromTo('#${p}-zoom', { scale: 1.55, x: 960 - 1440 * 1.55, y: 540 - 750 * 1.55 }, { scale: 1.45, x: 960 - 1430 * 1.45, y: 540 - 740 * 1.45, duration: 0.75, ease: 'power2.out' }, 0);
+tl.fromTo('#${p}-cur', { x: 1700, y: 1150, opacity: 1 }, { x: 822, y: 604, duration: 0.6, ease: 'power3.out' }, 0.15);
 tl.to('#${p}-cur', { scale: 0.86, transformOrigin: '10px 6px', duration: 0.07, yoyo: true, repeat: 1 }, 0.8);
 tl.to('#${p}-apply', { scale: 0.95, duration: 0.08, yoyo: true, repeat: 1, ease: 'power2.out' }, 0.8);
 tl.to('#${p}-albl', { opacity: 0, duration: 0.1 }, 0.9);

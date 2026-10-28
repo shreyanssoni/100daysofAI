@@ -261,33 +261,36 @@ add(fx, 3.87, felt(0.06))            # cup set down
 add(fx, 4.62, felt(0.05))            # sits
 add(fx, 4.98, glass(midi(81), 0.025))  # monitor wakes
 # scene 2 paper: the remittance document unfolds
+add(fx, S["s2"] + 3.62, paper(0.05, 0.5))
 # scene 3: extraction ticks as the scan reads each row
 TX_ROWS = 9
 for i in range(8):
     ti = S["s3"] + 2.3 + ((i * 56 + 56 * 0.6) / (8 * 56 + 8 + 68)) * 2.0
     add(fx, ti, tick(0.05, fc=5000, dec=90))
+add(fx, S["s3"] + 1.0, paper(0.035, 0.6))
 # scene 4: lines draw (glass), match (glass chord)
-add(fx, S["s4"] + 0.95, glass(midi(86), 0.03)); add(fx, S["s4"] + 1.1, glass(midi(89), 0.025))
-add(fx, S["s4"] + 6.07, glass(midi(81), 0.04)); add(fx, S["s4"] + 6.07, glass(midi(84), 0.03)); add(fx, S["s4"] + 6.1, glass(midi(88), 0.03))
+add(fx, S["s4"] + 0.95, glass(midi(86), 0.03)); add(fx, S["s4"] + 1.1, glass(midi(90), 0.025))
+add(fx, S["s4"] + 6.07, glass(midi(81), 0.04)); add(fx, S["s4"] + 6.07, glass(midi(85), 0.03)); add(fx, S["s4"] + 6.1, glass(midi(88), 0.03))
 # scene 5 montage: matches, rules, exceptions
 for i in range(4):
-    add(fx, S["s5"] + 1.75 + i * 0.07, glass(midi(88 + [0, 3, 5, 7][i]), 0.03))
+    add(fx, S["s5"] + 1.75 + i * 0.07, glass(midi(88 + [0, 2, 4, 7][i]), 0.03))
 add(fx, S["s5"] + 3.65, glass(midi(86), 0.03))                 # discount verified
 add(fx, S["s5"] + 5.2, low_tone(midi(45), 0.05))               # chargeback exception
 add(fx, S["s5"] + 6.1, low_tone(midi(50), 0.035, 0.4))         # proposed action
-add(fx, S["s5"] + 8.0, glass(midi(89), 0.035))                 # recovery identified
+add(fx, S["s5"] + 8.0, glass(midi(90), 0.035))                 # recovery identified
 add(fx, S["s5"] + 9.95, low_tone(midi(52), 0.035, 0.4))        # short pay kept open
 add(fx, S["s5"] + 11.35, low_tone(midi(41), 0.06, 0.5))        # duplicate barrier
 # scene 6: felt-damped confirmations
 add(fx, S["s6"] + 2.32, felt(0.07)); add(fx, S["s6"] + 3.77, felt(0.07))
 add(fx, S["s6"] + 4.0, glass(midi(81), 0.03))
 # scene 7: posting resolves
-add(fx, S["s7"] + 1.2, glass(midi(74), 0.04)); add(fx, S["s7"] + 1.2, glass(midi(77), 0.03)); add(fx, S["s7"] + 1.22, glass(midi(81), 0.03))
+add(fx, S["s7"] + 1.2, glass(midi(74), 0.04)); add(fx, S["s7"] + 1.2, glass(midi(78), 0.03)); add(fx, S["s7"] + 1.22, glass(midi(81), 0.03))
 for i in range(6):
     add(fx, S["s7"] + 2.38 + i * 0.09, felt(0.03))
+add(fx, S["s7"] + 2.55, paper(0.04, 0.5))
 
 # scene 8: reply sent, Dev reacts
-add(fx, S["s8"] + 0.52, glass(midi(81), 0.03)); add(fx, S["s8"] + 0.55, glass(midi(84), 0.025))
+add(fx, S["s8"] + 0.52, glass(midi(81), 0.03)); add(fx, S["s8"] + 0.55, glass(midi(85), 0.025))
 add(fx, S["s8"] + 2.15, felt(0.04))
 
 fx_st = reverb(fx, mix=0.22, decay=1.4)
@@ -302,7 +305,6 @@ def write(path, st):
 here = os.path.dirname(os.path.abspath(__file__))
 out = os.path.join(here, "..", "assets", "audio")
 os.makedirs(out, exist_ok=True)
-if os.environ.get("SYNTH_MUSIC"):
-    write(os.path.join(out, "score.wav"), mus_st)
+write(os.path.join(out, "score.wav"), mus_st)
 write(os.path.join(out, "fx.wav"), fx_st)
 print("ok")

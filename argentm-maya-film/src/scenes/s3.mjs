@@ -76,10 +76,10 @@ ${rowsHTML}
   js: `
 // the document settles into the source pane while the app builds around it
 tl.fromTo('#${p}-win', { opacity: 0, scale: 1.03 }, { opacity: 1, scale: 1, duration: 0.7, ease: 'power3.out' }, 0.3);
-tl.fromTo('#${p}-pdf', { x: 0, y: 0, scale: 1 }, { x: 150 - 700, y: 300 - 150, scale: 0.6, duration: 0.85, ease: 'power3.inOut' }, 0.15);
+tl.fromTo('#${p}-pdf', { x: 0, y: 0, scale: 1 }, { x: 150 - 700, y: 336 - 150, scale: 0.6, duration: 0.85, ease: 'power3.inOut' }, 0.15);
 tl.fromTo('#${p}-thead', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.9);
 // raw lines lift off the page into the table
-${ROWS.map((r, i) => `tl.fromTo('#${p}-raw${i}', { opacity: 0, x: ${150 + 20 - TX}, y: ${300 + 190 + i * 14 - (TY + i * RH)}, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, ${(1.0 + i * 0.07).toFixed(2)});`).join("\n")}
+${ROWS.map((r, i) => `tl.fromTo('#${p}-raw${i}', { opacity: 0, x: ${150 + 20 - TX}, y: ${336 + 190 + i * 14 - (TY + i * RH)}, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, ${(1.0 + i * 0.07).toFixed(2)});`).join("\n")}
 tl.fromTo('#${p}-total', { opacity: 0, y: -380 }, { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out' }, 1.6);
 // the reading pass
 tl.fromTo('#${p}-scan', { opacity: 0, y: ${TY - 6} }, { opacity: 1, y: ${TY - 6}, duration: 0.2 }, 2.1);
@@ -98,8 +98,8 @@ tl.fromTo('#${p}-count', { opacity: 1 }, { opacity: 1, duration: 0.01, onComplet
 tl.fromTo('#${p}-sumchip', { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.35, ease: 'expo.out' }, 4.25);
 tl.fromTo('#${p}-bankbox', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, 4.4);
 tl.fromTo('#${p}-dock', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.5);
-tl.to('#${p}-total', { x: 1150 - ${TX}, y: ${290 + 25 - totY}, opacity: 0, duration: 0.7, ease: 'power3.inOut' }, 4.75);
-tl.fromTo('#${p}-dtotal', { opacity: 0, y: 60, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'expo.out' }, 5.05);
+tl.to('#${p}-total', { opacity: 0, scale: 0.98, duration: 0.22, ease: 'power2.in' }, 4.75);
+tl.fromTo('#${p}-dtotal', { opacity: 0, y: ${totY - 290}, scale: 0.92 }, { keyframes: [{ opacity: 1, duration: 0.12 }, { y: 0, scale: 1, duration: 0.6, ease: 'power3.inOut' }] }, 4.8);
 tl.to('#${p}-sumchip', { opacity: 0, duration: 0.2 }, 4.7);
 tl.to('#${p}-dock', { opacity: 0, duration: 0.3 }, 5.4);
 // titles

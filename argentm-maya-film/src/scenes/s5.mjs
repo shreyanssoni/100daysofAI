@@ -17,7 +17,6 @@ const label = (id, txt, cls = "chip-bronze") => `<div id="${id}" class="abs" sty
 // Beat A data
 const A = [["INV-55141", "HX-1001", "$12,230.40"], ["INV-55188", "HX-1002", "$4,165.00"], ["INV-55167", "HX-1003", "$2,906.10"], ["INV-55172", "HX-1001", "$1,418.00"]];
 const AY = (i) => 370 + i * 108;
-const SHUF = [2, 0, 3, 1]; // ERP card i starts at slot SHUF[i]
 
 const LOG = [
   ["✓ 59 invoices matched", "chip-bronze"],
@@ -53,7 +52,7 @@ export default {
     ${A.map((a, i) => `<path id="${p}-al${i}" d="M800 ${AY(i) + 43} L1120 ${AY(i) + 43}" stroke="${C.bronze}" stroke-width="2.5" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`).join("")}
   </svg>
   ${A.map((a, i) => row(`${p}-ar${i}`, 260, AY(i), a[0], a[1], a[2])).join("")}
-  ${A.map((a, i) => row(`${p}-ae${i}`, 1120, AY(SHUF[i]), a[0], a[1], "", { tail: `<span id="${p}-as${i}" class="chip chip-grey" style="font-size:17px">Open</span><span id="${p}-ak${i}" class="chip chip-bronze" style="font-size:17px;position:absolute;right:24px;opacity:0">${check(C.bronzeD, 18)}Matched</span>` })).join("")}
+  ${A.map((a, i) => row(`${p}-ae${i}`, 1120, AY(i), a[0], a[1], "", { tail: `<span id="${p}-as${i}" class="chip chip-grey" style="font-size:17px">Open</span><span id="${p}-ak${i}" class="chip chip-bronze" style="font-size:17px;position:absolute;right:24px;opacity:0">${check(C.bronzeD, 18)}Matched</span>` })).join("")}
   ${label(`${p}-aL`, "Matched across related accounts")}
 </div>
 ${ruleBar(`${p}-aR`, "invoice no. + amount", "remittance lines 1–59")}
@@ -62,7 +61,7 @@ ${ruleBar(`${p}-aR`, "invoice no. + amount", "remittance lines 1–59")}
 <div id="${p}-B" class="card" style="left:500px;top:350px;width:920px;height:420px;padding:34px 40px;opacity:0">
   <div style="display:flex;align-items:center;gap:14px"><span style="font-size:36px;font-weight:700">INV-55188</span><span class="chip chip-white" style="font-size:18px">HX-1002</span><span class="chip chip-blue" style="font-size:18px;margin-left:auto">Terms 2/10 net 30 · paid in 8 days</span></div>
   <div style="margin-top:34px;font-size:28px;display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #F0EAE0"><span style="color:${C.ink2}">Gross</span><span class="num" style="font-weight:700">$4,250.00</span></div>
-  <div style="font-size:28px;display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #F0EAE0"><span style="color:${C.ink2}">Early-payment discount · 2%</span><span id="${p}-bslot" style="width:230px;height:46px;border-radius:10px;border:2px dashed ${C.line}"></span></div>
+  <div style="font-size:28px;display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #F0EAE0"><span style="color:${C.ink2}">Early-payment discount · 2%</span><span id="${p}-bslot" style="width:230px;height:46px;border-radius:10px;border:2px dashed ${C.line};display:inline-flex;align-items:center;justify-content:center"><span id="${p}-bslotT" class="num" style="font-size:22px;font-weight:700;color:${C.bronze};opacity:0">−$85.00</span></span></div>
   <div style="font-size:28px;display:flex;justify-content:space-between;padding:14px 0"><span style="color:${C.ink2}">Net paid</span><span class="num" style="font-weight:700">$4,165.00</span></div>
 </div>
 <div id="${p}-bcol" class="card" style="left:1500px;top:430px;width:300px;padding:22px 24px;opacity:0"><div class="label">Discounts</div><div style="height:58px"></div><div style="font-size:17px;color:${C.ink2}">Booked to 4910 · Sales discounts</div></div>
@@ -133,8 +132,8 @@ revealWords(tl, '.${p}-w2', 6.6, 0.1);
 // ---- A: invoice matching (0.3 – 2.7)
 tl.fromTo('.${p}-col', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.3);
 ${A.map((a, i) => `tl.fromTo('#${p}-ar${i}', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, ${(0.3 + i * 0.06).toFixed(2)});
-tl.fromTo('#${p}-ae${i}', { opacity: 0, x: 60 }, { opacity: 0.85, x: 30, duration: 0.5, ease: 'expo.out' }, ${(0.45 + i * 0.06).toFixed(2)});
-tl.to('#${p}-ae${i}', { y: ${AY(i) - AY(SHUF[i])}, x: 0, opacity: 1, duration: 0.6, ease: 'power3.inOut' }, ${(1.0 + i * 0.06).toFixed(2)});
+tl.fromTo('#${p}-ae${i}', { opacity: 0, x: 220, y: ${[-8, 10, -6, 8][i]} }, { opacity: 0.85, x: 150, y: ${[-8, 10, -6, 8][i]}, duration: 0.5, ease: 'expo.out' }, ${(0.45 + i * 0.06).toFixed(2)});
+tl.to('#${p}-ae${i}', { y: 0, x: 0, opacity: 1, duration: 0.6, ease: 'power3.inOut' }, ${(1.0 + i * 0.06).toFixed(2)});
 tl.to('#${p}-al${i}', { strokeDashoffset: 0, duration: 0.35, ease: 'power2.out' }, ${(1.5 + i * 0.07).toFixed(2)});
 tl.to('#${p}-as${i}', { opacity: 0, duration: 0.15 }, ${(1.75 + i * 0.07).toFixed(2)});
 pop('#${p}-ak${i}', ${(1.75 + i * 0.07).toFixed(2)});`).join("\n")}
@@ -150,6 +149,7 @@ inOut('#${p}-bR', 2.95, 4.65);
 tl.fromTo('#${p}-bcol', { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.4, ease: 'expo.out' }, 3.45);
 tl.to('#${p}-bstrip', { x: 1524 - 1150, y: 478 - 540, scale: 0.9, transformOrigin: '0 0', duration: 0.6, ease: 'power3.inOut' }, 3.65);
 inOut('#${p}-bL', 3.95, 4.65);
+tl.fromTo('#${p}-bslotT', { opacity: 0 }, { opacity: 0.7, duration: 0.3 }, 4.1);
 pop('#${p}-lg1', 4.3);
 tl.to('#${p}-B, #${p}-bstrip, #${p}-bcol', { opacity: 0, y: -30, duration: 0.25, ease: 'power3.in' }, 4.65);
 
@@ -160,8 +160,8 @@ inOut('#${p}-cR', 5.0, 6.85);
 tl.fromTo('#${p}-C', { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'expo.out' }, 5.2);
 tl.to('#${p}-c1', { x: 936 - 200, y: 480 - 420, scale: 0.9, transformOrigin: '0 0', duration: 0.55, ease: 'power3.inOut' }, 5.35);
 tl.to('#${p}-c2', { x: 936 - 200, y: 576 - 530, scale: 0.9, transformOrigin: '0 0', duration: 0.55, ease: 'power3.inOut' }, 5.42);
-tl.to('#${p}-ch1', { opacity: 0, duration: 0.2 }, 6.05);
-tl.fromTo('#${p}-ch2', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out' }, 6.1);
+tl.to('#${p}-ch1', { opacity: 0, y: -8, duration: 0.15, ease: 'power2.in' }, 6.0);
+tl.fromTo('#${p}-ch2', { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out' }, 6.17);
 tl.fromTo('#${p}-C', { borderColor: '${C.redL}' }, { borderColor: '${C.amber}', duration: 0.3 }, 6.05);
 pop('#${p}-cbadge', 6.25);
 inOut('#${p}-cL', 5.9, 6.85);

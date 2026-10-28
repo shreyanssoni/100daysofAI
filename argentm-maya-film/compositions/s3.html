@@ -12,7 +12,7 @@
 .t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:#6B665E}
 .w{display:inline-block;white-space:pre}
 .card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:20px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 6px 14px rgba(70,50,30,.05),0 28px 60px rgba(70,50,30,.10)}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;letter-spacing:-.005em;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.005em;white-space:nowrap;vertical-align:middle}
 .chip-blue{background:#E3EBF3;color:#3F6489}
 .chip-amber{background:#F6EAD0;color:#8E6A22}
 .chip-red{background:#F3E0DC;color:#9A4E47}
@@ -40,7 +40,7 @@
 .a-sub{font-size:15px;color:#6B665E}
 .a-card{background:#fff;border:1px solid #ECE5D9;border-radius:14px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 8px 20px rgba(70,50,30,.06)}
 .a-row{display:flex;align-items:center;font-size:15px;padding:12px 18px;border-top:1px solid #F0EAE0}
-.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;line-height:1.2;white-space:nowrap;display:inline-block}
 
 
 #s3-pdf{left:700px;top:150px;width:480px;height:800px;transform-origin:0 0}
@@ -154,17 +154,17 @@ const tl = gsap.timeline({ paused: true });
 
 // the document settles into the source pane while the app builds around it
 tl.fromTo('#s3-win', { opacity: 0, scale: 1.03 }, { opacity: 1, scale: 1, duration: 0.7, ease: 'power3.out' }, 0.3);
-tl.fromTo('#s3-pdf', { x: 0, y: 0, scale: 1 }, { x: 150 - 700, y: 300 - 150, scale: 0.6, duration: 0.85, ease: 'power3.inOut' }, 0.15);
+tl.fromTo('#s3-pdf', { x: 0, y: 0, scale: 1 }, { x: 150 - 700, y: 336 - 150, scale: 0.6, duration: 0.85, ease: 'power3.inOut' }, 0.15);
 tl.fromTo('#s3-thead', { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.9);
 // raw lines lift off the page into the table
-tl.fromTo('#s3-raw0', { opacity: 0, x: -350, y: 20, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.00);
-tl.fromTo('#s3-raw1', { opacity: 0, x: -350, y: -22, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.07);
-tl.fromTo('#s3-raw2', { opacity: 0, x: -350, y: -64, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.14);
-tl.fromTo('#s3-raw3', { opacity: 0, x: -350, y: -106, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.21);
-tl.fromTo('#s3-raw4', { opacity: 0, x: -350, y: -148, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.28);
-tl.fromTo('#s3-raw5', { opacity: 0, x: -350, y: -190, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.35);
-tl.fromTo('#s3-raw6', { opacity: 0, x: -350, y: -232, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.42);
-tl.fromTo('#s3-raw7', { opacity: 0, x: -350, y: -274, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.49);
+tl.fromTo('#s3-raw0', { opacity: 0, x: -350, y: 56, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.00);
+tl.fromTo('#s3-raw1', { opacity: 0, x: -350, y: 14, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.07);
+tl.fromTo('#s3-raw2', { opacity: 0, x: -350, y: -28, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.14);
+tl.fromTo('#s3-raw3', { opacity: 0, x: -350, y: -70, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.21);
+tl.fromTo('#s3-raw4', { opacity: 0, x: -350, y: -112, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.28);
+tl.fromTo('#s3-raw5', { opacity: 0, x: -350, y: -154, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.35);
+tl.fromTo('#s3-raw6', { opacity: 0, x: -350, y: -196, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.42);
+tl.fromTo('#s3-raw7', { opacity: 0, x: -350, y: -238, scale: 0.55, transformOrigin: '0 0' }, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.7, ease: 'expo.out' }, 1.49);
 tl.fromTo('#s3-total', { opacity: 0, y: -380 }, { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out' }, 1.6);
 // the reading pass
 tl.fromTo('#s3-scan', { opacity: 0, y: 464 }, { opacity: 1, y: 464, duration: 0.2 }, 2.1);
@@ -194,8 +194,8 @@ tl.fromTo('#s3-count', { opacity: 1 }, { opacity: 1, duration: 0.01, onComplete:
 tl.fromTo('#s3-sumchip', { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.35, ease: 'expo.out' }, 4.25);
 tl.fromTo('#s3-bankbox', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out' }, 4.4);
 tl.fromTo('#s3-dock', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.5);
-tl.to('#s3-total', { x: 1150 - 520, y: -611, opacity: 0, duration: 0.7, ease: 'power3.inOut' }, 4.75);
-tl.fromTo('#s3-dtotal', { opacity: 0, y: 60, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'expo.out' }, 5.05);
+tl.to('#s3-total', { opacity: 0, scale: 0.98, duration: 0.22, ease: 'power2.in' }, 4.75);
+tl.fromTo('#s3-dtotal', { opacity: 0, y: 636, scale: 0.92 }, { keyframes: [{ opacity: 1, duration: 0.12 }, { y: 0, scale: 1, duration: 0.6, ease: 'power3.inOut' }] }, 4.8);
 tl.to('#s3-sumchip', { opacity: 0, duration: 0.2 }, 4.7);
 tl.to('#s3-dock', { opacity: 0, duration: 0.3 }, 5.4);
 // titles

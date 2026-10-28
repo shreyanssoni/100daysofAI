@@ -46,7 +46,7 @@ export const CSS = `
 .t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:${C.ink2}}
 .w{display:inline-block;white-space:pre}
 .card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:20px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 6px 14px rgba(70,50,30,.05),0 28px 60px rgba(70,50,30,.10)}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;letter-spacing:-.005em;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.005em;white-space:nowrap;vertical-align:middle}
 .chip-blue{background:${C.blueL};color:${C.blueD}}
 .chip-amber{background:${C.amberL};color:${C.amberD}}
 .chip-red{background:${C.redL};color:${C.redD}}
@@ -74,7 +74,7 @@ export const CSS = `
 .a-sub{font-size:15px;color:${C.ink2}}
 .a-card{background:#fff;border:1px solid #ECE5D9;border-radius:14px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 8px 20px rgba(70,50,30,.06)}
 .a-row{display:flex;align-items:center;font-size:15px;padding:12px 18px;border-top:1px solid #F0EAE0}
-.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;line-height:1.2;white-space:nowrap;display:inline-block}
 `;
 
 // ---------- small pieces ----------
@@ -359,7 +359,7 @@ const poseBack = (o) => {
   setO('${p}-mb', o.op ?? 1);
   setT('${p}-mb-up', 'translate(0 ' + (88*sit + (o.bob ?? 0)).toFixed(2) + ') rotate(' + (o.lean ?? 0) + ' 0 -165)');
   setT('${p}-mb-legs', 'translate(0 ' + (40*sit).toFixed(2) + ') scale(1 ' + (1 - 0.55*sit).toFixed(3) + ')');
-  setO('${p}-mb-legs', 1 - sit*0.98);
+  setO('${p}-mb-legs', Math.max(0, 1 - sit*2.6));
   rot('${p}-mb-armL', o.armL ?? 4, -34, -294);
   rot('${p}-mb-foreL', o.foreL ?? 0, -34, -229);
   rot('${p}-mb-armR', o.armR ?? -4, 34, -294);
@@ -427,3 +427,10 @@ export const remitPDF = (p) => `
   <div style="font-size:12.5px;color:#A39C92;padding:8px 0">… 56 more lines</div>
   <div class="${p}-ptotal" style="font-size:15px;display:flex;padding:9px 0;border-top:1.5px solid #D9D2C6;color:${C.ink};font-weight:600"><span style="flex:1">TOTAL</span><span style="text-align:right">48,612.40</span></div>
 </div>`;
+
+// ---------- small line icons for sources (no brand marks) ----------
+export const icon = {
+  bank: (s = 24, c = "currentColor") => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="M3 9.5 L12 4 L21 9.5 Z" fill="${c}"/><rect x="5" y="11" width="2.6" height="6.5" rx=".6" fill="${c}"/><rect x="10.7" y="11" width="2.6" height="6.5" rx=".6" fill="${c}"/><rect x="16.4" y="11" width="2.6" height="6.5" rx=".6" fill="${c}"/><rect x="3" y="18.6" width="18" height="2.2" rx=".8" fill="${c}"/></svg>`,
+  mail: (s = 24, c = "currentColor") => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2.2" stroke="${c}" stroke-width="2"/><path d="M3.5 7 L12 13 L20.5 7" stroke="${c}" stroke-width="2" stroke-linejoin="round"/></svg>`,
+  erp: (s = 24, c = "currentColor") => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="${c}" stroke-width="2"/><path d="M4 6 V18 C4 19.7 7.6 21 12 21 C16.4 21 20 19.7 20 18 V6 M4 12 C4 13.7 7.6 15 12 15 C16.4 15 20 13.7 20 12" stroke="${c}" stroke-width="2"/></svg>`,
+};

@@ -12,7 +12,7 @@
 .t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:#6B665E}
 .w{display:inline-block;white-space:pre}
 .card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:20px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 6px 14px rgba(70,50,30,.05),0 28px 60px rgba(70,50,30,.10)}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;letter-spacing:-.005em;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.005em;white-space:nowrap;vertical-align:middle}
 .chip-blue{background:#E3EBF3;color:#3F6489}
 .chip-amber{background:#F6EAD0;color:#8E6A22}
 .chip-red{background:#F3E0DC;color:#9A4E47}
@@ -40,7 +40,7 @@
 .a-sub{font-size:15px;color:#6B665E}
 .a-card{background:#fff;border:1px solid #ECE5D9;border-radius:14px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 8px 20px rgba(70,50,30,.06)}
 .a-row{display:flex;align-items:center;font-size:15px;padding:12px 18px;border-top:1px solid #F0EAE0}
-.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;line-height:1.2;white-space:nowrap;display:inline-block}
 
 
 
@@ -344,7 +344,7 @@
   <div id="s8-line" class="abs">Complex cash. <span class="serif" style="color:#A9773F;font-size:1.1em">Clear decisions.</span></div>
   <div id="s8-tag" class="abs">argentm.ai · Finance AI for FinOps</div>
   <div id="s8-cta" class="abs"><div class="btn btn-bronze" style="height:84px;padding:0 54px;font-size:32px">Book a demo</div></div>
-  <div id="s8-note" class="abs">Product data, customers and metrics shown are illustrative. · Music: “Awanee” by Blue Dot Sessions (CC BY 3.0)</div>
+  <div id="s8-note" class="abs">Product data, customers and metrics shown are illustrative.</div>
 </div>
 
 </div>
@@ -393,7 +393,7 @@ const poseBack = (o) => {
   setO('s8-mb', o.op ?? 1);
   setT('s8-mb-up', 'translate(0 ' + (88*sit + (o.bob ?? 0)).toFixed(2) + ') rotate(' + (o.lean ?? 0) + ' 0 -165)');
   setT('s8-mb-legs', 'translate(0 ' + (40*sit).toFixed(2) + ') scale(1 ' + (1 - 0.55*sit).toFixed(3) + ')');
-  setO('s8-mb-legs', 1 - sit*0.98);
+  setO('s8-mb-legs', Math.max(0, 1 - sit*2.6));
   rot('s8-mb-armL', o.armL ?? 4, -34, -294);
   rot('s8-mb-foreL', o.foreL ?? 0, -34, -229);
   rot('s8-mb-armR', o.armR ?? -4, 34, -294);

@@ -12,7 +12,7 @@
 .t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:#6B665E}
 .w{display:inline-block;white-space:pre}
 .card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:20px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 6px 14px rgba(70,50,30,.05),0 28px 60px rgba(70,50,30,.10)}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;letter-spacing:-.005em;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.005em;white-space:nowrap;vertical-align:middle}
 .chip-blue{background:#E3EBF3;color:#3F6489}
 .chip-amber{background:#F6EAD0;color:#8E6A22}
 .chip-red{background:#F3E0DC;color:#9A4E47}
@@ -40,13 +40,14 @@
 .a-sub{font-size:15px;color:#6B665E}
 .a-card{background:#fff;border:1px solid #ECE5D9;border-radius:14px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 8px 20px rgba(70,50,30,.06)}
 .a-row{display:flex;align-items:center;font-size:15px;padding:12px 18px;border-top:1px solid #F0EAE0}
-.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;line-height:1.2;white-space:nowrap;display:inline-block}
 
 
 
 #s4-screen{left:1180px;top:452px;width:222px;height:125px;overflow:hidden;background:#FBF9F5}
 #s4-screen .app{transform:scale(0.1734375)}
-#s4-map{transform-origin:0 0;background:var(--ground)}
+#s4-map{transform-origin:0 0}
+#s4-mapbg{background:var(--ground)}
 #s4-world{opacity:0}
 #s4-face{opacity:0}
 #s4-match{opacity:0;background:var(--ground)}
@@ -322,13 +323,14 @@
   </g>
 </svg>
 </div>
+<div id="s4-mapbg" class="full"></div>
 <div id="s4-map" class="full">
   <svg class="full" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0">
     <path id="s4-ln1" d="M630 620 L790 620" stroke="#A9773F" stroke-width="3" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
     <path id="s4-ln2" d="M1130 620 L1290 620" stroke="#A9773F" stroke-width="3" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
     <path id="s4-tree" d="M960 430 V475 M590 475 H1330 M590 475 V520 M960 475 V520 M1330 475 V520" stroke="#A9773F" stroke-width="3" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
   </svg>
-  <div id="s4-why" class="abs" style="left:960px;top:566px;transform:translateX(-50%);opacity:0"><span class="chip chip-blue" style="font-size:18px">Same parent · same remit-to address</span></div>
+  <div id="s4-why" class="abs" style="left:960px;top:744px;transform:translateX(-50%);opacity:0"><span class="chip chip-blue" style="font-size:18px">Same parent · same remit-to address</span></div>
   
 <div id="s4-c0" class="card" style="left:290px;top:520px;width:340px;height:200px;padding:26px 28px">
   <div style="font-size:40px;font-weight:700;letter-spacing:-.02em">HX-1001</div>
@@ -503,7 +505,7 @@ const poseBack = (o) => {
   setO('s4-mb', o.op ?? 1);
   setT('s4-mb-up', 'translate(0 ' + (88*sit + (o.bob ?? 0)).toFixed(2) + ') rotate(' + (o.lean ?? 0) + ' 0 -165)');
   setT('s4-mb-legs', 'translate(0 ' + (40*sit).toFixed(2) + ') scale(1 ' + (1 - 0.55*sit).toFixed(3) + ')');
-  setO('s4-mb-legs', 1 - sit*0.98);
+  setO('s4-mb-legs', Math.max(0, 1 - sit*2.6));
   rot('s4-mb-armL', o.armL ?? 4, -34, -294);
   rot('s4-mb-foreL', o.foreL ?? 0, -34, -229);
   rot('s4-mb-armR', o.armR ?? -4, 34, -294);
@@ -543,7 +545,8 @@ revealWords(tl, '.s4-w1', 0.5);
 revealWords(tl, '.s4-w2', 2.35, 0.1);
 hideWords(tl, '.s4-w1, .s4-w2', 3.15, 0.02);
 // pull back: the picture is on Maya's monitor
-tl.fromTo('#s4-world', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.35);
+tl.fromTo('#s4-world', { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.3);
+tl.to('#s4-mapbg', { opacity: 0, duration: 0.3 }, 3.3);
 tl.fromTo('#s4-map', { scale: 1, x: 0, y: 0 }, { scale: 721.5 / 1920, x: 784.5, y: 260.5, duration: 0.6, ease: 'power3.inOut' }, 3.3);
 tl.to('#s4-map', { opacity: 0, duration: 0.25 }, 3.85);
 // recognition, close

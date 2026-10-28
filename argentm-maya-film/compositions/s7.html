@@ -12,7 +12,7 @@
 .t-sub{position:absolute;font-weight:400;font-size:40px;line-height:1.15;letter-spacing:-.02em;color:#6B665E}
 .w{display:inline-block;white-space:pre}
 .card{position:absolute;background:#fff;border:1px solid #EAE3D7;border-radius:20px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 6px 14px rgba(70,50,30,.05),0 28px 60px rgba(70,50,30,.10)}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;letter-spacing:-.005em;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.005em;white-space:nowrap;vertical-align:middle}
 .chip-blue{background:#E3EBF3;color:#3F6489}
 .chip-amber{background:#F6EAD0;color:#8E6A22}
 .chip-red{background:#F3E0DC;color:#9A4E47}
@@ -40,7 +40,7 @@
 .a-sub{font-size:15px;color:#6B665E}
 .a-card{background:#fff;border:1px solid #ECE5D9;border-radius:14px;box-shadow:0 1px 2px rgba(70,50,30,.05),0 8px 20px rgba(70,50,30,.06)}
 .a-row{display:flex;align-items:center;font-size:15px;padding:12px 18px;border-top:1px solid #F0EAE0}
-.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+.a-pill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;line-height:1.2;white-space:nowrap;display:inline-block}
 
 
 
@@ -392,7 +392,7 @@ const poseBack = (o) => {
   setO('s7-mb', o.op ?? 1);
   setT('s7-mb-up', 'translate(0 ' + (88*sit + (o.bob ?? 0)).toFixed(2) + ') rotate(' + (o.lean ?? 0) + ' 0 -165)');
   setT('s7-mb-legs', 'translate(0 ' + (40*sit).toFixed(2) + ') scale(1 ' + (1 - 0.55*sit).toFixed(3) + ')');
-  setO('s7-mb-legs', 1 - sit*0.98);
+  setO('s7-mb-legs', Math.max(0, 1 - sit*2.6));
   rot('s7-mb-armL', o.armL ?? 4, -34, -294);
   rot('s7-mb-foreL', o.foreL ?? 0, -34, -229);
   rot('s7-mb-armR', o.armR ?? -4, 34, -294);
@@ -414,8 +414,8 @@ drive(tl, 4.6, (t) => {
   cam(key(t, [[1.2, 1.55], [4.6, 1.5]]), 1380, 520);
 });
 // close on the button
-tl.fromTo('#s7-zoom', { scale: 1.55, x: -1540 * 0.55 + 0, y: -820 * 0.55 }, { scale: 1.3, x: -1540 * 0.3, y: -820 * 0.3, duration: 1.0, ease: 'power2.out' }, 0);
-tl.fromTo('#s7-cur', { x: 1700, y: 1150, opacity: 1 }, { x: 1400, y: 760, duration: 0.65, ease: 'power3.out' }, 0.1);
+tl.fromTo('#s7-zoom', { scale: 1.55, x: 960 - 1440 * 1.55, y: 540 - 750 * 1.55 }, { scale: 1.45, x: 960 - 1430 * 1.45, y: 540 - 740 * 1.45, duration: 0.75, ease: 'power2.out' }, 0);
+tl.fromTo('#s7-cur', { x: 1700, y: 1150, opacity: 1 }, { x: 822, y: 604, duration: 0.6, ease: 'power3.out' }, 0.15);
 tl.to('#s7-cur', { scale: 0.86, transformOrigin: '10px 6px', duration: 0.07, yoyo: true, repeat: 1 }, 0.8);
 tl.to('#s7-apply', { scale: 0.95, duration: 0.08, yoyo: true, repeat: 1, ease: 'power2.out' }, 0.8);
 tl.to('#s7-albl', { opacity: 0, duration: 0.1 }, 0.9);
