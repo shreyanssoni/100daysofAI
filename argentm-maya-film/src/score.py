@@ -216,6 +216,15 @@ def _ramp(a, b):
     return np.clip((t_all - a) / (b - a), 0, 1)
 _d0, _d1 = S["s4"] + 3.75, S["s4"] + 12.7
 mus *= 1 - (1 - 10 ** (-9 / 20)) * (_ramp(_d0, _d0 + 0.35) - _ramp(_d1, _d1 + 0.6))
+# Voice-over cut: duck the music under each narrator line (windows from src/vo-narration.json)
+VO_MIX = None
+_nj = os.path.join(_here, "vo-narration.json")
+if os.path.exists(_nj):
+    _w = json.load(open(_nj))["windows"]
+    g = np.ones(N)
+    for a, b in _w:
+        g = np.minimum(g, 1 - (1 - 10 ** (-7 / 20)) * (_ramp(a - 0.25, a) - _ramp(b, b + 0.4)))
+    VO_MIX = mus * g
 mus_st = reverb(mus, mix=0.32, decay=2.6)
 
 # ---------------- foley / ui fx ----------------
@@ -312,4 +321,6 @@ out = os.path.join(here, "..", "assets", "audio")
 os.makedirs(out, exist_ok=True)
 write(os.path.join(out, "score.wav"), mus_st)
 write(os.path.join(out, "fx.wav"), fx_st)
+if VO_MIX is not None:
+    write(os.path.join(out, "score-vo.wav"), reverb(VO_MIX, mix=0.32, decay=2.6))
 print("ok")
