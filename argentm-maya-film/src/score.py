@@ -223,8 +223,8 @@ if os.path.exists(_nj):
     _w = json.load(open(_nj))["windows"]
     g = np.ones(N)
     for a, b in _w:
-        g = np.minimum(g, 1 - (1 - 10 ** (-7 / 20)) * (_ramp(a - 0.25, a) - _ramp(b, b + 0.4)))
-    VO_MIX = mus * g
+        g = np.minimum(g, 1 - (1 - 10 ** (-14 / 20)) * (_ramp(a - 0.25, a) - _ramp(b, b + 0.4)))
+    VO_MIX = mus * g * 10 ** (-4 / 20)  # whole bed sits lower in this cut
 mus_st = reverb(mus, mix=0.32, decay=2.6)
 
 # ---------------- foley / ui fx ----------------
