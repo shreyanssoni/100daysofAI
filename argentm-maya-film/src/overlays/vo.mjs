@@ -10,13 +10,13 @@ const ENV = JSON.parse(fs.readFileSync(path.join(here, "vo-env.json"), "utf8"));
 const p = "vo";
 // local timings (seconds from overlay start)
 const M0 = 0.05, A0 = 1.9; // Maya's line, AI's line
-const PHR = [[0, 1.41], [1.59, 3.4], [3.77, 4.92], [5.3, 6.47]].map(([a, b]) => [A0 + a, A0 + b]);
+const PHR = [[0, 1.46], [1.57, 3.47], [3.79, 5.07], [5.35, 6.82]].map(([a, b]) => [A0 + a, A0 + b]);
 const bars = (cls, n) => Array.from({ length: n }, (_, i) => `<i class="${cls}" style="display:block;width:4px;height:30px;border-radius:2px;transform-origin:50% 50%"></i>`).join("");
 
 export default {
   id: p,
   at: { scene: "s4", t: 3.9 },
-  dur: 8.7,
+  dur: 8.95,
   css: `
 #root{background:transparent}
 .${p}-pill{position:absolute;left:960px;top:888px;transform:translateX(-50%);display:flex;align-items:center;gap:16px;padding:12px 24px 12px 14px;background:rgba(255,255,255,.96);border:1px solid #EAE3D7;border-radius:999px;box-shadow:0 2px 6px rgba(70,50,30,.08),0 18px 40px rgba(70,50,30,.14);white-space:nowrap;opacity:0}
@@ -41,7 +41,7 @@ const EM = ${JSON.stringify(ENV.maya)}, EA = ${JSON.stringify(ENV.ai)};
 const envAt = (E, t) => { const i = Math.floor(t * 30); return i >= 0 && i < E.length ? E[i] : 0; };
 const mb = [...document.querySelectorAll('.${p}-mb')], ab = [...document.querySelectorAll('.${p}-ab')];
 const shapeM = [0.55, 0.85, 1, 0.8, 0.5], shapeA = [0.35, 0.6, 0.85, 1, 0.9, 1, 0.8, 0.6, 0.35];
-drive(tl, ${8.7}, (t) => {
+drive(tl, ${8.95}, (t) => {
   mb.forEach((b, i) => { const v = envAt(EM, t - ${M0} - i * 0.025); b.style.transform = 'scaleY(' + (0.16 + 0.84 * v * shapeM[i]).toFixed(3) + ')'; b.style.background = '${C.ink2}'; });
   ab.forEach((b, i) => { const v = envAt(EA, t - ${A0} - Math.abs(i - 4) * 0.02); b.style.transform = 'scaleY(' + (0.12 + 0.88 * v * shapeA[i]).toFixed(3) + ')'; b.style.background = '${C.bronze}'; });
 });
@@ -49,6 +49,6 @@ tl.fromTo('#${p}-m', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35, 
 tl.to('#${p}-m', { opacity: 0, y: -8, duration: 0.2, ease: 'power2.in' }, 1.72);
 tl.fromTo('#${p}-a', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35, ease: 'expo.out' }, 1.8);
 ${PHR.map(([a], i) => `tl.fromTo('#${p}-s${i}', { color: '#BDB5A9' }, { color: '${i === 3 ? C.bronzeD : C.ink}', duration: 0.25 }, ${a.toFixed(2)});`).join("\n")}
-tl.to('#${p}-a', { opacity: 0, y: -8, duration: 0.25, ease: 'power2.in' }, 8.42);
+tl.to('#${p}-a', { opacity: 0, y: -8, duration: 0.25, ease: 'power2.in' }, 8.72);
 `,
 };
