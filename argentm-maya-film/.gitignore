@@ -1,3 +1,6 @@
 .hyperframes/
 render.log
 node_modules/
+renders/work-*/
+renders/.*hf-transaction*/
+renders/_raw*.mp4
