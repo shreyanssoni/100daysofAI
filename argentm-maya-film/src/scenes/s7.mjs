@@ -18,7 +18,7 @@ const posted = appShell("Posting & Audit", `
 // world-space records that fly from the monitor to the shelf
 const DOCS = [[1508, 318], [1544, 318], [1580, 468], [1616, 468], [1652, 618], [1688, 618]];
 const docs = DOCS.map((d, i) => `<div id="${p}-d${i}" class="abs" style="left:0;top:0;width:24px;height:30px;border-radius:3px;background:${C.bronzeL};border:1.5px solid ${C.bronze};opacity:0"><div style="margin:6px 4px 0;height:2.5px;background:${C.bronze};opacity:.6"></div><div style="margin:3px 4px 0;height:2.5px;background:${C.bronze};opacity:.4"></div></div>`).join("");
-const amber = `<div id="${p}-amber" class="abs" style="left:1410px;top:468px;width:58px;height:34px;border-radius:5px;background:${C.amberL};border:1.5px solid ${C.amber};font:700 8.5px Inter;color:${C.amberD};padding:4px 5px;line-height:1.25;opacity:0">INV-55203<br>$118.40 open</div>`;
+const amber = `<div id="${p}-amber" class="abs" style="left:1409px;top:446px;width:68px;padding:5px 6px;border-radius:6px;background:${C.amberL};border:1.5px solid ${C.amber};font:700 8px/1.35 Inter;color:${C.amberD};white-space:nowrap;box-shadow:0 3px 8px rgba(70,50,30,.15);opacity:0">INV-55203<br>$118.40 open</div>`;
 
 export default {
   id: p,

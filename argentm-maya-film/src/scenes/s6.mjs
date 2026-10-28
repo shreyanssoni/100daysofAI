@@ -5,21 +5,21 @@ const p = "s6";
 const btn = (id, txt, cls, x, y, w) => `<div id="${id}" class="btn ${cls}" style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:44px;font-size:16px">${txt}</div>`;
 const review = `
 <div style="display:flex;align-items:center;gap:12px"><div class="a-title">Needs review</div><span id="${p}-badge" style="min-width:34px;height:34px;border-radius:17px;background:${C.amber};color:#fff;font-weight:700;font-size:18px;display:inline-flex;align-items:center;justify-content:center;padding:0 10px">2</span><span id="${p}-clear" class="a-pill" style="background:#EEF2EA;color:#4F6B45;font-size:14px;opacity:0">All decisions made</span></div>
-<div class="a-sub">Remittance HX-778120 · Helix Health Distribution · 62 of 64 lines resolved automatically</div>
-<div id="${p}-k1" class="a-card" style="position:absolute;left:30px;top:110px;width:640px;height:200px;padding:20px 24px;transform-origin:0 0">
+<div class="a-sub" style="white-space:nowrap">Remittance HX-778120 · 62 of 64 lines resolved automatically</div>
+<div id="${p}-k1" class="a-card" style="position:absolute;left:30px;top:142px;width:640px;height:200px;padding:20px 24px;transform-origin:0 0">
   <span class="a-pill" style="background:${C.redL};color:${C.redD}">Chargebacks</span>
   <div style="font-size:24px;font-weight:700;margin-top:10px">Create $0 invoice for chargebacks</div>
   <div style="font-size:15px;color:${C.ink2};margin-top:6px">Offsets CB-40112 + CB-40113 · −$515.75 · Rule: chargeback handling</div>
   ${btn(p + "-approve", "Approve", "btn-bronze", 24, 132, 130)}${btn("", "Edit", "btn-ghost", 166, 132, 100)}
 </div>
-<div id="${p}-k2" class="a-card" style="position:absolute;left:30px;top:330px;width:640px;height:200px;padding:20px 24px">
+<div id="${p}-k2" class="a-card" style="position:absolute;left:30px;top:362px;width:640px;height:200px;padding:20px 24px">
   <span class="a-pill" style="background:${C.amberL};color:${C.amberD}">Short payment</span>
   <div style="font-size:24px;font-weight:700;margin-top:10px">INV-55203 — $118.40 remaining</div>
   <div style="font-size:15px;color:${C.ink2};margin-top:6px">Keep invoice open? Paid $881.60 of $1,000.00 · HX-1003</div>
   <div id="${p}-k2b">${btn(p + "-keep", "Keep open", "btn-bronze", 24, 132, 130)}${btn("", "Write off", "btn-ghost", 166, 132, 110)}</div>
   <span id="${p}-kept" class="a-pill" style="position:absolute;left:24px;top:142px;background:${C.amberL};color:${C.amberD};font-size:15px;opacity:0;border:1.5px solid ${C.amber}">Kept open · $118.40 tracked on INV-55203</span>
 </div>
-<div class="a-card" style="position:absolute;left:700px;top:110px;width:330px;height:420px;padding:18px 20px">
+<div class="a-card" style="position:absolute;left:700px;top:142px;width:330px;height:420px;padding:18px 20px">
   <div style="font-size:15px;font-weight:700;margin-bottom:12px">ERP posting queue</div>
   ${[["59 invoice applications", "$48,275.40"], ["Discounts taken", "$412.60"], ["Chargeback recovery", "$212.75"], ["Unapplied credit", "$640.00"]].map((r) => `<div style="display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;border-top:1px solid #F0EAE0"><span>${r[0]}</span><b class="num">${r[1]}</b></div>`).join("")}
   <div id="${p}-q0" style="display:flex;justify-content:space-between;font-size:13.5px;padding:9px 0;border-top:1px solid #F0EAE0;opacity:0"><span>$0 invoice · chargebacks</span><b class="num">−$515.75</b></div>
@@ -51,7 +51,7 @@ drive(tl, 7, (t) => {
   cam(s, key(t, [[0, 1234], [0.7, 1234], [1.5, 1291]]), key(t, [[0, 538], [0.7, 538], [1.5, 535]]));
 });
 // decision 1: approve the $0 invoice
-tl.fromTo('#${p}-cur', { x: 1100, y: 1000, opacity: 0 }, { x: 604, y: 302, opacity: 1, duration: 0.6, ease: 'power3.out' }, 1.65);
+tl.fromTo('#${p}-cur', { x: 1100, y: 1000, opacity: 0 }, { x: 662, y: 350, opacity: 1, duration: 0.6, ease: 'power3.out' }, 1.65);
 tl.to('#${p}-cur', { scale: 0.86, transformOrigin: '10px 6px', duration: 0.07, yoyo: true, repeat: 1 }, 2.3);
 tl.fromTo('#${p}-approve', { backgroundColor: '${C.bronze}' }, { backgroundColor: '${C.bronzeD}', duration: 0.08, yoyo: true, repeat: 1 }, 2.3);
 tl.to('#${p}-k1', { scale: 0.32, x: 690, y: 330, opacity: 0, duration: 0.6, ease: 'power3.inOut' }, 2.5);
@@ -59,7 +59,7 @@ tl.fromTo('#${p}-q0', { opacity: 0, x: -12 }, { opacity: 1, x: 0, duration: 0.35
 tl.to('#${p}-k2', { y: -220, duration: 0.5, ease: 'power3.inOut' }, 2.9);
 tl.fromTo('#${p}-badge', { scale: 1 }, { scale: 1.2, duration: 0.12, yoyo: true, repeat: 1, onStart: () => { $('#${p}-badge').textContent = '1'; }, onReverseComplete: () => { $('#${p}-badge').textContent = '2'; } }, 2.7);
 // decision 2: keep INV-55203 open
-tl.to('#${p}-cur', { x: 604, y: 311, duration: 0.5, ease: 'power3.inOut' }, 3.2);
+tl.to('#${p}-cur', { x: 662, y: 350, duration: 0.5, ease: 'power3.inOut' }, 3.2);
 tl.to('#${p}-cur', { scale: 0.86, transformOrigin: '10px 6px', duration: 0.07, yoyo: true, repeat: 1 }, 3.75);
 tl.fromTo('#${p}-keep', { backgroundColor: '${C.bronze}' }, { backgroundColor: '${C.bronzeD}', duration: 0.08, yoyo: true, repeat: 1 }, 3.75);
 tl.to('#${p}-k2b', { opacity: 0, duration: 0.15 }, 3.9);
