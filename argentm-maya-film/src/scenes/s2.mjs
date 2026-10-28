@@ -1,4 +1,4 @@
-// 0:07–0:15 — The complex payment. Dev's question; the deposit arrives from the bank, the remittance by
+// 0:07–0:15 — The complex payment. Jake's question; the deposit arrives from the bank, the remittance by
 // email; Maya opens it; the three sources sit fragmented, then gather into one workspace.
 import { C, appShell, dashContent, worldLayer, screenCSS, CAM, BACK_POSE, remitPDF, words, cursorSVG, icon } from "../shared.mjs";
 
@@ -9,8 +9,8 @@ const shadow = "box-shadow:0 2px 4px rgba(70,50,30,.08),0 14px 30px rgba(70,50,3
 const inbox = `
 <div style="position:absolute;left:680px;top:58px;width:378px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${C.ink2};display:flex;justify-content:space-between"><span>Inbox</span><span style="color:${C.bronze}">● live</span></div>
 <div id="${p}-dev" class="a-card" style="position:absolute;left:680px;top:84px;width:378px;height:124px;padding:14px 16px;display:flex;gap:12px;${shadow}">
-  <div style="width:38px;height:38px;border-radius:50%;background:${C.blueL};color:${C.blueD};font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none">DP</div>
-  <div><div style="font-size:12.5px;color:${C.ink2}"><b style="color:${C.ink}">Dev Patel</b> · Sales · now</div><div style="font-size:17px;line-height:1.35;margin-top:3px;color:${C.ink}">Helix says they <b>paid in full</b>. Can you confirm before my 10:00 call?</div></div>
+  <div style="width:38px;height:38px;border-radius:50%;background:${C.blueL};color:${C.blueD};font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none">JM</div>
+  <div><div style="font-size:12.5px;color:${C.ink2}"><b style="color:${C.ink}">Jake Miller</b> · Sales · now</div><div style="font-size:17px;line-height:1.35;margin-top:3px;color:${C.ink}">Helix says they <b>paid in full</b>. Can you confirm before my 10:00 call?</div></div>
 </div>
 <div id="${p}-toast" class="a-card" style="position:absolute;left:680px;top:220px;width:378px;height:112px;padding:14px 16px;display:flex;gap:12px;align-items:center;${shadow}">
   <div style="width:42px;height:42px;border-radius:12px;background:${C.bronzeL};color:${C.bronzeD};display:flex;align-items:center;justify-content:center;flex:none">${icon.bank(22)}</div>
@@ -109,7 +109,7 @@ const travel = (sel, pathSel, t0, dur) => {
   tl.fromTo(o, { u: 0 }, { u: 1, duration: dur, ease: 'power2.inOut', onUpdate: () => { const pt = path.getPointAtLength(o.u * L); const e = $(sel); e.style.transform = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)'; } }, t0);
   const pt0 = path.getPointAtLength(0); $(sel).style.transform = 'translate(' + pt0.x + 'px,' + pt0.y + 'px)';
 };
-// Dev's question
+// Jake's question
 tl.fromTo('#${p}-dev', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.55, ease: 'expo.out' }, 0.35);
 // the deposit comes in from the bank
 tl.fromTo('#${p}-bsrc', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 0.9);

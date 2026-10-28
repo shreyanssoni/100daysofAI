@@ -1,4 +1,4 @@
-// Characters: Maya Chen (AR manager) and Dev Patel (Sales). Hand-built SVG rigs.
+// Characters: Maya Chen (AR manager) and Jake Miller (Sales). Hand-built SVG rigs.
 // Proportions: Maya ~370 world px tall (~7.6 heads). All rigs share one palette so she reads
 // the same in the walk, the over-the-shoulder shots and the close-ups.
 
@@ -11,7 +11,7 @@ export const P = {
   shoe: "#1F1B18", sole: "#5A4A3E",
   bag: "#8A5A3B", bagS: "#6F462D",
   cup: "#FFFFFF", sleeve: "#A9773F",
-  // Dev
+  // Jake
   dSkin: "#B9845F", dSkinS: "#9E6C4B", dHair: "#1E1915", shirt: "#9DB4CC", shirtS: "#839CB6", chino: "#3D4A5C", chinoS: "#323D4D",
 };
 
@@ -138,7 +138,7 @@ export const mayaBack = (p) => `
   </g>
 </g>`;
 
-// ---------------- Dev Patel, seated side view facing right (background desk). ----------------
+// ---------------- Jake Miller, seated side view facing right (background desk). ----------------
 export const dev = (p) => `
 <g id="${p}-col" transform="translate(500 724) scale(.9)">
   <ellipse cx="10" cy="2" rx="62" ry="6" fill="#4A3A2A" opacity=".14"/>

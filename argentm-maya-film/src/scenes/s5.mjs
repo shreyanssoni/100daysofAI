@@ -39,8 +39,8 @@ export default {
 `,
   html: `
 <div id="${p}-ask" class="card" style="left:1400px;top:56px;width:410px;padding:16px 20px;display:flex;gap:14px;align-items:center;opacity:0">
-  <div style="width:46px;height:46px;border-radius:50%;background:${C.blueL};color:${C.blueD};font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;flex:none">DP</div>
-  <div><div style="font-size:16px;color:${C.ink2}"><b style="color:${C.ink}">Dev</b> asked</div><div style="font-size:23px;font-weight:700;letter-spacing:-.01em">“Did Helix pay in full?”</div></div>
+  <div style="width:46px;height:46px;border-radius:50%;background:${C.blueL};color:${C.blueD};font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;flex:none">JM</div>
+  <div><div style="font-size:16px;color:${C.ink2}"><b style="color:${C.ink}">Jake</b> asked</div><div style="font-size:23px;font-weight:700;letter-spacing:-.01em">“Did Helix pay in full?”</div></div>
 </div>
 <div id="${p}-t1" class="t-hero">${words("Every line understood.", p + "-w1")}</div>
 <div id="${p}-t2" class="t-hero">${words("Every decision", p + "-w2")} <span class="w ${p}-w2 serif">explained.</span></div>

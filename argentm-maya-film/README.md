@@ -9,20 +9,20 @@
 - **Voices:** Maya ("Serena – Calm & Friendly") and the AI ("Clara V.") generated with ElevenLabs (`assets/audio/vo-*.m4a`); the caption/waveform overlay is `src/overlays/vo.mjs`, driven by `vo-env.json` (the real voice envelopes).
 - **Voice-over cut:** `bash src/master-vo.sh` → `renders/maya-60s-1080p-voiceover.mp4`. Same picture plus a narrator ("Luke", ElevenLabs) placed line by line on its beats (`assets/audio/narration.m4a`). The score ducks under the narration using `src/vo-narration.json`; `score-vo.m4a` comes from `src/score.py`. The narrator stays silent during the Maya/AI exchange.
 
-**Story:** Maya arrives at 8:58. Dev from Sales messages: *"Helix says they paid in full. Can you confirm before my 10:00 call?"* The product works through the remittance, and each complex case is part of the answer. At 9:14 Maya replies ("not quite in full: $118.40 still open, a $640 duplicate held as credit") and Dev gives a thumbs-up across the office.
+**Story:** Maya arrives at 8:58. Jake from Sales messages: *"Helix says they paid in full. Can you confirm before my 10:00 call?"* The product works through the remittance, and each complex case is part of the answer. At 9:14 Maya replies ("not quite in full: $118.40 still open, a $640 duplicate held as credit") and Jake gives a thumbs-up across the office.
 
 | Time | Scene | File |
 | --- | --- | --- |
-| 0:00–0:07 | Maya arrives (8:58), Dev waves, she sits and wakes her monitor | `s1` |
-| 0:07–0:15 | Dev's question; the deposit flies in from the bank and the remittance from an email; three fragmented sources | `s2` |
+| 0:00–0:07 | Maya arrives (8:58), Jake waves, she sits and wakes her monitor | `s1` |
+| 0:07–0:15 | Jake's question; the deposit flies in from the bank and the remittance from an email; three fragmented sources | `s2` |
 | 0:15–0:22.5 | The PDF becomes a structured table; TOTAL recognised as a summary | `s3` |
 | 0:22.5–0:29.5 | Three accounts → one parent; Maya asks *"Show me how this matched"*; exact bank match while the AI answers | `s4` |
-| 0:29.5–0:43 | Six decisions (matching, 2% discount, chargebacks, recovery, short pay, duplicate), with Dev's question pinned | `s5` |
+| 0:29.5–0:43 | Six decisions (matching, 2% discount, chargebacks, recovery, short pay, duplicate), with Jake's question pinned | `s5` |
 | 0:43–0:50 | Maya approves the $0 invoice, keeps INV-55203 open, and turns it into a rule for Helix | `s6` |
 | 0:50–0:54.6 | Apply & post → records filed to the ERP shelf; audit trail | `s7` |
-| 0:54.6–1:00 | Maya's reply, Dev's thumbs-up, end card (no logo) | `s8` |
+| 0:54.6–1:00 | Maya's reply, Jake's thumbs-up, end card (no logo) | `s8` |
 
-Characters live in `src/characters.mjs` (Maya: side walk, back/seated, close-up; Dev: seated). `node src/harness.mjs out.png` renders them large for review.
+Characters live in `src/characters.mjs` (Maya: side walk, back/seated, close-up; Jake: seated). `node src/harness.mjs out.png` renders them large for review.
 
 ## Reconciliation (all fictional, internally consistent)
 

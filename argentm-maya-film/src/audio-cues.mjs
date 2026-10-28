@@ -3,7 +3,7 @@
 export const AUDIO = [
   { id: "score", file: "audio/score.m4a", t: 0, dur: 60, vol: 0.8, track: 2 },
   { id: "foley", file: "audio/fx.m4a", t: 0, dur: 60, vol: 0.9, track: 3 },
-  // s2: Dev's question, the deposit, the remittance; Maya opens it
+  // s2: Jake's question, the deposit, the remittance; Maya opens it
   { id: "sx-dev", scene: "s2", file: "sfx/notification.mp3", t: 0.37, dur: 2.4, vol: 0.2, track: 4 },
   { id: "sx-coin", scene: "s2", file: "sfx/whoosh-short.mp3", t: 1.2, dur: 0.57, vol: 0.16, track: 6 },
   { id: "sx-bank", scene: "s2", file: "sfx/pop.mp3", t: 1.8, dur: 0.7, vol: 0.18, track: 5 },
@@ -32,7 +32,7 @@ export const AUDIO = [
   // s7: apply
   { id: "sx-apply", scene: "s7", file: "sfx/click.mp3", t: 0.81, dur: 0.37, vol: 0.38, track: 4 },
   { id: "sx-fly", scene: "s7", file: "sfx/whoosh-short.mp3", t: 1.8, dur: 0.57, vol: 0.14, track: 5 },
-  // s8: Maya sends her reply; Dev's thumbs-up
+  // s8: Maya sends her reply; Jake's thumbs-up
   { id: "sx-send", scene: "s8", file: "sfx/click-soft.mp3", t: 0.55, dur: 0.37, vol: 0.35, track: 4 },
   { id: "sx-dev2", scene: "s8", file: "sfx/pop.mp3", t: 2.12, dur: 0.7, vol: 0.16, track: 5 },
 ];

@@ -303,7 +303,7 @@ for i in range(6):
     add(fx, S["s7"] + 2.38 + i * 0.09, felt(0.03))
 add(fx, S["s7"] + 2.55, paper(0.04, 0.5))
 
-# scene 8: reply sent, Dev reacts
+# scene 8: reply sent, Jake reacts
 add(fx, S["s8"] + 0.52, glass(midi(81), 0.03)); add(fx, S["s8"] + 0.55, glass(midi(85), 0.025))
 add(fx, S["s8"] + 2.15, felt(0.04))
 

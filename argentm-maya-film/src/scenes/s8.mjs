@@ -1,4 +1,4 @@
-// 0:54.6–1:00 — Resolution. Maya answers Dev; the office is calm; end card (no logo).
+// 0:54.6–1:00 — Resolution. Maya answers Jake; the office is calm; end card (no logo).
 import { C, appShell, worldLayer, screenCSS, CAM, BACK_POSE } from "../shared.mjs";
 
 const p = "s8";
@@ -13,7 +13,7 @@ const screen = appShell("Dashboard", `
       <div style="font-size:12px;color:#A39C92;margin-top:26px">Illustrative figures</div>
     </div>
     <div class="a-card" style="flex:1;padding:18px 20px;height:560px;position:relative">
-      <div style="font-size:15px;font-weight:700;padding-bottom:12px;border-bottom:1px solid #F0EAE0">Dev Patel · Sales</div>
+      <div style="font-size:15px;font-weight:700;padding-bottom:12px;border-bottom:1px solid #F0EAE0">Jake Miller · Sales</div>
       <div style="margin-top:16px;max-width:400px;background:#F3EFE8;border-radius:16px 16px 16px 4px;padding:14px 16px;font-size:18px;line-height:1.4">Helix says they paid in full. Can you confirm before my 10:00 call?</div>
       <div id="${p}-reply" style="margin:16px 0 0 auto;max-width:470px;background:${C.bronze};color:#fff;border-radius:16px 16px 4px 16px;padding:16px 18px;font-size:19px;line-height:1.45">
         Confirmed: <b>$48,612.40</b> received and applied across HX-1001–1003.<br>Not quite in full: <b>$118.40</b> still open on INV-55203, and a <b>$640</b> duplicate is held as credit.
@@ -40,7 +40,7 @@ ${worldLayer(p, screen, { sun: 0.55, clock: [9, 14] })}
 <div id="${p}-glow" class="full"></div>
 <div id="${p}-bub" class="abs">
   <div class="card" style="position:relative;padding:18px 22px;width:440px;font-size:24px;line-height:1.35;border-radius:20px 20px 20px 6px">
-    <div style="font-size:15px;color:${C.ink2};margin-bottom:4px"><b style="color:${C.ink}">Dev</b> · Sales</div>Perfect — I'll raise the <b>$118.40</b> on the call.
+    <div style="font-size:15px;color:${C.ink2};margin-bottom:4px"><b style="color:${C.ink}">Jake</b> · Sales</div>Perfect — I'll raise the <b>$118.40</b> on the call.
   </div>
 </div>
 <div id="${p}-end" class="full">
@@ -64,7 +64,7 @@ drive(tl, 5.4, (t) => {
   });
   setO('${p}-deskcup', t >= 1.9 ? 0 : 1);
   cam(key(t, [[0, 5.6], [1.15, 5.6], [2.2, 1.05]]), key(t, [[0, 1291], [1.15, 1291], [2.2, 960]]), key(t, [[0, 525], [1.15, 525], [2.2, 560]]));
-  // Dev reads it, looks over and gives a thumbs-up
+  // Jake reads it, looks over and gives a thumbs-up
   const look = key(t, [[1.9, 0], [2.2, 1]]);
   const up = key(t, [[2.05, 0], [2.35, 1]]);
   rot('${p}-col-head', -12 * look, 4, -226);

@@ -324,8 +324,8 @@
   </div></div>
 <div style="position:absolute;left:680px;top:58px;width:378px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B665E;display:flex;justify-content:space-between"><span>Inbox</span><span style="color:#A9773F">● live</span></div>
 <div id="s2-dev" class="a-card" style="position:absolute;left:680px;top:84px;width:378px;height:124px;padding:14px 16px;display:flex;gap:12px;box-shadow:0 2px 4px rgba(70,50,30,.08),0 14px 30px rgba(70,50,30,.12)">
-  <div style="width:38px;height:38px;border-radius:50%;background:#E3EBF3;color:#3F6489;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none">DP</div>
-  <div><div style="font-size:12.5px;color:#6B665E"><b style="color:#2B2A28">Dev Patel</b> · Sales · now</div><div style="font-size:17px;line-height:1.35;margin-top:3px;color:#2B2A28">Helix says they <b>paid in full</b>. Can you confirm before my 10:00 call?</div></div>
+  <div style="width:38px;height:38px;border-radius:50%;background:#E3EBF3;color:#3F6489;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex:none">JM</div>
+  <div><div style="font-size:12.5px;color:#6B665E"><b style="color:#2B2A28">Jake Miller</b> · Sales · now</div><div style="font-size:17px;line-height:1.35;margin-top:3px;color:#2B2A28">Helix says they <b>paid in full</b>. Can you confirm before my 10:00 call?</div></div>
 </div>
 <div id="s2-toast" class="a-card" style="position:absolute;left:680px;top:220px;width:378px;height:112px;padding:14px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 2px 4px rgba(70,50,30,.08),0 14px 30px rgba(70,50,30,.12)">
   <div style="width:42px;height:42px;border-radius:12px;background:#F1E5D6;color:#8A5E2E;display:flex;align-items:center;justify-content:center;flex:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5 L12 4 L21 9.5 Z" fill="currentColor"/><rect x="5" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="10.7" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="16.4" y="11" width="2.6" height="6.5" rx=".6" fill="currentColor"/><rect x="3" y="18.6" width="18" height="2.2" rx=".8" fill="currentColor"/></svg></div>
@@ -478,7 +478,7 @@ const travel = (sel, pathSel, t0, dur) => {
   tl.fromTo(o, { u: 0 }, { u: 1, duration: dur, ease: 'power2.inOut', onUpdate: () => { const pt = path.getPointAtLength(o.u * L); const e = $(sel); e.style.transform = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)'; } }, t0);
   const pt0 = path.getPointAtLength(0); $(sel).style.transform = 'translate(' + pt0.x + 'px,' + pt0.y + 'px)';
 };
-// Dev's question
+// Jake's question
 tl.fromTo('#s2-dev', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.55, ease: 'expo.out' }, 0.35);
 // the deposit comes in from the bank
 tl.fromTo('#s2-bsrc', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, 0.9);
